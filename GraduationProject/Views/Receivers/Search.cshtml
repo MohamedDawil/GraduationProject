@@ -5,13 +5,14 @@
 
 <form asp-controller="Receivers" asp-action="Search" method="post">
 
-
+    <label asp-for="Search"></label>
     <input asp-for="Search" type="text" placeholder="Varunamn" />
     <span asp-validation-for="Search"></span>
-
+    <br />
+    <label asp-for="Distance"></label>
     <input asp-for="Distance" type="range" placeholder="Beskrivning" />
     <span asp-validation-for="Distance"></span>
-
+    <br />
     <input type="submit" value="Sök" />
 </form>
 

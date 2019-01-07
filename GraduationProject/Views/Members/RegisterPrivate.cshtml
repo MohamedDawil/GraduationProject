@@ -6,15 +6,19 @@
 <form asp-controller="Members" asp-action="RegisterPrivate" method="post">
     <input asp-for="FirstName" type="text" placeholder="Förnamn" />
     <span asp-validation-for="FirstName"></span>
+    <br />
     <input asp-for="LastName" type="text" placeholder="Efternamn" />
     <span asp-validation-for="LastName"></span>
+    <br />
     <input asp-for="Email" type="text" placeholder="E-mail" />
     <span asp-validation-for="Email"></span>
+    <br />
     <input asp-for="Password" type="password" placeholder="Lösenord" />
     <span asp-validation-for="Password"></span>
+    <br />
     <input asp-for="ConfirmPassword" type="password" placeholder="Bekräfta lösenord" />
     <span asp-validation-for="ConfirmPassword"></span>
-
+    <br />
     <input type="submit" value="Skapa konto" />
 </form>
 

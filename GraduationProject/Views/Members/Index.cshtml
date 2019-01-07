@@ -1,19 +1,23 @@
 ﻿@model MembersIndexVM
 
 <form asp-controller="Members" asp-action="Index" method="post">
+    <label asp-for="Email"></label>
     <input asp-for="Email" type="text" placeholder="E-mail" />
     <span asp-validation-for="Email"></span>
+    <br />
+    <label asp-for="Password"></label>
     <input asp-for="Password" type="password" placeholder="Lösenord" />
     <span asp-validation-for="Password"></span>
-    <label asp-for="RememberMe"></label>
+    <label asp-for="RememberMe" style="display:inline"></label>
     <input asp-for="RememberMe" type="checkbox" />
-
+    <br />
     <input type="submit" value="Logga in" />
 </form>
 
 <form asp-controller="Members" asp-action="Register" method="get">
     <input type="submit" value="Skapa konto" />
 </form>
+
 
 
 
