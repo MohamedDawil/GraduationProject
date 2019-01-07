@@ -1,4 +1,22 @@
-﻿<form>
-<input type=""/>
+﻿@model MembersIndexVM
+
+<form asp-controller="Members" asp-action="Index" method="post">
+    <input asp-for="Email" type="text" placeholder="E-mail" />
+    <span asp-validation-for="Email"></span>
+    <input asp-for="Password" type="password" placeholder="Lösenord" />
+    <span asp-validation-for="Password"></span>
+    <label asp-for="RememberMe"></label>
+    <input asp-for="RememberMe" type="checkbox" />
+
+    <input type="submit" value="Logga in" />
+
+
+
 </form>
+<form asp-controller="Members" asp-action="Register" method="get">
+    <input type="submit" value="Skapa konto" />
+    </form>
+    @*<button asp-controller="Members" asp-action="Register" formmethod="get">Skapa konto</button>*@
+
+
 

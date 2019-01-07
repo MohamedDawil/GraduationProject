@@ -14,6 +14,7 @@ namespace GraduationProject.Models.ViewModels
 
         [Required]
         [Display(Name ="Lösenord")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Display(Name ="Kom ihåg mig")]
