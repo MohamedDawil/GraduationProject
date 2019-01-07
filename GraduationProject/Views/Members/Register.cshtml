@@ -1,7 +1,16 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
 
+<form asp-controller="Members" asp-action="RegisterPrivate" method="get">
+    <input type="submit" value="Privatperson" />
+</form>
+
+<form asp-controller="Members" asp-action="RegisterOrganization" method="get">
+    <input type="submit" value="Organisation" />
+</form>
+
+<form asp-controller="Members" asp-action="Index" method="get">
+    <input type="submit" value="Tillbaka" />
+</form>

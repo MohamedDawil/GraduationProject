@@ -1,0 +1,27 @@
+﻿@model MembersProfileVM
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<img src="https://eadb.org/wp-content/uploads/2015/08/profile-placeholder.jpg" />
+<form asp-controller="Members" asp-action="Profile" method="post">
+    <input asp-for="Picture" type="file" accept="image/*;capture=camera" value="Ändra bild">
+    <input asp-for="FirstName" type="text" placeholder="Förnamn" />
+    <span asp-validation-for="FirstName"></span>
+    <input asp-for="LastName" type="text" placeholder="Efternamn" />
+    <span asp-validation-for="LastName"></span>
+    <input asp-for="Email" type="text" placeholder="E-mail" />
+    <span asp-validation-for="LastName"></span>
+    <input asp-for="Street" type="text" placeholder="Gatuadress" />
+    <span asp-validation-for="Street"></span>
+    <input asp-for="ZipCode" type="text" placeholder="Postnr" />
+    <span asp-validation-for="ZipCode"></span>
+    <input asp-for="City" type="text" placeholder="Postort" />
+    <span asp-validation-for="City"></span>
+    <input asp-for="Password" type="password" placeholder="Lösenord" />
+    <span asp-validation-for="Password"></span>
+    <input asp-for="ConfirmPassword" type="password" placeholder="Bekräfta lösenord" />
+    <span asp-validation-for="ConfirmPassword"></span>
+
+    <input type="submit" value="Spara" />
+</form>

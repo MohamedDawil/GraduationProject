@@ -23,14 +23,9 @@ namespace GraduationProject.Controllers
             if (!ModelState.IsValid)
                 return View(membersIndexVM);
 
-            return RedirectToAction(nameof(Map));
+            return RedirectToAction("Map", "Receivers");
         }
 
-        [HttpGet]       
-        public IActionResult Map()
-        {
-            return View();
-        }
 
         [HttpGet]
         public IActionResult Register()
@@ -38,6 +33,49 @@ namespace GraduationProject.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult RegisterPrivate()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult RegisterPrivate(MembersRegisterPrivateVM membersRegisterPrivateVM)
+        {
+            if (!ModelState.IsValid)
+                return View(membersRegisterPrivateVM);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult RegisterOrganization()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RegisterOrganization(MembersRegisterOrganizationVM membersRegisterOrganizationVM)
+        {
+            if (!ModelState.IsValid)
+                return View(membersRegisterOrganizationVM);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Profile(MembersProfileVM membersProfileVM)
+        {
+            if (!ModelState.IsValid)
+                return View(membersProfileVM);
+
+            return RedirectToAction(nameof(Profile));
+        }
     }
 }

@@ -1,0 +1,20 @@
+﻿@model ReceiversSearchVM
+@{
+    ViewData["Title"] = "AddProduct";
+}
+
+<form asp-controller="Receivers" asp-action="Search" method="post">
+
+
+    <input asp-for="Search" type="text" placeholder="Varunamn" />
+    <span asp-validation-for="Search"></span>
+
+    <input asp-for="Distance" type="range" placeholder="Beskrivning" />
+    <span asp-validation-for="Distance"></span>
+
+    <input type="submit" value="Sök" />
+</form>
+
+<form asp-controller="Members" asp-action="Register" method="get">
+    <input type="submit" value="Tillbaka" />
+</form>

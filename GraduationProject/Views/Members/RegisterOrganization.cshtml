@@ -1,0 +1,23 @@
+﻿@model MembersRegisterOrganizationVM
+@{
+    ViewData["Title"] = "RegisterOrganization";
+}
+
+<form asp-controller="Members" asp-action="RegisterOrganization" method="post">
+<input asp-for="OrgName" type="text" placeholder="Organisationsnamn" />
+<span asp-validation-for="OrgName"></span>
+<input asp-for="OrgNumber" type="text" placeholder="Organisationsnummer" />
+<span asp-validation-for="OrgNumber"></span>
+<input asp-for="Email" type="text" placeholder="E-mail" />
+<span asp-validation-for="Email"></span>
+<input asp-for="Password" type="password" placeholder="Lösenord" />
+<span asp-validation-for="Password"></span>
+<input asp-for="ConfirmPassword" type="password" placeholder="Bekräfta lösenord" />
+<span asp-validation-for="ConfirmPassword"></span>
+
+<input type="submit" value="Skapa konto" />
+</form>
+
+<form asp-controller="Members" asp-action="Register" method="get">
+    <input type="submit" value="Tillbaka" />
+</form>

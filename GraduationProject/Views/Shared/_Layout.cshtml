@@ -4,9 +4,19 @@
     <title>Layout</title>
 </head>
 <body>
-    <header>Lägg till vara  Mina varor  Profil</header>
+    <header>
+        <a asp-controller="Givers" asp-action="AddProduct">Lägg till vara</a>    
+        <a asp-controller="Givers" asp-action="Products">Mina varor</a>
+        <a asp-controller="Members" asp-action="Profile">Profil</a>
+    </header>
     <main>@RenderBody()</main>
-    <footer>Karta Sök vara Matkorg Meddelanden</footer>
+    <footer>
+        <a asp-controller="Receivers" asp-action="Map">Karta</a>
+        <a asp-controller="Receivers" asp-action="Search">Sök vara</a>
+        <a asp-controller="Receivers" asp-action="Cart">Matkorg</a>
+        <a asp-controller="Messages" asp-action="Inbox">Meddelanden</a>
+
+    </footer>
 </body>
 
 </html>

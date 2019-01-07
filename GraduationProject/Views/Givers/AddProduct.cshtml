@@ -1,0 +1,34 @@
+﻿@model GiversAddProductVM
+@{
+    ViewData["Title"] = "AddProduct";
+}
+
+<form asp-controller="Givers" asp-action="AddProduct" method="post">
+    <input asp-for="Image" type="file" accept="image/*;capture=camera" value="Lägg till bild">
+    <input asp-for="Scan" type="file" accept="image/*;capture=camera" value="Skanna streckkod">
+
+
+    <input asp-for="ProductName" type="text" placeholder="Varunamn" />
+    <span asp-validation-for="ProductName"></span>
+
+    <input asp-for="Description" type="text" placeholder="Beskrivning" />
+    <span asp-validation-for="Description"></span>
+
+    <input asp-for="Freshness" type="range" min="1" max="10" placeholder="Fräschhet" />
+    <span asp-validation-for="Freshness"></span>
+
+    <input asp-for="ExpiryDate" type="date" placeholder="Utgångsdatum" />
+    <span asp-validation-for="ExpiryDate"></span>
+
+    <input asp-for="PickUpDate1" type="date" placeholder="Hämta tidigast" />
+    <span asp-validation-for="PickUpDate1"></span>
+
+    <input asp-for="PickUpDate2" type="date" placeholder="Hämta senast" />
+    <span asp-validation-for="PickUpDate2"></span>
+
+    <input type="submit" value="Lägg till vara" />
+</form>
+
+<form asp-controller="Members" asp-action="Register" method="get">
+    <input type="submit" value="Tillbaka" />
+</form>
