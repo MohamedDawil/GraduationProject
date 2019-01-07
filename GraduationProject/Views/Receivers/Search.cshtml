@@ -15,6 +15,29 @@
     <input type="submit" value="Sök" />
 </form>
 
-<form asp-controller="Members" asp-action="Register" method="get">
-    <input type="submit" value="Tillbaka" />
-</form>
+
+
+@{
+    if (Model.Products != null)
+    {
+
+        foreach (var product in Model.Products)
+        {
+            @product.ProductName
+
+            @product.ProductDistance
+            <br />
+            @product.ProductImage
+            <br />
+            @product.ProductPickUpDate1
+            @product.ProductPickUpDate2
+            <br />
+            <form asp-controller="Receivers" asp-action="ClaimProduct" asp-route-id="@product.ProductId" method="post">
+                @*Lägg till en ajaxgrej*@
+                <input type="button" value="Se info" />
+                <input type="submit" value="Boka vara" />
+            </form>
+        }
+    }
+
+}
