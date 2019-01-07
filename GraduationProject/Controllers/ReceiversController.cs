@@ -20,7 +20,7 @@ namespace GraduationProject.Controllers
         {
             var viewModels = new ReceiversSearchVM
             {
-                Products = new ReceiversProductVM[] {new ReceiversProductVM()}
+                Products = new ReceiversProductVM[] { new ReceiversProductVM() }
             };
             return View(viewModels);
         }
@@ -39,5 +39,32 @@ namespace GraduationProject.Controllers
         {
             return RedirectToAction(nameof(Search));
         }
+
+        [HttpGet]
+        public IActionResult Cart()
+        {
+            var viewModels = new ReceiversCartVM[]
+            {
+                new ReceiversCartVM()
+            };
+           
+            return View(viewModels);
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

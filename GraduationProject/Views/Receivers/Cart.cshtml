@@ -1,0 +1,27 @@
+﻿@model ReceiversCartVM[]
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+@{ foreach (var product in Model)
+    {
+        @product.ProductName
+        <br />
+        @product.ProductImage
+        <br />
+        @product.ProductDescription
+        <br />
+        @product.ProductExpiryDate
+        <br />
+        @product.ProductPickUpDate1
+        @product.ProductPickUpDate2
+
+        <a class="button">Google Maps</a>
+        <a class="button" asp-controller="Receivers" asp-action="UnclaimProduct">Avboka</a>
+        <br />
+        <a class="button" asp-controller="Messages" asp-action="Chat">Meddelanden</a>
+
+    }
+
+}
