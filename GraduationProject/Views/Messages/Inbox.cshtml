@@ -1,0 +1,16 @@
+﻿@model MessagesInboxVM[]
+@{
+    ViewData["Title"] = "Inbox";
+}
+
+@foreach (var conversation in Model)
+{
+    @conversation.ProductName
+    <br />
+    @conversation.MemberName 
+
+    @conversation.PublishDate
+    <br />
+    <a asp-controller="Messages" asp-action="Chat" asp-route-id="@conversation.ProductId" class="button">Read</a>
+}
+

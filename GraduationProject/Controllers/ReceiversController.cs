@@ -12,7 +12,18 @@ namespace GraduationProject.Controllers
         [HttpGet]
         public IActionResult Map()
         {
-            return View();
+            var viewModel = new ReceiversMapVM
+            {
+                Positions = new ReceiversMapPositionVM[]
+                {
+                    new ReceiversMapPositionVM()
+                },
+                Products = new ReceiversMapProductVM[]
+                {
+                    new ReceiversMapProductVM()
+                }
+            };
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -33,8 +44,7 @@ namespace GraduationProject.Controllers
 
             return RedirectToAction(nameof(Search));
         }
-
-        [HttpPost]
+        
         public IActionResult ClaimProduct(int productId)
         {
             return RedirectToAction(nameof(Search));
