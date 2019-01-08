@@ -1,0 +1,44 @@
+﻿@model GiversProductsVM
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<label asp-for="Claimed"></label>
+@{ foreach (var product in Model.Claimed)
+    {
+        @product.ProductImage
+        <br />
+        @product.ReceiverName
+        <br />
+
+        <form asp-controller="Givers" asp-action="ChangeProduct" asp-route-id="@product.ProductId" method="post">
+            <input type="button" value="Ändra" />
+        </form>
+
+        <form asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" method="post">
+            <input type="button" value="Radera" />
+        </form>
+    }
+
+}
+
+<label asp-for="Unclaimed"></label>
+@{ foreach (var product in Model.Unclaimed)
+    {
+        @product.ProductImage
+        <br />
+        @product.ReceiverName
+        <br />
+
+        <form asp-controller="Givers" asp-action="ChangeProduct" asp-route-id="@product.ProductId" method="post">
+            <input type="button" value="Ändra" />
+        </form>
+
+        <form asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" method="post">
+            <input type="button" value="Radera" />
+        </form>
+    }
+
+}
+

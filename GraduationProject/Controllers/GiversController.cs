@@ -24,5 +24,12 @@ namespace GraduationProject.Controllers
             return RedirectToAction(nameof(AddProduct));
         }
 
+        [HttpGet]
+        public IActionResult Products()
+        {
+            return View();
+        }
+
+
     }
 }
