@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,13 @@ namespace GraduationProject.Controllers
 {
     public class MembersController : Controller
     {
+        private MembersService service;
+
+        public MembersController(MembersService service)
+        {
+            this.service = service;
+        }
+
         [HttpGet]
         [Route("")]
         public IActionResult Index()

@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraduationProject.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GraduationProject
@@ -15,6 +20,22 @@ namespace GraduationProject
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<MembersService>();
+            var connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FreshishDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            services.AddDbContext<MyIdentityContext>(o =>
+            o.UseSqlServer(connString));
+            services.AddIdentity<MyIdentityUser, IdentityRole>(o =>
+            {
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 6;
+            })
+                .AddEntityFrameworkStores<MyIdentityContext>()
+                .AddDefaultTokenProviders();
+            services.ConfigureApplicationCookie(
+                o => o.LoginPath = "/Members/Login");
+            services.AddAuthentication(
+                   CookieAuthenticationDefaults.AuthenticationScheme)
+               .AddCookie(o => o.LoginPath = "/Members/Login");
             services.AddMvc();
         }
 
@@ -22,6 +43,7 @@ namespace GraduationProject
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseDeveloperExceptionPage();
+            app.UseAuthentication(); 
             app.UseMvcWithDefaultRoute();
         }
     }
