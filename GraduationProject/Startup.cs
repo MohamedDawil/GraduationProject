@@ -28,6 +28,8 @@ namespace GraduationProject
             {
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 6;
+                o.Password.RequireDigit = false;
+                o.Password.RequireUppercase = false;
             })
                 .AddEntityFrameworkStores<MyIdentityContext>()
                 .AddDefaultTokenProviders();

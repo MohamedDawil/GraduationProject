@@ -26,9 +26,14 @@ namespace GraduationProject.Controllers
 
         [HttpPost]
         [Route("")]
-        public IActionResult Index(MembersIndexVM membersIndexVM)
+        public async Task<IActionResult> Index(MembersIndexVM membersIndexVM)
         {
             if (!ModelState.IsValid)
+                return View(membersIndexVM);
+
+            var isLoggedIn = await service.SignInAsync(membersIndexVM);
+
+            if (!isLoggedIn)
                 return View(membersIndexVM);
 
             return RedirectToAction("Map", "Receivers");
@@ -48,9 +53,14 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegisterPrivate(MembersRegisterPrivateVM membersRegisterPrivateVM)
+        public async Task<IActionResult> RegisterPrivate(MembersRegisterPrivateVM membersRegisterPrivateVM)
         {
             if (!ModelState.IsValid)
+                return View(membersRegisterPrivateVM);
+
+            var isAdded = await service.CreateAsync(membersRegisterPrivateVM);
+
+            if (!isAdded)
                 return View(membersRegisterPrivateVM);
 
             return RedirectToAction(nameof(Index));

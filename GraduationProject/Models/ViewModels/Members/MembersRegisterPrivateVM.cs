@@ -25,6 +25,7 @@ namespace GraduationProject.Models.ViewModels
         [Required]
         [Display(Name = "Bekräfta lösenord: ")]
         [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Dina lösenord matchar inte... Lol")]
         public string ConfirmPassword { get; set; }
     }
 }

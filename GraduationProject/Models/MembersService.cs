@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using GraduationProject.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,25 @@ namespace GraduationProject.Models
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             //this.context = context;
+        }
+
+        public async Task<bool> SignInAsync(MembersIndexVM membersIndexVM)
+        {
+            var result = await signInManager.PasswordSignInAsync(membersIndexVM.Email, membersIndexVM.Password, false, false);
+            return result.Succeeded;
+        }
+
+        public async Task<bool> CreateAsync(MembersRegisterPrivateVM membersRegisterPrivateVM)
+        {
+            var result = await userManager.CreateAsync(
+                new MyIdentityUser
+                {
+                    UserName = membersRegisterPrivateVM.Email,
+                    FirstName = membersRegisterPrivateVM.FirstName,
+                    LastName = membersRegisterPrivateVM.LastName,
+                    Email = membersRegisterPrivateVM.Email
+                }, membersRegisterPrivateVM.Password);
+            return result.Succeeded;
         }
     }
 }
