@@ -27,9 +27,28 @@ namespace GraduationProject.Controllers
         [HttpGet]
         public IActionResult Products()
         {
+            var viewModel = new GiversProductsVM
+            {
+                Claimed = new GiversClaimedVM[] { new GiversClaimedVM() },
+                Unclaimed = new GiversClaimedVM[] { new GiversClaimedVM() }
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult ChangeProduct(int productId)
+        {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult ChangeProduct(GiversChangeProductVM giversChangeProductVM)
+        {
+            if (!ModelState.IsValid)
+                return View(giversChangeProductVM);
 
+            return RedirectToAction(nameof(ChangeProduct));
+        }
     }
 }

@@ -12,13 +12,8 @@
         @product.ReceiverName
         <br />
 
-        <form asp-controller="Givers" asp-action="ChangeProduct" asp-route-id="@product.ProductId" method="post">
-            <input type="button" value="Ändra" />
-        </form>
-
-        <form asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" method="post">
-            <input type="button" value="Radera" />
-        </form>
+        <a asp-controller="Givers" asp-action="ChangeProduct" asp-route-id="@product.ProductId" class="button">Ändra</a>
+        <a asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" class="button">Radera</a>
     }
 
 }
@@ -31,13 +26,8 @@
         @product.ReceiverName
         <br />
 
-        <form asp-controller="Givers" asp-action="ChangeProduct" asp-route-id="@product.ProductId" method="post">
-            <input type="button" value="Ändra" />
-        </form>
-
-        <form asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" method="post">
-            <input type="button" value="Radera" />
-        </form>
+        <a asp-controller="Givers" asp-action="ChangeProduct" asp-route-id="@product.ProductId" class="button">Ändra</a>
+        <a asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" class="button">Radera</a>
     }
 
 }
