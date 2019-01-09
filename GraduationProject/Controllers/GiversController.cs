@@ -21,6 +21,8 @@ namespace GraduationProject.Controllers
             if (!ModelState.IsValid)
                 return View(giversAddProductVM);
 
+            
+
             return RedirectToAction(nameof(AddProduct));
         }
 

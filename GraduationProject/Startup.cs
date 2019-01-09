@@ -24,6 +24,7 @@ namespace GraduationProject
             var connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FreshishDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<MyIdentityContext>(o =>
             o.UseSqlServer(connString));
+            
             services.AddIdentity<MyIdentityUser, IdentityRole>(o =>
             {
                 o.Password.RequireNonAlphanumeric = false;

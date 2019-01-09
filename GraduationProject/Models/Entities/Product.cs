@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace GraduationProject.Models.Entities
+{
+    public partial class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Freshness { get; set; }
+        public DateTime ExpiryDate { get; set; }
+        public int Amount { get; set; }
+        public DateTime PickUpDate1 { get; set; }
+        public DateTime PickUpDate2 { get; set; }
+        public bool Claimed { get; set; }
+        public bool Collected { get; set; }
+        public string Picture { get; set; }
+        public DateTime PublishDate { get; set; }
+        public string GiverId { get; set; }
+        public string ReceiverId { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+
+        public virtual AspNetUsers Giver { get; set; }
+        public virtual AspNetUsers Receiver { get; set; }
+    }
+}
