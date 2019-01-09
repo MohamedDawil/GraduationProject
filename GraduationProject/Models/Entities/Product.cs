@@ -9,7 +9,7 @@ namespace GraduationProject.Models.Entities
         public string Name { get; set; }
         public int Freshness { get; set; }
         public DateTime ExpiryDate { get; set; }
-        public int Amount { get; set; }
+        public string Description { get; set; }
         public DateTime PickUpDate1 { get; set; }
         public DateTime PickUpDate2 { get; set; }
         public bool Claimed { get; set; }

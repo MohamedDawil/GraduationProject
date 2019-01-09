@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GraduationProject.Models;
+using GraduationProject.Models.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,10 +22,14 @@ namespace GraduationProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<MembersService>();
+            services.AddTransient<GiversService>();
+
             var connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FreshishDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<MyIdentityContext>(o =>
             o.UseSqlServer(connString));
-            
+            services.AddDbContext<FreshishContext>(o =>
+           o.UseSqlServer(connString));
+
             services.AddIdentity<MyIdentityUser, IdentityRole>(o =>
             {
                 o.Password.RequireNonAlphanumeric = false;
@@ -47,7 +52,7 @@ namespace GraduationProject
         {
             app.UseStaticFiles();
             app.UseDeveloperExceptionPage();
-            app.UseAuthentication(); 
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
         }
     }

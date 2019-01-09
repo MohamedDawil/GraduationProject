@@ -56,6 +56,8 @@ namespace GraduationProject.Models.Entities
             {
                 entity.ToTable("product", "fresh");
 
+                entity.Property(e => e.Description).IsRequired();
+
                 entity.Property(e => e.GiverId)
                     .IsRequired()
                     .HasMaxLength(450);
@@ -76,12 +78,12 @@ namespace GraduationProject.Models.Entities
                     .WithMany(p => p.ProductGiver)
                     .HasForeignKey(d => d.GiverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__product__GiverId__46E78A0C");
+                    .HasConstraintName("FK__product__GiverId__4AB81AF0");
 
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.ProductReceiver)
                     .HasForeignKey(d => d.ReceiverId)
-                    .HasConstraintName("FK__product__Receive__47DBAE45");
+                    .HasConstraintName("FK__product__Receive__4BAC3F29");
             });
         }
     }

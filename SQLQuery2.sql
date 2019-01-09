@@ -5,7 +5,7 @@ create table fresh.product (
 	[Name] nvarchar(256) not null,
 	Freshness int not null,
 	ExpiryDate datetime2 not null,
-	Amount int not null,
+	[Description] nvarchar(max) not null,
 	PickUpDate1 datetime2 not null,
 	PickUpDate2 datetime2 not null,
 	Claimed bit not null,

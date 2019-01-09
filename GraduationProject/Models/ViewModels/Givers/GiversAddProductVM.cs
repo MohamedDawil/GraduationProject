@@ -8,8 +8,9 @@ namespace GraduationProject.Models.ViewModels
 {
     public class GiversAddProductVM
     {
+        public string GiverId { get; set; }
         //[Required(ErrorMessage ="Vänligen lägg till en bild på din vara")]
-        public string Image { get; set; }
+        public string Picture { get; set; }
 
         [Required(ErrorMessage ="Vänligen ange varans namn")]
         public string ProductName { get; set; }

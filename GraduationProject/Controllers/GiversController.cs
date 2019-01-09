@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,15 @@ namespace GraduationProject.Controllers
 {
     public class GiversController : Controller
     {
+        private GiversService giversService;
+        private MembersService membersService;
+
+        public GiversController(GiversService giversService, MembersService membersService)
+        {
+            this.giversService = giversService;
+            this.membersService = membersService;
+        }
+
         [HttpGet]
         public IActionResult AddProduct()
         {
@@ -16,12 +26,14 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct(GiversAddProductVM giversAddProductVM)
+        public async Task<IActionResult> AddProduct(GiversAddProductVM giversAddProductVM)
         {
             if (!ModelState.IsValid)
                 return View(giversAddProductVM);
 
-            
+            var giver = await membersService.GetUser(HttpContext.User);
+            giversAddProductVM.GiverId = giver.Id;
+            await giversService.CreateProductAsync(giversAddProductVM);
 
             return RedirectToAction(nameof(AddProduct));
         }

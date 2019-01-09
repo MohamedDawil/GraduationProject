@@ -6,7 +6,7 @@
 <form asp-controller="Givers" asp-action="AddProduct" method="post">
     <img id="output" />
     <label class="custom-file-upload">
-        <input asp-for="Image" type="file" accept="image/*;capture=camera" value="Lägg till bild" onchange="loadFile(event)">
+        <input asp-for="Picture" type="file" accept="image/*;capture=camera" value="Lägg till bild" onchange="loadFile(event)">
         <i class="fa fa-cloud-upload"></i> Lägg till bild
     </label>
     <label class="custom-file-upload">
@@ -14,8 +14,6 @@
         <i class="fa fa-cloud-upload"></i> Skanna streckkod
     </label>
     <br />
-
-    
 
     <input asp-for="ProductName" type="text" placeholder="Varunamn" />
     <span asp-validation-for="ProductName"></span>
