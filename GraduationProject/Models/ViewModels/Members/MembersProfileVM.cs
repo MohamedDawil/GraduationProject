@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +9,9 @@ namespace GraduationProject.Models.ViewModels
 {
     public class MembersProfileVM
     {
-        public string Picture { get; set; }
+        public IFormFile Picture { get; set; }
+        public string PictureFileName { get; set; }
+        
         [Required]
         [Display(Name = "Förnamn: ")]
         public string FirstName { get; set; }

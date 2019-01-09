@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GraduationProject.Controllers
@@ -11,10 +13,12 @@ namespace GraduationProject.Controllers
     public class MembersController : Controller
     {
         private MembersService service;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public MembersController(MembersService service)
+        public MembersController(MembersService service, IHostingEnvironment hostingEnvironment)
         {
             this.service = service;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -82,18 +86,38 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
-            return View();
+            var viewModel = await service.GetProfile(HttpContext.User);
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Profile(MembersProfileVM membersProfileVM)
+        public async Task<IActionResult> Profile(MembersProfileVM membersProfileVM)
         {
             if (!ModelState.IsValid)
                 return View(membersProfileVM);
+            if (membersProfileVM.Picture != null)
+            {
+                var uniqueFileName = GetUniqueFileName(membersProfileVM.Picture.FileName);
+                var images = Path.Combine(hostingEnvironment.WebRootPath, "Images");
+                var filePath = Path.Combine(images, uniqueFileName);
+                membersProfileVM.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+                membersProfileVM.PictureFileName = uniqueFileName;
+                //to do : Save uniqueFileName  to your db table   
+            }
 
+            await service.ChangeProfile(membersProfileVM, HttpContext.User);
             return RedirectToAction(nameof(Profile));
+        }
+        private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                      + "_"
+                      + Guid.NewGuid().ToString().Substring(0, 4)
+                      + Path.GetExtension(fileName);
         }
     }
 }

@@ -3,9 +3,12 @@
     ViewData["Title"] = "Profile";
 }
 
-<img src="https://eadb.org/wp-content/uploads/2015/08/profile-placeholder.jpg" />
+<img src="/Profiles/@Model.Picture" id="output" />
 <form asp-controller="Members" asp-action="Profile" method="post">
-    <input asp-for="Picture" type="file" accept="image/*;capture=camera" value="Ändra bild">
+    <label class="custom-file-upload">
+        <input asp-for="Picture" type="file" accept="image/*;capture=camera" value="Lägg till bild" onchange="loadFile(event)">
+        <i class="fa fa-cloud-upload"></i> Lägg till bild
+    </label>
     <br />
     <input asp-for="FirstName" type="text" placeholder="Förnamn" />
     <span asp-validation-for="FirstName"></span>

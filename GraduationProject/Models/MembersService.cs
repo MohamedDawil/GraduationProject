@@ -49,5 +49,37 @@ namespace GraduationProject.Models
 
             return result.Succeeded;
         }
+
+        public async Task<MembersProfileVM> GetProfile(ClaimsPrincipal user)
+        {
+            var result = await GetUser(user);
+
+            return new MembersProfileVM
+            {
+                City = result.City,
+                Street = result.Street,
+                ZipCode = result.ZipCode,
+                Email = result.Email,
+                FirstName = result.FirstName,
+                LastName = result.LastName,
+                PictureFileName = result.Picture
+            };
+        }
+
+        public async Task ChangeProfile(MembersProfileVM membersProfileVM, ClaimsPrincipal user)
+        {
+            var result = await GetUser(user);
+
+            result.City = membersProfileVM.City;
+            result.Email = membersProfileVM.Email;
+            result.UserName = membersProfileVM.Email;
+            result.FirstName = membersProfileVM.FirstName;
+            result.LastName = membersProfileVM.LastName;
+            result.Picture = membersProfileVM.PictureFileName;
+            result.Street = membersProfileVM.Street;
+            result.ZipCode = membersProfileVM.ZipCode;
+        
+            await userManager.UpdateAsync(result);
+        }
     }
 }
