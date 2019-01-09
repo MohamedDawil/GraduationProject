@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GraduationProject.Controllers
@@ -12,17 +14,19 @@ namespace GraduationProject.Controllers
     {
         private GiversService giversService;
         private MembersService membersService;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public GiversController(GiversService giversService, MembersService membersService)
+        public GiversController(GiversService giversService, MembersService membersService, IHostingEnvironment environment)
         {
             this.giversService = giversService;
             this.membersService = membersService;
+            this.hostingEnvironment = environment;
         }
 
         [HttpGet]
         public IActionResult AddProduct()
         {
-            return View();
+            return View(new GiversAddProductVM());
         }
 
         [HttpPost]
@@ -31,11 +35,30 @@ namespace GraduationProject.Controllers
             if (!ModelState.IsValid)
                 return View(giversAddProductVM);
 
+            if (giversAddProductVM.Picture != null)
+            {
+                var uniqueFileName = GetUniqueFileName(giversAddProductVM.Picture.FileName);
+                var images = Path.Combine(hostingEnvironment.WebRootPath, "Images");
+                var filePath = Path.Combine(images, uniqueFileName);
+                giversAddProductVM.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+                giversAddProductVM.PictureFileName = uniqueFileName;
+                //to do : Save uniqueFileName  to your db table   
+            }
+
             var giver = await membersService.GetUser(HttpContext.User);
             giversAddProductVM.GiverId = giver.Id;
             await giversService.CreateProductAsync(giversAddProductVM);
 
             return RedirectToAction(nameof(AddProduct));
+        }
+
+        private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                      + "_"
+                      + Guid.NewGuid().ToString().Substring(0, 4)
+                      + Path.GetExtension(fileName);
         }
 
         [HttpGet]

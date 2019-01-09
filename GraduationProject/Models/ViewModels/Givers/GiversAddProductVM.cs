@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace GraduationProject.Models.ViewModels
     {
         public string GiverId { get; set; }
         //[Required(ErrorMessage ="Vänligen lägg till en bild på din vara")]
-        public string Picture { get; set; }
+        public IFormFile Picture { get; set; }
+
+        public string PictureFileName { get; set; }
 
         [Required(ErrorMessage ="Vänligen ange varans namn")]
         public string ProductName { get; set; }

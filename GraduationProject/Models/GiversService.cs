@@ -30,7 +30,7 @@ namespace GraduationProject.Models
                 Name = giversAddProductVM.ProductName,
                 PickUpDate1 = giversAddProductVM.PickUpDate1,
                 PickUpDate2 = giversAddProductVM.PickUpDate2,
-                Picture = giversAddProductVM.Picture,
+                Picture = giversAddProductVM.PictureFileName,
                 PublishDate = DateTime.Now,
                 GiverId = giversAddProductVM.GiverId
             });

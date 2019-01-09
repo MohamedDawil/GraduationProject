@@ -24,6 +24,7 @@ namespace GraduationProject
             services.AddTransient<MembersService>();
             services.AddTransient<GiversService>();
 
+
             var connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FreshishDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<MyIdentityContext>(o =>
             o.UseSqlServer(connString));
