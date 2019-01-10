@@ -98,15 +98,25 @@ namespace GraduationProject.Controllers
         {
             if (!ModelState.IsValid)
                 return View(membersProfileVM);
-            if (membersProfileVM.Picture != null)
+
+            var statusCode = await service.CheckAddress(membersProfileVM);
+
+            if (!statusCode.Item1)
             {
-                var uniqueFileName = GetUniqueFileName(membersProfileVM.Picture.FileName);
-                var images = Path.Combine(hostingEnvironment.WebRootPath, "Images");
+                membersProfileVM.ErrorMessage = statusCode.Item2;
+                return View(membersProfileVM);
+            }
+            if (membersProfileVM.FilePath != null)
+            {
+                var uniqueFileName = GetUniqueFileName(membersProfileVM.FilePath.FileName);
+                var images = Path.Combine(hostingEnvironment.WebRootPath, "Profiles");
                 var filePath = Path.Combine(images, uniqueFileName);
-                membersProfileVM.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
-                membersProfileVM.PictureFileName = uniqueFileName;
+                membersProfileVM.FilePath.CopyTo(new FileStream(filePath, FileMode.Create));
+                membersProfileVM.Picture = uniqueFileName;
                 //to do : Save uniqueFileName  to your db table   
             }
+            //https://papapi.se/json/?s=Birger+Jarlsgatan+10&c=Stockholm&token=DIN_TOKEN
+           
 
             await service.ChangeProfile(membersProfileVM, HttpContext.User);
             return RedirectToAction(nameof(Profile));

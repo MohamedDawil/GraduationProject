@@ -9,9 +9,10 @@ namespace GraduationProject.Models.ViewModels
 {
     public class MembersProfileVM
     {
-        public IFormFile Picture { get; set; }
-        public string PictureFileName { get; set; }
+        public IFormFile FilePath { get; set; }
+        public string Picture { get; set; }
         
+        public string ErrorMessage { get; set; }
         [Required]
         [Display(Name = "Förnamn: ")]
         public string FirstName { get; set; }
