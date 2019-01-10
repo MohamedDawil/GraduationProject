@@ -23,7 +23,7 @@ namespace GraduationProject.Models.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FreshishDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FreshishDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False", x => x.UseNetTopologySuite());
             }
         }
 
@@ -62,9 +62,9 @@ namespace GraduationProject.Models.Entities
                     .IsRequired()
                     .HasMaxLength(450);
 
-                entity.Property(e => e.Latitude).IsRequired();
-
-                entity.Property(e => e.Longitude).IsRequired();
+                entity.Property(e => e.Location)
+                    .IsRequired()
+                    .HasColumnType("geometry");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -78,12 +78,12 @@ namespace GraduationProject.Models.Entities
                     .WithMany(p => p.ProductGiver)
                     .HasForeignKey(d => d.GiverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__product__GiverId__4AB81AF0");
+                    .HasConstraintName("FK__product__GiverId__60A75C0F");
 
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.ProductReceiver)
                     .HasForeignKey(d => d.ReceiverId)
-                    .HasConstraintName("FK__product__Receive__4BAC3F29");
+                    .HasConstraintName("FK__product__Receive__619B8048");
             });
         }
     }

@@ -47,6 +47,10 @@ namespace GraduationProject.Controllers
 
             var giver = await membersService.GetUser(HttpContext.User);
             giversAddProductVM.GiverId = giver.Id;
+
+            var location = await giversService.GetCoordinates(giver);
+            giversAddProductVM.Location = location;
+
             await giversService.CreateProductAsync(giversAddProductVM);
 
             return RedirectToAction(nameof(AddProduct));

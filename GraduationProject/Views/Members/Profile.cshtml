@@ -3,9 +3,10 @@
     ViewData["Title"] = "Profile";
 }
 
-<img src="/Profiles/@Model.Picture" id="output" />
-<input type="hidden" asp-for="Picture" />
+<img src="/Profiles/@Model.Picture" id="output" style="width: 200px; height: auto;" />
+
 <form asp-controller="Members" asp-action="Profile" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Picture" />
     <label class="custom-file-upload">
         <input asp-for="FilePath" type="file" accept="image/*;capture=camera" value="Lägg till bild" onchange="loadFile(event)">
         <i class="fa fa-cloud-upload"></i> Lägg till bild

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 namespace GraduationProject.Json
 {
 
-    public class Rootobject
+    public class JsonAddress
     {
         public Api api { get; set; }
-        public Result result { get; set; }
+        public Result2 result { get; set; }
     }
 
     public class Api
@@ -20,7 +20,7 @@ namespace GraduationProject.Json
         public string encoding { get; set; }
     }
 
-    public class Result
+    public class Result2
     {
         public Address address { get; set; }
         public Status status { get; set; }

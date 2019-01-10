@@ -97,7 +97,7 @@ namespace GraduationProject.Models
             var url = string.Format($"https://papapi.se/json/?v={street}|{streetNumber}|{membersProfileVM.ZipCode}|{membersProfileVM.City}&token=b5d95cb8932150b6bb65e4de000fe4567aac2d30");
             var response = await http.GetAsync(url);
             var result = await response.Content.ReadAsStringAsync();
-            var json = JsonConvert.DeserializeObject<Rootobject>(result); // Convertor from string"result" to json
+            var json = JsonConvert.DeserializeObject<JsonAddress>(result); // Convertor from string"result" to json
 
             return new Tuple<bool, string>
             (

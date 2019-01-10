@@ -106,6 +106,7 @@ namespace GraduationProject.Controllers
                 membersProfileVM.ErrorMessage = statusCode.Item2;
                 return View(membersProfileVM);
             }
+
             if (membersProfileVM.FilePath != null)
             {
                 var uniqueFileName = GetUniqueFileName(membersProfileVM.FilePath.FileName);
@@ -113,10 +114,7 @@ namespace GraduationProject.Controllers
                 var filePath = Path.Combine(images, uniqueFileName);
                 membersProfileVM.FilePath.CopyTo(new FileStream(filePath, FileMode.Create));
                 membersProfileVM.Picture = uniqueFileName;
-                //to do : Save uniqueFileName  to your db table   
             }
-            //https://papapi.se/json/?s=Birger+Jarlsgatan+10&c=Stockholm&token=DIN_TOKEN
-           
 
             await service.ChangeProfile(membersProfileVM, HttpContext.User);
             return RedirectToAction(nameof(Profile));
