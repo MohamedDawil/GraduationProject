@@ -6,6 +6,44 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\app.css" />
+    <Content Remove="wwwroot\css\icons.css" />
+    <Content Remove="wwwroot\fonts\Framework7Icons-Regular.eot" />
+    <Content Remove="wwwroot\fonts\Framework7Icons-Regular.ttf" />
+    <Content Remove="wwwroot\fonts\Framework7Icons-Regular.woff" />
+    <Content Remove="wwwroot\fonts\Framework7Icons-Regular.woff2" />
+    <Content Remove="wwwroot\fonts\MaterialIcons-Regular.eot" />
+    <Content Remove="wwwroot\fonts\MaterialIcons-Regular.ttf" />
+    <Content Remove="wwwroot\fonts\MaterialIcons-Regular.woff" />
+    <Content Remove="wwwroot\fonts\MaterialIcons-Regular.woff2" />
+    <Content Remove="wwwroot\framework7\css\framework7.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.ios.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.ios.min.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.md.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.md.min.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.min.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.rtl.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.rtl.ios.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.rtl.ios.min.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.rtl.md.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.rtl.md.min.css" />
+    <Content Remove="wwwroot\framework7\css\framework7.rtl.min.css" />
+    <Content Remove="wwwroot\framework7\js\framework7.js" />
+    <Content Remove="wwwroot\framework7\js\framework7.min.js" />
+    <Content Remove="wwwroot\framework7\js\framework7.min.js.map" />
+    <Content Remove="wwwroot\js\app.js" />
+    <Content Remove="wwwroot\js\routes.js" />
+    <Content Remove="wwwroot\pages\404.html" />
+    <Content Remove="wwwroot\pages\about.html" />
+    <Content Remove="wwwroot\pages\catalog.html" />
+    <Content Remove="wwwroot\pages\page-loader-component.html" />
+    <Content Remove="wwwroot\pages\page-loader-template7.html" />
+    <Content Remove="wwwroot\pages\product.html" />
+    <Content Remove="wwwroot\pages\request-and-load.html" />
+    <Content Remove="wwwroot\pages\settings.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.1" />
@@ -15,6 +53,45 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Profiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\app.css" />
+    <None Include="wwwroot\css\icons.css" />
+    <None Include="wwwroot\fonts\Framework7Icons-Regular.eot" />
+    <None Include="wwwroot\fonts\Framework7Icons-Regular.ttf" />
+    <None Include="wwwroot\fonts\Framework7Icons-Regular.woff" />
+    <None Include="wwwroot\fonts\Framework7Icons-Regular.woff2" />
+    <None Include="wwwroot\fonts\MaterialIcons-Regular.eot" />
+    <None Include="wwwroot\fonts\MaterialIcons-Regular.ttf" />
+    <None Include="wwwroot\fonts\MaterialIcons-Regular.woff" />
+    <None Include="wwwroot\fonts\MaterialIcons-Regular.woff2" />
+    <None Include="wwwroot\framework7\css\framework7.css" />
+    <None Include="wwwroot\framework7\css\framework7.ios.css" />
+    <None Include="wwwroot\framework7\css\framework7.ios.min.css" />
+    <None Include="wwwroot\framework7\css\framework7.md.css" />
+    <None Include="wwwroot\framework7\css\framework7.md.min.css" />
+    <None Include="wwwroot\framework7\css\framework7.min.css" />
+    <None Include="wwwroot\framework7\css\framework7.rtl.css" />
+    <None Include="wwwroot\framework7\css\framework7.rtl.ios.css" />
+    <None Include="wwwroot\framework7\css\framework7.rtl.ios.min.css" />
+    <None Include="wwwroot\framework7\css\framework7.rtl.md.css" />
+    <None Include="wwwroot\framework7\css\framework7.rtl.md.min.css" />
+    <None Include="wwwroot\framework7\css\framework7.rtl.min.css" />
+    <None Include="wwwroot\framework7\js\framework7.js" />
+    <None Include="wwwroot\framework7\js\framework7.min.js" />
+    <None Include="wwwroot\framework7\js\framework7.min.js.map" />
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\js\app.js" />
+    <None Include="wwwroot\js\routes.js" />
+    <None Include="wwwroot\pages\404.html" />
+    <None Include="wwwroot\pages\about.html" />
+    <None Include="wwwroot\pages\catalog.html" />
+    <None Include="wwwroot\pages\page-loader-component.html" />
+    <None Include="wwwroot\pages\page-loader-template7.html" />
+    <None Include="wwwroot\pages\product.html" />
+    <None Include="wwwroot\pages\request-and-load.html" />
+    <None Include="wwwroot\pages\settings.html" />
   </ItemGroup>
 
 </Project>
