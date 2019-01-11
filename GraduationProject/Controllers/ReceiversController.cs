@@ -65,6 +65,14 @@ namespace GraduationProject.Controllers
            
             return View(viewModels);
         }
+
+        //[Route("/Receivers/SaveCurrentLocation/{lat}/{lng}")]
+        [HttpGet]
+        public async Task<IActionResult> SaveCurrentLocation(double lat, double lng)
+        {
+            var viewModels = await service.GetDistances(lat, lng);
+            return Json(viewModels);
+        }
     }
 }
 

@@ -55,12 +55,6 @@ namespace GraduationProject.Models
             var point = new Point(new Coordinate ((double)json.results[0].geometry.location.lat, (double)json.results[0].geometry.location.lng));
             point.SRID = 4326;
             return point;
-            //return geometryFactory.CreatePoint(new Coordinate(json.results[0].geometry.location.lat, json.results[0].geometry.location.lng));
-            //return new Tuple<IGeometry, IGeometry>
-            //(
-            //    json.results[0].geometry.location.lat,
-            //    json.results[0].geometry.location.lng
-            //);
         }
         
     }

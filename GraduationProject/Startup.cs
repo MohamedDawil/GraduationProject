@@ -58,6 +58,7 @@ namespace GraduationProject
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseDeveloperExceptionPage();
             app.UseAuthentication();
