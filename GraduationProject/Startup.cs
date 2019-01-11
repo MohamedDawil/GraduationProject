@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using GraduationProject.Models;
@@ -23,13 +24,13 @@ namespace GraduationProject
         {
             services.AddTransient<MembersService>();
             services.AddTransient<GiversService>();
-
+            services.AddTransient<ReceiversService>();
 
             var connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FreshishDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<MyIdentityContext>(o =>
             o.UseSqlServer(connString));
             services.AddDbContext<FreshishContext>(o =>
-           o.UseSqlServer(connString));
+           o.UseSqlServer(connString, s => s.UseNetTopologySuite()));
 
             services.AddIdentity<MyIdentityUser, IdentityRole>(o =>
             {
@@ -51,6 +52,12 @@ namespace GraduationProject
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var cultureInfo = new CultureInfo("en-US");
+            cultureInfo.NumberFormat.CurrencySymbol = "€";
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
             app.UseStaticFiles();
             app.UseDeveloperExceptionPage();
             app.UseAuthentication();

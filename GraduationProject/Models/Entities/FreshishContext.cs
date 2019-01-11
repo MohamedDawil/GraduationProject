@@ -62,9 +62,7 @@ namespace GraduationProject.Models.Entities
                     .IsRequired()
                     .HasMaxLength(450);
 
-                entity.Property(e => e.Location)
-                    .IsRequired()
-                    .HasColumnType("geometry");
+                entity.Property(e => e.Location).IsRequired();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -78,12 +76,12 @@ namespace GraduationProject.Models.Entities
                     .WithMany(p => p.ProductGiver)
                     .HasForeignKey(d => d.GiverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__product__GiverId__60A75C0F");
+                    .HasConstraintName("FK__product__GiverId__6477ECF3");
 
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.ProductReceiver)
                     .HasForeignKey(d => d.ReceiverId)
-                    .HasConstraintName("FK__product__Receive__619B8048");
+                    .HasConstraintName("FK__product__Receive__656C112C");
             });
         }
     }

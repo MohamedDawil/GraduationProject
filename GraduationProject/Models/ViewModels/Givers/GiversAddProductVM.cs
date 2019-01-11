@@ -1,5 +1,6 @@
 ﻿using GeoAPI.Geometries;
 using Microsoft.AspNetCore.Http;
+using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +11,7 @@ namespace GraduationProject.Models.ViewModels
 {
     public class GiversAddProductVM
     {
-        public IPoint Location { get; set; }
+        public IGeometry Location { get; set; }
 
         public string GiverId { get; set; }
         //[Required(ErrorMessage ="Vänligen lägg till en bild på din vara")]
@@ -22,6 +23,7 @@ namespace GraduationProject.Models.ViewModels
         public string ProductName { get; set; }
 
         [Required(ErrorMessage ="Vänligen ange varans skick")]
+        [Display(Name ="Fräschhet")]
         public int Freshness { get; set; }
 
         public DateTime ExpiryDate { get; set; }

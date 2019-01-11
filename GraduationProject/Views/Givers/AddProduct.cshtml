@@ -4,7 +4,8 @@
 }
 
 <form asp-controller="Givers" asp-action="AddProduct" method="post" enctype="multipart/form-data">
-    <img id="output" />
+    <img src="@Model.Picture" id="output" style="width: 200px; height: auto;" />
+    <br />
     <label class="custom-file-upload">
         <input asp-for="Picture" type="file" accept="image/*;capture=camera" value="Lägg till bild" onchange="loadFile(event)">
         <i class="fa fa-cloud-upload"></i> Lägg till bild
@@ -21,6 +22,7 @@
     <input asp-for="Description" type="text" placeholder="Beskrivning" />
     <span asp-validation-for="Description"></span>
     <br />
+    <label asp-for="Freshness">Fräschhet</label>
     <input asp-for="Freshness" type="range" min="1" max="10" placeholder="Fräschhet" />
     <span asp-validation-for="Freshness"></span>
     <br />

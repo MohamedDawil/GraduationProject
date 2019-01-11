@@ -42,7 +42,6 @@ namespace GraduationProject.Controllers
                 var filePath = Path.Combine(images, uniqueFileName);
                 giversAddProductVM.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                 giversAddProductVM.PictureFileName = uniqueFileName;
-                //to do : Save uniqueFileName  to your db table   
             }
 
             var giver = await membersService.GetUser(HttpContext.User);

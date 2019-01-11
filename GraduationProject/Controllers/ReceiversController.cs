@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +10,19 @@ namespace GraduationProject.Controllers
 {
     public class ReceiversController : Controller
     {
+        private ReceiversService service;
+
+        public ReceiversController(ReceiversService service)
+        {
+            this.service = service;
+        }
+
         [HttpGet]
-        public IActionResult Map()
+        public async Task<IActionResult> Map()
         {
             var viewModel = new ReceiversMapVM
             {
-                Positions = new ReceiversMapPositionVM[]
-                {
-                    new ReceiversMapPositionVM()
-                },
+                Positions = await service.GetPositions(),
                 Products = new ReceiversMapProductVM[]
                 {
                     new ReceiversMapProductVM()
