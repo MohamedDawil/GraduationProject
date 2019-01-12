@@ -10,11 +10,13 @@ namespace GraduationProject.Controllers
 {
     public class ReceiversController : Controller
     {
-        private ReceiversService service;
+        private ReceiversService receiversService;
+        private MembersService membersService;
 
-        public ReceiversController(ReceiversService service)
+        public ReceiversController(ReceiversService receiversService, MembersService membersService)
         {
-            this.service = service;
+            this.receiversService = receiversService;
+            this.membersService = membersService;
         }
 
         [HttpGet]
@@ -22,7 +24,7 @@ namespace GraduationProject.Controllers
         {
             var viewModel = new ReceiversMapVM
             {
-                Positions = await service.GetPositions(),
+                Positions = await receiversService.GetPositions(),
                 Products = new ReceiversMapProductVM[]
                 {
                     new ReceiversMapProductVM()
@@ -49,10 +51,13 @@ namespace GraduationProject.Controllers
 
             return RedirectToAction(nameof(Search));
         }
-        
-        public IActionResult ClaimProduct(int productId)
+
+        public async Task<IActionResult> ClaimProduct(int id)
         {
-            return RedirectToAction(nameof(Search));
+            var receiver = await membersService.GetUser(HttpContext.User);
+            var isClaimed = await receiversService.ClaimProduct(id, receiver.Id);
+
+            return Json(isClaimed);
         }
 
         [HttpGet]
@@ -62,7 +67,7 @@ namespace GraduationProject.Controllers
             {
                 new ReceiversCartVM()
             };
-           
+
             return View(viewModels);
         }
 
@@ -70,8 +75,10 @@ namespace GraduationProject.Controllers
         [HttpGet]
         public async Task<IActionResult> SaveCurrentLocation(double lat, double lng)
         {
-            var viewModels = await service.GetDistances(lat, lng);
-            return Json(viewModels);
+            var viewModels = await receiversService.GetDistances(lat, lng);
+            //Partiell view
+            return PartialView("_ProductBox", viewModels);
+            //return Json(viewModels);
         }
     }
 }

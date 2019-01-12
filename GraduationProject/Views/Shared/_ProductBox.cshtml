@@ -1,0 +1,57 @@
+﻿@model ReceiversMapProductVM[]
+
+@{
+    Layout = null;
+}
+
+@for (int i = 0; i < Model.Length; i++)
+{
+    <div style="background-color: seagreen; @*background-image: url('/Images/@Model[i].ProductImage');*@ width: 360px; height: auto;" id="output">
+
+        @Model[i].ProductName                     @Model[i].ProductDistance m
+        <br />
+        Hämtas @Model[i].ProductPickUpDate1              @Model[i].ProductPickUpDate2
+
+        <br />
+        <div id="seInfoDiv_@i" style="display: none;">
+            @Model[i].ProductDescription
+        </div>
+        <button id="info_@i" onclick="showInfo(@i);">Se info</button>
+
+        <button id="product_@Model[i].ProductId" onclick="claimProduct(@Model[i].ProductId);">Boka vara</button>
+
+    </div>
+    <br />
+
+}
+<script>
+    function showInfo(id) {
+        var x = document.getElementById("seInfoDiv_" + id);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            document.getElementById("info_" + id).innerHTML = "Dölj info";
+        }
+        else {
+            x.style.display = "none";
+            document.getElementById("info_" + id).innerHTML = "Se info";
+        }
+    }
+
+    function claimProduct(id) {
+        $.ajax({
+            url: "/Receivers/ClaimProduct",
+            data: {
+                id: id
+            },
+            type: "POST",
+            success: function (response) {
+                console.log("success"+response);
+                document.getElementById("product_" + id).innerHTML = "Avboka vara";
+            },
+            error: function (response) {
+                console.log("error" +response);
+                //document.getElementById("product_" + id).innerHTML = "Boka vara";
+            }
+        });
+    }
+</script>
