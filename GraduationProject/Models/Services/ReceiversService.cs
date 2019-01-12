@@ -1,4 +1,5 @@
 ﻿using GeoAPI.Geometries;
+using GraduationProject.Helpers;
 using GraduationProject.Models.Entities;
 using GraduationProject.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -32,9 +33,14 @@ namespace GraduationProject.Models
 
         public async Task<ReceiversMapProductVM[]> GetDistances(double lat, double lng)
         {
+            var point = new Point(new Coordinate(lat, lng));
+            point.SRID = 4326;
             return await context.Product.Select(p => new ReceiversMapProductVM
             {
-                ProductDistance = p.Location.Distance(new Point(new Coordinate(lat, lng)))
+                GiverCity = p.Giver.City,
+                ProductDistance = Convert.ToInt32(Helper.Distance(point, (Point)p.Location)),
+                ProductLatitude = ((Point)p.Location).X,
+                ProductLongitude = ((Point)p.Location).Y
             }).ToArrayAsync();
         }
     }

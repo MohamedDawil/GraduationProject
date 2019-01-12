@@ -10,7 +10,7 @@ namespace GraduationProject.Models.ViewModels
         public string ProductName { get; set; }
         public double ProductLongitude { get; set; }
         public double ProductLatitude { get; set; }
-        public double ProductDistance { get; set; }
+        public int ProductDistance { get; set; }
         public string ProductImage { get; set; }
         public DateTime ProductPickUpDate1 { get; set; }
         public DateTime ProductPickUpDate2 { get; set; }

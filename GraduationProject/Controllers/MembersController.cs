@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using GraduationProject.Helpers;
 using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
 using Microsoft.AspNetCore.Hosting;
@@ -109,7 +110,7 @@ namespace GraduationProject.Controllers
 
             if (membersProfileVM.FilePath != null)
             {
-                var uniqueFileName = GetUniqueFileName(membersProfileVM.FilePath.FileName);
+                var uniqueFileName = Helper.GetUniqueFileName(membersProfileVM.FilePath.FileName);
                 var images = Path.Combine(hostingEnvironment.WebRootPath, "Profiles");
                 var filePath = Path.Combine(images, uniqueFileName);
                 membersProfileVM.FilePath.CopyTo(new FileStream(filePath, FileMode.Create));
@@ -119,13 +120,6 @@ namespace GraduationProject.Controllers
             await service.ChangeProfile(membersProfileVM, HttpContext.User);
             return RedirectToAction(nameof(Profile));
         }
-        private string GetUniqueFileName(string fileName)
-        {
-            fileName = Path.GetFileName(fileName);
-            return Path.GetFileNameWithoutExtension(fileName)
-                      + "_"
-                      + Guid.NewGuid().ToString().Substring(0, 4)
-                      + Path.GetExtension(fileName);
-        }
+       
     }
 }
