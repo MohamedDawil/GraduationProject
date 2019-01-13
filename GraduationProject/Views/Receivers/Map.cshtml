@@ -76,7 +76,6 @@
                     data: pos,
                     type: "GET",
                     cache: false,
-                    processData: false,
                     success: function (response) {
                         $("#products").html(response);
                         $("#badge-chat").html(parseInt($('#badge-chat').html(), 10) + 1);

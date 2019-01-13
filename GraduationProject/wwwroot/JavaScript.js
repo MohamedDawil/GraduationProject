@@ -37,3 +37,15 @@ function mapsSelector(lat, lng) {
     else /* else use Google */
         window.open("https://maps.google.com/maps?daddr=" + lat + "," + lng + "&amp;ll=");
 }
+
+function showInfo(id) {
+    var x = document.getElementById("seInfoDiv_" + id);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        document.getElementById("info_" + id).innerHTML = "Dölj info";
+    }
+    else {
+        x.style.display = "none";
+        document.getElementById("info_" + id).innerHTML = "Se info";
+    }
+}

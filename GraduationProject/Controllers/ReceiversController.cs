@@ -68,6 +68,7 @@ namespace GraduationProject.Controllers
             return Json(isUnClaimed);
         }
 
+        [HttpGet]
         public async Task<IActionResult> UnclaimProductCart(int id)
         {
             var receiver = await membersService.GetUser(HttpContext.User);
