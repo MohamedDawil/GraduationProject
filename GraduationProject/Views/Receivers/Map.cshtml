@@ -5,11 +5,14 @@
 }
 
 
-<div id="map" @*style="width: 45%; height: 45%; position: absolute;"*@>
+<div id="map" @*style="width: 45%; height: 45%; position: absolute;" *@>
     <div id="map-canvas"></div>
 </div>
 
-<div id="products"></div>
+
+
+<div id="products">
+</div>
 
 <script>
     // Note: This example requires that you consent to location sharing when
@@ -79,13 +82,15 @@
                     data: pos,
                     type: "GET",
                     success: function (response) {
-                        var result;
-                        console.log(response);
-                        response.forEach(function (data) {
-                            result += "<div>" + data.giverCity + ": " + data.productDistance + ", " +data.productLatitude+", " + data.productLongitude + "</div>";
-                        })
+                        $("#products").html(response)
+                        //var result;
+                        //console.log(response);
+                        //response.forEach(function (data) {
+                        //    $("#products").append(data);
+                        //    //result += "<div>" + data.giverCity + ": " + data.productDistance + ", " +data.productLatitude+", " + data.productLongitude + "</div>";
+                        //})
 
-                        $("#products").html(result);
+                        //$("#products").html(result);
                     },
                     error: function (response) {
                         console.log("error" + response.responseText);
@@ -109,6 +114,33 @@
             }, function () {
                 console.log("!navigator.geolocation.getCurrentPosition");
 
+                var pos = {
+                    lat: 59.3477632,
+                    lng: 18.042060799999998
+                };
+
+                $.ajax({
+                    url: "/Receivers/SaveCurrentLocation",
+                    data: pos,
+                    type: "GET",
+                    dataType: 'HTML',
+                    success: function (response) {
+                        console.log(response);
+                        //$("#products").html(response);
+                        // var result;
+                        //console.log(response);
+                        //response.forEach(function (data) {
+                        //    result += "<div>" + data.giverCity + ": " + data.productDistance + ", " +data.productLatitude+", " + data.productLongitude + "</div>";
+                        //})
+
+                        $("#products").html(response);
+                    },
+                    error: function (response) {
+                        console.log("error" + response.responseText);
+                        alert(response.responseText);
+                    }
+                });
+
                 clearTimeout(location_timeout);
 
                 handleLocationError(true, receiverWindow, map.getCenter());
@@ -131,22 +163,11 @@
             'Error: Your browser doesn\'t support geolocation.');
         receiverWindow.open(map);
     }
+
+
+
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtkrfI4kUln6UUZTJTvZvv3FC5wP624D4&callback=initMap">
 </script>
 
-
-
-@*@foreach (var product in Model.Products)
-    {
-        @product.ProductName
-        @product.ProductLongitude
-        @product.ProductLatitude
-        @product.ProductImage
-        @product.ProductPickUpDate1
-        @product.ProductPickUpDate2
-
-        <a class="button" href="#">Se info</a>
-        <a class="button" asp-controller="Receivers" asp-action="ClaimProduct">Boka vara</a>
-    }*@

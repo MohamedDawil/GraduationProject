@@ -27,7 +27,7 @@ namespace GraduationProject.Models
                 //FIXME: Shift due to strange behaviour
                 Latitude = ((Point)p.Location).Y,
                 Longitude = ((Point)p.Location).X,
-                ProductName = p.Name
+                ProductName = p.Name,
             }).ToArrayAsync();
         }
 
@@ -37,11 +37,26 @@ namespace GraduationProject.Models
             point.SRID = 4326;
             return await context.Product.Select(p => new ReceiversMapProductVM
             {
-                GiverCity = p.Giver.City,
+                ProductId = p.Id,
+                ProductImage = p.Picture,
+                ProductName = p.Name,
+                ProductPickUpDate1 = p.PickUpDate1,
+                ProductPickUpDate2= p.PickUpDate2,  
+                ProductDescription = p.Description,
                 ProductDistance = Convert.ToInt32(Helper.Distance(point, (Point)p.Location)),
-                ProductLatitude = ((Point)p.Location).X,
-                ProductLongitude = ((Point)p.Location).Y
             }).ToArrayAsync();
+        }
+
+        public async Task<bool> ClaimProduct(int productId, string receiverId)
+        {
+            var product = await context.Product.SingleOrDefaultAsync(p => p.Id == productId);
+            if (product == null)
+                return false;
+
+            product.Claimed = true;
+            product.ReceiverId = receiverId;
+            await context.SaveChangesAsync();
+            return true;
         }
     }
 }
