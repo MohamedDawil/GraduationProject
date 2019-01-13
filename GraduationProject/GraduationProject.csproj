@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\products\" />
     <Folder Include="wwwroot\profiles\" />
   </ItemGroup>
 
