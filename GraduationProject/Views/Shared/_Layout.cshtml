@@ -4,21 +4,23 @@
     <title>Layout</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.0/theme-classic/theme-classic.css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="~/StyleSheet.css" rel="stylesheet" type="text/css" />
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
     @*https://fontawesome.com/icons?from=io*@
     @*http://demos.jquerymobile.com/1.4.5/icons/*@
 </head>
 <body>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <div data-role="page">
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a asp-controller="Givers" asp-action="AddProduct" data-icon="plus">Lägg till vara</a></li>
-                    <li><a asp-controller="Givers" asp-action="Products" data-icon="grid">Mina varor</a></li>
-                    <li><a asp-controller="Members" asp-action="Profile" data-icon="user">Profil</a></li>
+                    <li><a asp-controller="Givers" asp-action="AddProduct" data-theme="b" data-icon="plus">Lägg till vara</a></li>
+                    <li><a asp-controller="Givers" asp-action="Products" data-theme="b" data-icon="grid">Mina varor</a></li>
+                    <li><a asp-controller="Members" asp-action="Profile" data-theme="b" data-icon="user">Profil</a></li>
                 </ul>
             </div>
             @if (ViewBag.BackButton ?? false)
@@ -36,12 +38,12 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a asp-controller="Receivers" asp-action="Map" data-role="tab" id="map" data-icon="location">Karta</a></li>
-                    <li><a asp-controller="Receivers" asp-action="Search" data-role="tab" id="search" data-icon="search">Sök vara</a></li>
-                    <li><a asp-controller="Receivers" asp-action="Cart" data-role="tab" id="cart" data-icon="shop">Matkorg</a></li>
+                    <li><a asp-controller="Receivers" asp-action="Map" data-theme="b" data-role="tab" id="map" data-icon="location">Karta</a></li>
+                    <li><a asp-controller="Receivers" asp-action="Search" data-theme="b" data-role="tab" id="search" data-icon="search">Sök vara</a></li>
+                    <li><a asp-controller="Receivers" asp-action="Cart" data-theme="b" data-role="tab" id="cart" data-icon="shop">Matkorg<span class="ui-li-count ui-btn-corner-all countBubl">1</span>
+</a></li>
                     <li>
-                        <a asp-controller="Messages" asp-action="Inbox" data-role="tab" id="messages" data-icon="comment">Meddelanden</a>
-                        <span class="ui-li-count ui-btn-corner-all countBubl">12</span>
+                        <a asp-controller="Messages" asp-action="Inbox" data-theme="b" data-role="tab" id="messages" data-icon="comment">Meddelanden</a>
                     </li>
                 </ul>
             </div>
@@ -49,7 +51,6 @@
 
     </div>
 
-   
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
     <script type="text/javascript" src="~/Javascript.js"></script>

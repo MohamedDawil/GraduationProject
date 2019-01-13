@@ -35,3 +35,10 @@ input[type="file"] {
     left: 0;
 }
 
+.countBubl {
+    float: left;
+    margin-top: -25px;
+    background: #ed1d24;
+    color: #fff;
+    padding: 2px;
+}

@@ -7,7 +7,7 @@
 <div id="cart"></div>
 
 <script>
-    $(function () {
+    $(document).on('pageinit', function () {
         if (navigator.geolocation) {
             console.log("navigator.geolocation");
 
@@ -23,13 +23,13 @@
                     data: pos,
                     type: "GET",
                     dataType: 'HTML',
+                    cache: false,
                     success: function (response) {
-                        console.log(response);
+                        console.log("Cart: success");
                         $("#cart").html(response);
                     },
                     error: function (response) {
-                        console.log("error" + response.responseText);
-                        alert(response.responseText);
+                        console.log("Cart: error " + response.responseText);
                     }
                 });
             })
