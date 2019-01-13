@@ -24,6 +24,7 @@
                     type: "GET",
                     dataType: 'HTML',
                     cache: false,
+                    processData: false,
                     success: function (response) {
                         console.log("Cart: success");
                         $("#cart").html(response);

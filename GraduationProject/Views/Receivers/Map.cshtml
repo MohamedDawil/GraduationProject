@@ -15,6 +15,7 @@
     // locate you.
     var map, receiverWindow;
     function initMap() {
+
         console.log("initMap");
         var map = new google.maps.Map(document.getElementById('google-map'), {
             zoom: 10,
@@ -74,8 +75,11 @@
                     url: "/Receivers/GetProducts",
                     data: pos,
                     type: "GET",
+                    cache: false,
+                    processData: false,
                     success: function (response) {
-                        $("#products").html(response)
+                        $("#products").html(response);
+                        $("#badge-chat").html(parseInt($('#badge-chat').html(), 10) + 1);
                     },
                     error: function (response) {
                         console.log("error" + response.responseText);
@@ -109,6 +113,7 @@
                     data: pos,
                     type: "GET",
                     dataType: 'HTML',
+                    processData: false,
                     success: function (response) {
                         console.log(response);
                         $("#products").html(response);
