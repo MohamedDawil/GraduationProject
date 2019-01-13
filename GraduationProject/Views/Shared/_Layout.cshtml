@@ -2,24 +2,50 @@
 <html>
 <head>
     <title>Layout</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="~/StyleSheet.css" rel="stylesheet" type="text/css" />
+    @*https://fontawesome.com/icons?from=io*@
+    @*http://demos.jquerymobile.com/1.4.5/icons/*@
 </head>
 <body>
-    <header>
-        <a asp-controller="Givers" asp-action="AddProduct">Lägg till vara</a>
-        <a asp-controller="Givers" asp-action="Products">Mina varor</a>
-        <a asp-controller="Members" asp-action="Profile">Profil</a>
-    </header>
-    <main>@RenderBody()</main>
-    <footer>
-        <a asp-controller="Receivers" asp-action="Map">Karta</a>
-        <a asp-controller="Receivers" asp-action="Search">Sök vara</a>
-        <a asp-controller="Receivers" asp-action="Cart">Matkorg</a>
-        <a asp-controller="Messages" asp-action="Inbox">Meddelanden</a>
+    <div data-role="page">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a asp-controller="Givers" asp-action="AddProduct" data-icon="plus">Lägg till vara</a></li>
+                    <li><a asp-controller="Givers" asp-action="Products" data-icon="grid">Mina varor</a></li>
+                    <li><a asp-controller="Members" asp-action="Profile" data-icon="user">Profil</a></li>
+                </ul>
+            </div>
+            @if (ViewBag.BackButton ?? false)
+            {
+                <div data-role="navbar" align="left" style="border-top: 1px solid #ddd;" id="back-button">
+                    <ul>
+                        <li><a data-icon="arrow-l" data-rel="back">Tillbaka</a></li>
+                    </ul>
+                </div>
+            }
+        </div>
 
-    </footer>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+        <div data-role="content">@RenderBody()</div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a asp-controller="Receivers" asp-action="Map" data-role="tab" id="map" data-icon="location">Karta</a></li>
+                    <li><a asp-controller="Receivers" asp-action="Search" data-role="tab" id="search" data-icon="search">Sök vara</a></li>
+                    <li><a asp-controller="Receivers" asp-action="Cart" data-role="tab" id="cart" data-icon="shop">Matkorg</a></li>
+                    <li><a asp-controller="Messages" asp-action="Inbox" data-role="tab" id="messages" data-icon="comment">Meddelanden</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
     <script type="text/javascript" src="~/Javascript.js"></script>

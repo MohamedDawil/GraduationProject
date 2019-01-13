@@ -48,12 +48,14 @@ namespace GraduationProject.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            ViewBag.BackButton = true;
             return View();
         }
 
         [HttpGet]
         public IActionResult RegisterPrivate()
         {
+            ViewBag.BackButton = true;
             return View();
         }
 
@@ -61,12 +63,18 @@ namespace GraduationProject.Controllers
         public async Task<IActionResult> RegisterPrivate(MembersRegisterPrivateVM membersRegisterPrivateVM)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.BackButton = true;
                 return View(membersRegisterPrivateVM);
+            }
 
             var isAdded = await service.CreateAsync(membersRegisterPrivateVM);
 
             if (!isAdded)
+            {
+                ViewBag.BackButton = true;
                 return View(membersRegisterPrivateVM);
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -120,6 +128,6 @@ namespace GraduationProject.Controllers
             await service.ChangeProfile(membersProfileVM, HttpContext.User);
             return RedirectToAction(nameof(Profile));
         }
-       
+
     }
 }

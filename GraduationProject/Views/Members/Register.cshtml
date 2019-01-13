@@ -1,16 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Register";
 }
+<a asp-controller="Members" asp-action="RegisterPrivate" class="ui-btn">Privatperson</a>
 
+<a asp-controller="Members" asp-action="RegisterOrganization" class="ui-btn">Organisation</a>
 
-<form asp-controller="Members" asp-action="RegisterPrivate" method="get">
-    <input type="submit" value="Privatperson" />
-</form>
-
-<form asp-controller="Members" asp-action="RegisterOrganization" method="get">
-    <input type="submit" value="Organisation" />
-</form>
-
-<form asp-controller="Members" asp-action="Index" method="get">
-    <input type="submit" value="Tillbaka" />
-</form>
+<script>
+    $(document).ready(function () {
+        $("#back-button").show();
+    });
+</script>

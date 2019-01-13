@@ -1,6 +1,7 @@
 ﻿body {
     background-color: white;
 }
+
 input[type="file"] {
     display: none;
 }
@@ -16,3 +17,6 @@ input[type="file"] {
     height: 100%;
 }
 
+#content {
+    padding: 0 !important;
+}
