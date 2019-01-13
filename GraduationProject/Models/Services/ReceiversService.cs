@@ -47,6 +47,7 @@ namespace GraduationProject.Models
                 ProductExpiryDate = p.ExpiryDate,
                 ProductLatitude = ((Point)p.Location).X,
                 ProductLongitude = ((Point)p.Location).Y,
+                ProductClaimed = p.Claimed,
                 GiverCity = p.City,
                 GiverStreet = p.Street,
                 GiverZipCode = p.ZipCode,
@@ -64,6 +65,31 @@ namespace GraduationProject.Models
             product.ReceiverId = receiverId;
             await context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<ReceiversCartVM[]> GetCart(string receiverId, double lat, double lng)
+        {
+            var point = new Point(new Coordinate(lat, lng));
+            point.SRID = 4326;
+            return await context.Product.Where(r => r.ReceiverId == receiverId).Select(p => new ReceiversCartVM
+            {
+                ProductId = p.Id,
+                ProductImage = p.Picture,
+                ProductName = p.Name,
+                ProductPickUpDate1 = p.PickUpDate1,
+                ProductPickUpDate2 = p.PickUpDate2,
+                ProductDescription = p.Description,
+                ProductFreshness = p.Freshness,
+                ProductExpiryDate = p.ExpiryDate,
+                ProductLatitude = ((Point)p.Location).X,
+                ProductLongitude = ((Point)p.Location).Y,
+                ProductClaimed = p.Claimed,
+                GiverName = p.Giver.FirstName,
+                GiverCity = p.City,
+                GiverStreet = p.Street,
+                GiverZipCode = p.ZipCode,
+                ProductDistance = Convert.ToInt32(Helper.Distance(point, (Point)p.Location)),
+            }).OrderBy(p => p.ProductDistance).ToArrayAsync();
         }
 
         public async Task<bool> UnclaimProduct(int productId, string receiverId)
