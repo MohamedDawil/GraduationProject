@@ -60,25 +60,42 @@ namespace GraduationProject.Controllers
             return Json(isClaimed);
         }
 
+        public async Task<IActionResult> UnclaimProduct(int id)
+        {
+            var receiver = await membersService.GetUser(HttpContext.User);
+            var isUnClaimed = await receiversService.UnclaimProduct(id, receiver.Id);
+
+            return Json(isUnClaimed);
+        }
+
+        public async Task<IActionResult> UnclaimProductCart(int id)
+        {
+            var receiver = await membersService.GetUser(HttpContext.User);
+            var isUnClaimed = await receiversService.UnclaimProduct(id, receiver.Id);
+
+            return RedirectToAction(nameof(Cart));
+        }
+
         [HttpGet]
         public IActionResult Cart()
         {
-            var viewModels = new ReceiversCartVM[]
-            {
-                new ReceiversCartVM()
-            };
-
-            return View(viewModels);
+            return View();
         }
 
-        //[Route("/Receivers/SaveCurrentLocation/{lat}/{lng}")]
         [HttpGet]
-        public async Task<IActionResult> SaveCurrentLocation(double lat, double lng)
+        public async Task<IActionResult> GetCart(double lat, double lng)
+        {
+            var receiver = await membersService.GetUser(HttpContext.User);
+            var viewModels = await receiversService.GetCart(receiver.Id, lat, lng);
+            
+            return PartialView("_CartBox", viewModels);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProducts(double lat, double lng)
         {
             var viewModels = await receiversService.GetDistances(lat, lng);
-            //Partiell view
             return PartialView("_ProductBox", viewModels);
-            //return Json(viewModels);
         }
     }
 }

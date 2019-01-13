@@ -56,6 +56,8 @@ namespace GraduationProject.Models.Entities
             {
                 entity.ToTable("product", "fresh");
 
+                entity.Property(e => e.City).IsRequired();
+
                 entity.Property(e => e.Description).IsRequired();
 
                 entity.Property(e => e.GiverId)
@@ -71,6 +73,10 @@ namespace GraduationProject.Models.Entities
                 entity.Property(e => e.Picture).IsRequired();
 
                 entity.Property(e => e.ReceiverId).HasMaxLength(450);
+
+                entity.Property(e => e.Street).IsRequired();
+
+                entity.Property(e => e.ZipCode).IsRequired();
 
                 entity.HasOne(d => d.Giver)
                     .WithMany(p => p.ProductGiver)

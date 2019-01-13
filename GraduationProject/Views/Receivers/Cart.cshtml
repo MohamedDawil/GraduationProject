@@ -4,25 +4,35 @@
     ViewData["Title"] = "Cart";
 }
 
-@{ foreach (var product in Model)
-    {
-        @product.ProductName
-        <br />
-        @product.ProductImage
-        <br />
-        @product.ProductDescription
-        <br />
-        @product.ProductExpiryDate
-        <br />
-        @product.ProductPickUpDate1
-        @product.ProductPickUpDate2
-        <br />
+<div id="cart"></div>
 
-        <a class="button">Google Maps</a>
-        <a class="button" asp-controller="Receivers" asp-action="UnclaimProduct">Avboka</a>
-        <br />
-        <a class="button" asp-controller="Messages" asp-action="Chat">Meddelanden</a>
+<script>
+    $(function () {
+        if (navigator.geolocation) {
+            console.log("navigator.geolocation");
 
-    }
+            navigator.geolocation.getCurrentPosition(function (position) {
+                console.log("navigator.geolocation.getCurrentPosition");
 
-}
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                $.ajax({
+                    url: "/Receivers/GetCart",
+                    data: pos,
+                    type: "GET",
+                    dataType: 'HTML',
+                    success: function (response) {
+                        console.log(response);
+                        $("#cart").html(response);
+                    },
+                    error: function (response) {
+                        console.log("error" + response.responseText);
+                        alert(response.responseText);
+                    }
+                });
+            })
+        }
+    });
+</script>
