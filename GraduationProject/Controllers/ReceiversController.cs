@@ -60,6 +60,14 @@ namespace GraduationProject.Controllers
             return Json(isClaimed);
         }
 
+        public async Task<IActionResult> UnclaimProduct(int id)
+        {
+            var receiver = await membersService.GetUser(HttpContext.User);
+            var isUnClaimed = await receiversService.UnclaimProduct(id, receiver.Id);
+
+            return Json(isUnClaimed);
+        }
+
         [HttpGet]
         public IActionResult Cart()
         {

@@ -13,6 +13,9 @@
     [GiverId]     NVARCHAR (450) NOT NULL,
     [ReceiverId]  NVARCHAR (450) NULL,
     [Location]    geography NOT NULL,
+	[Street] NVARCHAR (MAX) NOT NULL,
+	[City] NVARCHAR (MAX) NOT NULL,
+	[ZipCode] NVARCHAR (MAX) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([GiverId]) REFERENCES [dbo].[AspNetUsers] ([Id]),
     FOREIGN KEY ([ReceiverId]) REFERENCES [dbo].[AspNetUsers] ([Id])

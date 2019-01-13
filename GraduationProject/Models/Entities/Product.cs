@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using GeoAPI.Geometries;
 
 namespace GraduationProject.Models.Entities
@@ -21,6 +20,9 @@ namespace GraduationProject.Models.Entities
         public string GiverId { get; set; }
         public string ReceiverId { get; set; }
         public IGeometry Location { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string ZipCode { get; set; }
 
         public virtual AspNetUsers Giver { get; set; }
         public virtual AspNetUsers Receiver { get; set; }

@@ -6,22 +6,40 @@
 
 @for (int i = 0; i < Model.Length; i++)
 {
-    <div>
-
-        @Model[i].ProductName                     @Model[i].ProductDistance m
-        <br />
-        Hämtas @Model[i].ProductPickUpDate1              @Model[i].ProductPickUpDate2
-
-        <br />
-        <div id="seInfoDiv_@i" style="display: none;">
-            @Model[i].ProductDescription
-        </div>
-        <button id="info_@i" onclick="showInfo(@i);">Se info</button>
-
-        <button id="product_@Model[i].ProductId" onclick="claimProduct(@Model[i].ProductId);">Boka vara</button>
-
+    <div class="ui-grid-a">
+        <div class="ui-block-a">@Model[i].ProductName</div>
+        <div class="ui-block-b">@Model[i].ProductDistance m</div>
     </div>
-    <br />
+    <div class="ui-grid-solo">
+        <div class="ui-block-a"><img src="~/Images/@Model[i].ProductImage" style="width: 100%; height: 150px;" /></div>
+        <div class="ui-block-b">Hämtas @Model[i].ProductPickUpDate1 - @Model[i].ProductPickUpDate2</div>
+    </div>
+    <div class="ui-grid-solo" id="seInfoDiv_@i" style="display: none;">
+        <div class="ui-grid-solo">Fräschhet: @Model[i].ProductFreshness</div>
+        <div class="ui-grid-solo">Utgångsdatum: @Model[i].ProductExpiryDate</div>
+        <div class="ui-grid-solo">
+            Beskrivning: @Model[i].ProductDescription
+        </div>
+        <div class="ui-grid-solo">
+            Inlagd av: @Model[i].GiverName
+        </div>
+        <div class="ui-grid-solo">
+            Gatudress: @Model[i].GiverStreet
+        </div>
+        <div class="ui-grid-solo">
+            Postnummer: @Model[i].GiverZipCode
+        </div>
+        <div class="ui-grid-solo">
+            Stad: @Model[i].GiverCity
+        </div>
+    </div>
+    <div class="ui-grid-solo">
+        <button onclick="mapsSelector(@Model[i].ProductLatitude, @Model[i].ProductLongitude)" class="ui-shadow ui-btn ui-corner-all">Se på karta</button>
+    </div>
+    <div class="ui-grid-a">
+        <div class="ui-block-a"><button id="info_@i" onclick="showInfo(@i);" class="ui-shadow ui-btn ui-corner-all">Se info</button></div>
+        <div class="ui-block-b"><button id="product_@Model[i].ProductId" onclick="claimProduct(@Model[i].ProductId);" class="ui-shadow ui-btn ui-corner-all">Boka vara</button></div>
+    </div>
 
 }
 <script>
@@ -45,13 +63,43 @@
             },
             type: "POST",
             success: function (response) {
-                console.log("success"+response);
+                console.log("success" + response);
                 document.getElementById("product_" + id).innerHTML = "Avboka vara";
+                document.getElementById("product_" + id).onclick = function () { unClaimProduct(id); }
             },
             error: function (response) {
-                console.log("error" +response);
+                console.log("error" + response);
                 //document.getElementById("product_" + id).innerHTML = "Boka vara";
             }
         });
+    }
+
+    function unClaimProduct(id) {
+        $.ajax({
+            url: "/Receivers/UnclaimProduct",
+            data: {
+                id: id
+            },
+            type: "POST",
+            success: function (response) {
+                console.log("success" + response);
+                document.getElementById("product_" + id).innerHTML = "Boka vara";
+                document.getElementById("product_" + id).onclick = function () { claimProduct(id); }
+            },
+            error: function (response) {
+                console.log("error" + response);
+                //document.getElementById("product_" + id).innerHTML = "Boka vara";
+            }
+        });
+    }
+
+    function mapsSelector(lat, lng) {
+        if /* if we're on iOS, open in Apple Maps */
+        ((navigator.platform.indexOf("iPhone") != -1) ||
+        (navigator.platform.indexOf("iPad") != -1) ||
+            (navigator.platform.indexOf("iPod") != -1))
+            window.open("maps://maps.google.com/maps?daddr="+lat+","+lng+"&amp;ll=");
+        else /* else use Google */
+            window.open("https://maps.google.com/maps?daddr=" + lat+"," + lng+"&amp;ll=");
     }
 </script>

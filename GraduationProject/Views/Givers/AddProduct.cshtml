@@ -26,12 +26,15 @@
     <input asp-for="Freshness" type="range" min="1" max="10" placeholder="Fräschhet" />
     <span asp-validation-for="Freshness"></span>
     <br />
-    <input asp-for="ExpiryDate" type="date" placeholder="Utgångsdatum" />
+    <label asp-for="ExpiryDate"></label>
+    <input asp-for="ExpiryDate" type="date" placeholder="Utgångsdatum" data-role="none" />
     <span asp-validation-for="ExpiryDate"></span>
     <br />
+    <label asp-for="PickUpDate1"></label>
     <input asp-for="PickUpDate1" type="date" placeholder="Hämta tidigast" />
     <span asp-validation-for="PickUpDate1"></span>
     <br />
+    <label asp-for="PickUpDate2"></label>
     <input asp-for="PickUpDate2" type="date" placeholder="Hämta senast" />
     <span asp-validation-for="PickUpDate2"></span>
     <br />

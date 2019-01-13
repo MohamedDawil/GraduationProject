@@ -43,8 +43,15 @@ namespace GraduationProject.Models
                 ProductPickUpDate1 = p.PickUpDate1,
                 ProductPickUpDate2= p.PickUpDate2,  
                 ProductDescription = p.Description,
+                ProductFreshness = p.Freshness,
+                ProductExpiryDate = p.ExpiryDate,
+                ProductLatitude = ((Point)p.Location).X,
+                ProductLongitude = ((Point)p.Location).Y,
+                GiverCity = p.City,
+                GiverStreet = p.Street,
+                GiverZipCode = p.ZipCode,
                 ProductDistance = Convert.ToInt32(Helper.Distance(point, (Point)p.Location)),
-            }).ToArrayAsync();
+            }).OrderBy(p => p.ProductDistance).ToArrayAsync();
         }
 
         public async Task<bool> ClaimProduct(int productId, string receiverId)
@@ -55,6 +62,18 @@ namespace GraduationProject.Models
 
             product.Claimed = true;
             product.ReceiverId = receiverId;
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> UnclaimProduct(int productId, string receiverId)
+        {
+            var product = await context.Product.SingleOrDefaultAsync(p => p.Id == productId);
+            if (product == null)
+                return false;
+
+            product.Claimed = false;
+            product.ReceiverId = null;
             await context.SaveChangesAsync();
             return true;
         }
