@@ -8,7 +8,9 @@
     <div id="google-map"></div>
     <div id="products"></div>
 </div>
-<script>
+
+@section Scripts {
+    <script>
     // Note: This example requires that you consent to location sharing when
     // prompted by your browser. If you see the error "The Geolocation service
     // failed.", it means you probably did not give permission for the browser to
@@ -145,8 +147,8 @@
             'Error: Your browser doesn\'t support geolocation.');
         receiverWindow.open(map);
     }
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtkrfI4kUln6UUZTJTvZvv3FC5wP624D4&callback=initMap">
-</script>
-
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtkrfI4kUln6UUZTJTvZvv3FC5wP624D4&callback=initMap">
+    </script>
+}

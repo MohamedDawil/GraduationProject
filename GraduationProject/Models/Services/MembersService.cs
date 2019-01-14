@@ -29,9 +29,15 @@ namespace GraduationProject.Models
 
         public async Task<MyIdentityUser> GetUser(ClaimsPrincipal user)
         {
-            string userId = userManager.GetUserId(user);
+            string userId = GetUserId(user);
             MyIdentityUser identityUser = await userManager.FindByIdAsync(userId);
             return identityUser;
+        }
+
+        public string GetUserId(ClaimsPrincipal user)
+        {
+            string userId = userManager.GetUserId(user);
+            return userId;
         }
 
         public async Task<bool> SignInAsync(MembersIndexVM membersIndexVM)

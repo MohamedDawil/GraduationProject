@@ -49,3 +49,40 @@ function showInfo(id) {
         document.getElementById("info_" + id).innerHTML = "Se info";
     }
 }
+
+function claimProduct(id) {
+    $.ajax({
+        url: "/Receivers/ClaimProduct",
+        data: {
+            id: id
+        },
+        type: "POST",
+        success: function (response) {
+            console.log("_ProductBox.claimProduct (success): " + response);
+            document.getElementById("product_" + id).innerHTML = "Avboka vara";
+            document.getElementById("product_" + id).onclick = function () { unClaimProduct(id); }
+        },
+        error: function (response) {
+            console.log("_ProductBox.claimProduct (error): " + response);
+            //document.getElementById("product_" + id).innerHTML = "Boka vara";
+        }
+    });
+}
+
+function unClaimProduct(id) {
+    $.ajax({
+        url: "/Receivers/UnclaimProduct",
+        data: {
+            id: id
+        },
+        type: "POST",
+        success: function (response) {
+            console.log("_ProductBox.unClaimProduct (success)" + response);
+            document.getElementById("product_" + id).innerHTML = "Boka vara";
+            document.getElementById("product_" + id).onclick = function () { claimProduct(id); }
+        },
+        error: function (response) {
+            console.log("_ProductBox.unClaimProduct (error)" + response);
+        }
+    });
+}

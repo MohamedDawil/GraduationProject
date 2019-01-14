@@ -54,8 +54,8 @@ namespace GraduationProject.Controllers
 
         public async Task<IActionResult> ClaimProduct(int id)
         {
-            var receiver = await membersService.GetUser(HttpContext.User);
-            var isClaimed = await receiversService.ClaimProduct(id, receiver.Id);
+            var receiverId = membersService.GetUserId(HttpContext.User);
+            var isClaimed = await receiversService.ClaimProduct(id, receiverId);
 
             return Json(isClaimed);
         }
@@ -86,8 +86,8 @@ namespace GraduationProject.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCart(double lat, double lng)
         {
-            var receiver = await membersService.GetUser(HttpContext.User);
-            var viewModels = await receiversService.GetCart(receiver.Id, lat, lng);
+            var receiverId = membersService.GetUserId(HttpContext.User);
+            var viewModels = await receiversService.GetCart(receiverId, lat, lng);
             
             return PartialView("_CartBox", viewModels);
         }

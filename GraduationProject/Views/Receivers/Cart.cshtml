@@ -1,43 +1,47 @@
-﻿@model ReceiversCartVM[]
-
-@{
+﻿@{
     ViewData["Title"] = "Cart";
 }
 
 <div id="cart"></div>
 
+@section Scripts {
 <script>
-    $(document).on('pageinit', function () {
-        if (navigator.geolocation) {
-            console.log("navigator.geolocation");
+    console.log("Cart.script");
+    //$(document).ready(function () {
+    //    console.log("Cart before navigator.geolocation");
+    //    if (navigator.geolocation) {
+    //        console.log("navigator.geolocation");
 
-            navigator.geolocation.getCurrentPosition(function (position) {
-                console.log("navigator.geolocation.getCurrentPosition");
+    //        navigator.geolocation.getCurrentPosition(function (position) {
+    //            console.log("navigator.geolocation.getCurrentPosition");
 
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                console.log("Cart: " + pos.lat + ", " + pos.lng);
-                $.ajax({
-                    url: "/Receivers/GetCart",
-                    data: pos,
-                    type: "GET",
-                    dataType: 'HTML',
-                    cache: false,
-                    success: function (response) {
-                        console.log("Cart: success");
-                        console.log(response);
-                        $("#cart").html(response);
-                    },
-                    error: function (response) {
-                        console.log("Cart: error " + response.responseText);
-                    }
-                });
-            }, function (e) {
-                console.log("!navigator.geolocation.getCurrentPosition");
-                console.log(e);
-            })
-        }
-    });
+    //            var pos = {
+    //                lat: position.coords.latitude,
+    //                lng: position.coords.longitude
+    //            };
+    //            console.log("Cart: " + pos.lat + ", " + pos.lng);
+    //            $.ajax({
+    //                url: "/Receivers/GetCart",
+    //                data: pos,
+    //                type: "GET",
+    //                dataType: 'HTML',
+    //                cache: false,
+    //                success: function (response) {
+    //                    console.log("Cart: success");
+    //                    console.log(response);
+    //                    $("#cart").html(response);
+    //                },
+    //                error: function (response) {
+    //                    console.log("Cart: error " + response.responseText);
+    //                }
+    //            });
+    //        }, function (e) {
+    //            console.log("!navigator.geolocation.getCurrentPosition");
+    //            console.log(e);
+    //        })
+    //    } else {
+    //        console.log("No geolocation");
+    //    }
+    //});
 </script>
+}
