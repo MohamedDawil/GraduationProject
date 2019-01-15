@@ -28,9 +28,9 @@
             <p>Hämtas före @Model.Products[i].ProductPickUpDate2</p>
         </div>
         <div class="productButtons">
-            <button onclick="mapsSelector(@Model.Products[i].ProductLatitude, @Model.Products[i].ProductLongitude)" class="btn btn-default btn-sm productBtn">Karta</button>
-            <button id="info_@i" onclick="showInfo(@i);" class="btn btn-default btn-sm productBtn">Info</button>
-            <button id="product_@Model.Products[i].ProductId" onclick="claimProduct(@Model.Products[i].ProductId);" class="btn btn-default btn-sm productBtn">Boka</button>
+            <button onclick="mapsSelector(@Model.Products[i].ProductLatitude, @Model.Products[i].ProductLongitude)" class="btn btn-light productBtn">Karta</button>
+            <button id="info_@i" onclick="showInfo(@i);" class="btn btn-light productBtn">Info</button>
+            <button id="product_@Model.Products[i].ProductId" onclick="claimProduct(@Model.Products[i].ProductId);" class="btn btn-light productBtn">Boka</button>
         </div>
     </div>
 

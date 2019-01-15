@@ -5,7 +5,64 @@
 }
 
 
-@for (int i = 0; i < Model.Length; i++)
+
+<div class="row mx-0">
+    @for (int i = 0; i < Model.Length; i++)
+    {
+        <div class="px-1 col-sm-6 col-md-4 col-xl-2">
+            <div class="productCard">
+                <img src="~/Images/@Model[i].ProductImage" alt="..." />
+                <div class="caption productCaption">
+                    <div class="title">
+                        <h3>@Model[i].ProductName</h3>
+                        <span>@Model[i].ProductDistance m</span>
+                    </div>
+                    <p>Hämtas före @Model[i].ProductPickUpDate2</p>
+                </div>
+                <div class="productButtons">
+                    <button onclick="mapsSelector(@Model[i].ProductLatitude, @Model[i].ProductLongitude)" class="btn btn-light productBtn">Karta</button>
+                    <button id="info_@i" onclick="showInfo(@i);" class="btn btn-light productBtn">Info</button>
+                    <button id="product_@Model[i].ProductId" onclick="claimProduct(@Model[i].ProductId);" class="btn btn-light btn-sm productBtn">Boka</button>
+                    <button class="btn btn-light btn-sm productBtn">Meddelande</button>
+                </div>
+            </div>
+            <div class="infoCard" id="seInfoDiv_@i" style="display: none;">
+                <table class="table procuctsTable">
+                    <tr>
+                        <th class="infoHeading">Fräschhet</th>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="@Model[i].ProductFreshness" aria-valuemin="0" aria-valuemax="100" style="width: @(Model[i].ProductFreshness+"0%");"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="infoHeading">Utgångsdatum</th>
+                        <td>@Model[i].ProductExpiryDate</td>
+                    </tr>
+                    <tr>
+                        <th class="infoHeading">Beskrivning</th>
+                        <td>@Model[i].ProductDescription</td>
+                    </tr>
+                    <tr>
+                        <th class="infoHeading">Inlagd av</th>
+                        <td>
+                            @Model[i].GiverName<br />
+                            @Model[i].GiverStreet<br />
+                            @Model[i].GiverZipCode<br />
+                            @Model[i].GiverCity
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+@*@for (int i = 0; i < Model.Length; i++)
 {
     <div class="productCard">
         <img src="~/Images/@Model[i].ProductImage" alt="..." />
@@ -17,10 +74,10 @@
             <p>Hämtas före @Model[i].ProductPickUpDate2</p>
         </div>
         <div class="productButtons">
-            <button onclick="mapsSelector(@Model[i].ProductLatitude, @Model[i].ProductLongitude)" class="btn btn-default btn-sm productBtn">Karta</button>
-            <button id="info_@i" onclick="showInfo(@i);" class="btn btn-default btn-sm productBtn">Info</button>
-            <button id="product_@Model[i].ProductId" onclick="claimProduct(@Model[i].ProductId);" class="btn btn-default btn-sm productBtn">Avboka</button>
-            <button class="btn btn-default btn-sm productBtn">Meddelande</button>
+            <button onclick="mapsSelector(@Model[i].ProductLatitude, @Model[i].ProductLongitude)" class="btn btn-light productBtn">Karta</button>
+            <button id="info_@i" onclick="showInfo(@i);" class="btn btn-light productBtn">Info</button>
+            <button id="product_@Model[i].ProductId" onclick="claimProduct(@Model[i].ProductId);" class="btn btn-light productBtn">Avboka</button>
+            <button class="btn btn-light btn-sm productBtn">Meddelande</button>
 
         </div>
     </div>
@@ -54,6 +111,4 @@
             </tr>
         </table>
     </div>
-}
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+}*@

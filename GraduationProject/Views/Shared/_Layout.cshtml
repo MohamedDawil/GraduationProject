@@ -3,92 +3,41 @@
 <head>
     <title>Halvfräscht</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/StyleSheet.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body >
 
-    <div id="wrap">
 
-        @*<nav class="navbar navbar-default" role="navigation">
-                <div class="navbar-header text-center">
-                    <a href="#" class="navbar-brand">Brand</a>
-                </div>
-            </nav>*@
 
-        <div id="header">
-            <div class="col-xs-12 navbar-inverse navbar-fixed-top">
-                <div class="row" id="topNav">
-                    <div class="col-xs-4 text-center"><a asp-controller="Givers" asp-action="AddProduct"><i class="glyphicon glyphicon-plus"></i><br>Lägg till vara</a></div>
-                    <div class="col-xs-4 text-center"><a asp-controller="Givers" asp-action="Products"><i class="glyphicon glyphicon-list-alt"></i><br>Mina varor</a></div>
-                    <div class="col-xs-4 text-center"><a asp-controller="Members" asp-action="Profile"><i class="glyphicon glyphicon-user"></i><br>Profil</a></div>
-                </div>
+    <div id="header">
+        <div class="bg-dark fixed-top">
+            <div class="row" id="topNav">
+                <div class="col text-center"><a asp-controller="Givers" asp-action="AddProduct"><i class="fas fa-plus"></i><br>Lägg till vara</a></div>
+                <div class="col text-center"><a asp-controller="Givers" asp-action="Products"><i class="fas fa-list-alt"></i><br>Mina varor</a></div>
+                <div class="col text-center"><a asp-controller="Members" asp-action="Profile"><i class="fas fa-user"></i><br>Profil</a></div>
             </div>
         </div>
-
-        <!-- Begin page content -->
-        <div class="container">
-            <p class="lead">
-                @RenderBody()
-            </p>
-        </div>
+    </div>
+    <div id="wrap">
+    <!-- Begin page content -->
+    <div class="container">
+        @RenderBody()
+    </div>
     </div>
 
     <div id="footer">
-        <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
+        <div class="bg-dark fixed-bottom">
             <div class="row" id="bottomNav">
-                <div class="col-xs-3 text-center"><a asp-controller="Receivers" asp-action="Map"><i class="glyphicon glyphicon-map-marker"></i><br>Karta</a></div>
-                <div class="col-xs-3 text-center"><a asp-controller="Receivers" asp-action="Search"><i class="glyphicon glyphicon-search"></i><br>Sök</a></div>
-                <div class="col-xs-3 text-center"><a asp-controller="Receivers" asp-action="Cart"><i class="glyphicon glyphicon-shopping-cart"></i><span class="countBubl" id="badge-cart">0</span><br>Matkorg</a></div>
-                <div class="col-xs-3 text-center"><a asp-controller="Messages" asp-action="Inbox"><i class="glyphicon glyphicon-comment"></i><span class="countBubl" id="badge-cart">0</span><br>Inkorg</a></div>
+                <div class="col text-center"><a asp-controller="Receivers" asp-action="Map"><i class="fas fa-map-marker-alt"></i><br>Karta</a></div>
+                <div class="col text-center"><a asp-controller="Receivers" asp-action="Search"><i class="fas fa-search"></i><br>Sök</a></div>
+                <div class="col text-center"><a asp-controller="Receivers" asp-action="Cart"><i class="fas fa-shopping-cart"></i><span class="countBubl" id="badge-cart">0</span><br>Matkorg</a></div>
+                <div class="col text-center"><a asp-controller="Messages" asp-action="Inbox"><i class="fas fa-comment"></i><span class="countBubl" id="badge-cart">0</span><br>Inkorg</a></div>
             </div>
         </div>
     </div>
-
-
-
-    @*<div data-role="page">
-            <div data-role="header" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a asp-controller="Givers" asp-action="AddProduct" data-theme="b" data-icon="plus">Lägg till vara</a></li>
-                        <li><a asp-controller="Givers" asp-action="Products" data-theme="b" data-icon="grid">Mina varor</a></li>
-                        <li><a asp-controller="Members" asp-action="Profile" data-theme="b" data-icon="user">Profil</a></li>
-                    </ul>
-                </div>
-                @if (ViewBag.BackButton ?? false)
-                {
-                    <div data-role="navbar" align="left" style="border-top: 1px solid #ddd;" id="back-button">
-                        <ul>
-                            <li><a data-icon="arrow-l" data-rel="back">Tillbaka</a></li>
-                        </ul>
-                    </div>
-                }
-            </div>
-
-            <div data-role="content">@RenderBody()</div>
-
-            <div data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a asp-controller="Receivers" asp-action="Map">Karta</a></li>
-                        <li><a asp-controller="Receivers" asp-action="Search" data-theme="b" data-role="tab" id="search" data-icon="search">Sök vara</a></li>
-                        <li>
-                            <a asp-controller="Receivers" asp-action="Cart" data-theme="b" data-role="tab" id="cart" data-icon="shop">
-                                Matkorg
-                                <span class="countBubl" id="badge-chat">0</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-controller="Messages" asp-action="Inbox" data-theme="b" data-role="tab" id="messages" data-icon="comment">Meddelanden</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>*@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>

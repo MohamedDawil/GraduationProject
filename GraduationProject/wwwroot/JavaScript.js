@@ -78,7 +78,7 @@ function unClaimProduct(id) {
         type: "POST",
         success: function (response) {
             console.log("_ProductBox.unClaimProduct (success)" + response);
-            document.getElementById("product_" + id).innerHTML = "Boka vara";
+            document.getElementById("product_" + id).innerHTML = "Boka";
             document.getElementById("product_" + id).onclick = function () { claimProduct(id); }
         },
         error: function (response) {
