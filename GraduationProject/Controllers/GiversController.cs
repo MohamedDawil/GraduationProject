@@ -85,7 +85,7 @@ namespace GraduationProject.Controllers
             var viewModel = await giversService.GetProduct(id);
 
             await SetBadges();
-
+            ViewBag.BackButton = true;
             return View(viewModel);
         }
 

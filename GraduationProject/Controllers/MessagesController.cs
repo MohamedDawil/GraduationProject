@@ -56,6 +56,8 @@ namespace GraduationProject.Controllers
                 return RedirectToAction(nameof(Inbox));
 
             await SetBadges();
+
+            ViewBag.BackButton = true;
             return View(viewModel);
         }
 
@@ -63,7 +65,10 @@ namespace GraduationProject.Controllers
         public IActionResult Chat(MessagesChatVM messagesChatVM)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.BackButton = true;
                 return View(messagesChatVM);
+            }
 
             return RedirectToAction(nameof(Chat));
         }
