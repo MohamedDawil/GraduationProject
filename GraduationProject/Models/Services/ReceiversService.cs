@@ -48,6 +48,7 @@ namespace GraduationProject.Models
                 ProductLatitude = ((Point)p.Location).X,
                 ProductLongitude = ((Point)p.Location).Y,
                 ProductClaimed = p.Claimed,
+                GiverName = $"{p.Giver.FirstName} {p.Giver.LastName}",
                 GiverCity = p.City,
                 GiverStreet = p.Street,
                 GiverZipCode = p.ZipCode,

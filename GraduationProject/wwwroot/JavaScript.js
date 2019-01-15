@@ -46,7 +46,7 @@ function showInfo(id) {
     }
     else {
         x.style.display = "none";
-        document.getElementById("info_" + id).innerHTML = "Se info";
+        document.getElementById("info_" + id).innerHTML = "Info";
     }
 }
 
