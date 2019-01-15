@@ -42,7 +42,7 @@ function showInfo(id) {
     var x = document.getElementById("seInfoDiv_" + id);
     if (x.style.display === "none") {
         x.style.display = "block";
-        document.getElementById("info_" + id).innerHTML = "Dölj info";
+        document.getElementById("info_" + id).innerHTML = "Dölj";
     }
     else {
         x.style.display = "none";
@@ -59,7 +59,7 @@ function claimProduct(id) {
         type: "POST",
         success: function (response) {
             console.log("_ProductBox.claimProduct (success): " + response);
-            document.getElementById("product_" + id).innerHTML = "Avboka vara";
+            document.getElementById("product_" + id).innerHTML = "Avboka";
             document.getElementById("product_" + id).onclick = function () { unClaimProduct(id); }
         },
         error: function (response) {
