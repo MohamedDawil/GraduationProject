@@ -34,6 +34,13 @@ namespace GraduationProject.Models
             return identityUser;
         }
 
+        public async Task<MyIdentityUser> GetUser(string sentById)
+        {
+            MyIdentityUser identityUser = await userManager.FindByIdAsync(sentById);
+            return identityUser;
+        }
+
+
         public string GetUserId(ClaimsPrincipal user)
         {
             string userId = userManager.GetUserId(user);

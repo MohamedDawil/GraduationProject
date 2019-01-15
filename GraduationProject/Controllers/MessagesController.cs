@@ -45,6 +45,8 @@ namespace GraduationProject.Controllers
         {
             var userId = membersService.GetUserId(HttpContext.User);
             var viewModel = await messagesService.GetChat(productId, userId);
+            if (viewModel == null)
+                return RedirectToAction(nameof(Inbox));
             return View(viewModel);
         }
 

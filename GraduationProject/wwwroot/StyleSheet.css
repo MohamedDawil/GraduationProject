@@ -73,6 +73,22 @@ body {
     color: #fff;
 }
 
+#bottomBack {
+    padding: 10px;
+}
+
+    #bottomBack a {
+        font-size: 14pt;
+        color: #ddd;
+        text-decoration: none;
+    }
+
+        #bottomBack a:hover {
+            color: #fff;
+        }
+
+
+
 #topNav {
     padding: 10px;
 }

@@ -67,9 +67,10 @@ namespace GraduationProject.Models.Services
                     chats.Add(chat);
                 }
 
-                var newestChat = chats.OrderByDescending(c => c.PublishDate).First();
+                var newestChat = chats.Last();
                 viewModel.MemberName = (newestChat.SentBy != null) ? newestChat.SentBy.FirstName :  "Server";
-                viewModel.ProductName = context.Product.SingleOrDefault(p => p.Id == group.Key).Name;
+                var product = await context.Product.SingleOrDefaultAsync(p => p.Id == group.Key);
+                viewModel.ProductName = product.Name;
                 viewModel.PublishDate = newestChat.PublishDate;
 
                 viewModels.Add(viewModel);
@@ -80,6 +81,17 @@ namespace GraduationProject.Models.Services
 
         public async Task<MessagesChatVM> GetChat(int productId, string userId)
         {
+            var bubbles = await context.Chat.Where(c => c.ProductId == productId && (c.GiverId == userId || c.ReceiverId == userId)).Select(c => new MessagesChatBubbleVM
+            {
+                IsSent = c.SentById.Equals(userId),
+                MemberImage = c.SentBy.Picture,
+                MemberMessage = c.Message,
+                MemberName = c.SentBy.FirstName,
+                PublishDate = c.PublishDate
+            }).ToArrayAsync();
+            if (!bubbles.Any())
+                return null;
+
             var product = await context.Product.SingleOrDefaultAsync(p => p.Id == productId);
             return new MessagesChatVM
             {
@@ -88,14 +100,7 @@ namespace GraduationProject.Models.Services
                 GiverId = product.GiverId,
                 ReceiverId = product.ReceiverId,
                 SentById = userId,
-                Bubbles = await context.Chat.Select(c => new MessagesChatBubbleVM
-                {
-                    IsSent = c.SentById.Equals(userId),
-                    MemberImage = c.SentBy.Picture,
-                    MemberMessage = c.Message,
-                    MemberName = c.SentBy.FirstName,
-                    PublishDate = c.PublishDate
-                }).ToArrayAsync()
+                Bubbles = bubbles
             };
         }
     }
