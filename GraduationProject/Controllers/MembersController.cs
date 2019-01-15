@@ -128,7 +128,7 @@ namespace GraduationProject.Controllers
             if (membersProfileVM.FilePath != null)
             {
                 var uniqueFileName = Helper.GetUniqueFileName(membersProfileVM.FilePath.FileName);
-                var images = Path.Combine(hostingEnvironment.WebRootPath, "Profiles");
+                var images = Path.Combine(hostingEnvironment.WebRootPath, "profiles");
                 var filePath = Path.Combine(images, uniqueFileName);
                 membersProfileVM.FilePath.CopyTo(new FileStream(filePath, FileMode.Create));
                 membersProfileVM.Picture = uniqueFileName;

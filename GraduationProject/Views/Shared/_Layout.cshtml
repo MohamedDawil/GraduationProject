@@ -9,19 +9,11 @@
     <link href="~/StyleSheet.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
     <div id="wrap">
-
-        @*<nav class="navbar navbar-default" role="navigation">
-                <div class="navbar-header text-center">
-                    <a href="#" class="navbar-brand">Brand</a>
-                </div>
-            </nav>*@
-
         <div id="header">
-            <div class="col-xs-12 navbar-inverse navbar-fixed-top">
+            <div class="col-xs-12 navbar-inverse navbar-fixed-top" style="background: #84699D; border-bottom: 1px solid black">
                 <div class="row" id="topNav">
-                    <div class="col-xs-4 text-center"><a asp-controller="Givers" asp-action="AddProduct"><i class="glyphicon glyphicon-plus"></i><br>Lägg till vara</a></div>
+                    <div class="col-xs-4 text-center" style="background: #63487E; border-radius: 3px;"><a asp-controller="Givers" asp-action="AddProduct" class="active"><i class="glyphicon glyphicon-plus"></i><br>Lägg till vara</a></div>
                     <div class="col-xs-4 text-center"><a asp-controller="Givers" asp-action="Products"><i class="glyphicon glyphicon-list-alt"></i><span class="countBubl" id="badge-products">@ViewBag.BadgeProducts</span><br>Mina varor</a></div>
                     <div class="col-xs-4 text-center"><a asp-controller="Members" asp-action="Profile"><i class="glyphicon glyphicon-user"></i><br>Profil</a></div>
                 </div>
@@ -37,10 +29,10 @@
     </div>
 
     <div id="footer">
-        <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
+        <div class="col-xs-12 navbar-inverse navbar-fixed-bottom" style="background: #84699D;border-top: 1px solid black;">
             @if (ViewBag.BackButton ?? false)
             {
-                <div class="row" id="bottomBack">
+                <div class="row" id="bottomBack" style="background: #AB93C3">
                     <div class="col-xs-4 text-center">
                         <a href="javascript:history.back()"><i class="glyphicon glyphicon-arrow-left"></i> Tillbaka</a>
                     </div>
@@ -53,7 +45,7 @@
             </div>
         </div>
     </div>
-
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>

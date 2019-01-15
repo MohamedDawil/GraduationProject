@@ -103,6 +103,11 @@ body {
             color: #fff;
         }
 
+
+.active {
+    color: #fff !important;
+}
+
 input[type="file"] {
     display: none;
 }
@@ -140,6 +145,7 @@ input[type="file"] {
     height: 17px;
     width: 17px;
     background-color: #ed1d24;
+    border: 1px solid red;
     border-radius: 50%;
     display: inline-block;
     vertical-align: top;

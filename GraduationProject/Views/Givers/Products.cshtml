@@ -9,7 +9,7 @@
     @{ foreach (var product in Model.Claimed)
         {
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="/Images/@product.ProductImage" style="width: 250px;" alt="Card image cap">
+                <img class="card-img-top" src="/products/@product.ProductImage" style="width: 250px;" alt="Card image cap">
                 <div class="card-body">
                     <p class="card-text">
                         @product.ReceiverName
@@ -34,7 +34,7 @@
     @{ foreach (var product in Model.Unclaimed)
         {
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="/Images/@product.ProductImage" style="width:250px;" alt="Card image cap">
+                <img class="card-img-top" src="/products/@product.ProductImage" style="width:250px;" alt="Card image cap">
                 <div class="card-body">
                     <p class="card-text">
                         @product.ProductPickUpDate1

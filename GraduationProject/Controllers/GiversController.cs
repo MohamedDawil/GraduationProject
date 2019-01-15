@@ -44,7 +44,7 @@ namespace GraduationProject.Controllers
             if (giversAddProductVM.Picture != null)
             {
                 var uniqueFileName = Helper.GetUniqueFileName(giversAddProductVM.Picture.FileName);
-                var images = Path.Combine(hostingEnvironment.WebRootPath, "Images");
+                var images = Path.Combine(hostingEnvironment.WebRootPath, "products");
                 var filePath = Path.Combine(images, uniqueFileName);
                 giversAddProductVM.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                 giversAddProductVM.PictureFileName = uniqueFileName;
@@ -98,7 +98,7 @@ namespace GraduationProject.Controllers
             if (giversChangeProductVM.Picture != null)
             {
                 var uniqueFileName = Helper.GetUniqueFileName(giversChangeProductVM.Picture.FileName);
-                var images = Path.Combine(hostingEnvironment.WebRootPath, "Images");
+                var images = Path.Combine(hostingEnvironment.WebRootPath, "products");
                 var filePath = Path.Combine(images, uniqueFileName);
                 giversChangeProductVM.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
                 giversChangeProductVM.PictureFileName = uniqueFileName;
