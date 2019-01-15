@@ -23,10 +23,10 @@
         </div>
     </div>
 
-    <div id="seInfoDiv_@i" style="display: none;">
-        <table>
+    <div class="infoCard" id="seInfoDiv_@i" style="display: none;">
+        <table class="procuctsTable">
             <tr>
-                <th> Fräschhet</th>
+                <th class="infoHeading">Fräschhet</th>
                 <td>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="@Model[i].ProductFreshness" aria-valuemin="0" aria-valuemax="100" style="width: @(Model[i].ProductFreshness+"0%");"></div>
@@ -34,15 +34,15 @@
                 </td>
                 </tr>
             <tr>
-                <th>Utgångsdatum</th>
+                <th class="infoHeading">Utgångsdatum</th>
                 <td>@Model[i].ProductExpiryDate</td>
             </tr>
             <tr>
-                <th>Beskrivning</th>
+                <th class="infoHeading">Beskrivning</th>
                 <td>@Model[i].ProductDescription</td>
             </tr>
             <tr>
-                <th>Inlagd av</th>
+                <th class="infoHeading">Inlagd av</th>
                 <td>
                     @Model[i].GiverName<br />
                     @Model[i].GiverStreet<br />

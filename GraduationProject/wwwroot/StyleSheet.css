@@ -5,7 +5,7 @@ html,
 body {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
+    font-weight: 600;
     /* The html and body elements cannot have any padding or margin. */
 }
 
@@ -178,8 +178,8 @@ input[type="file"] {
     font-family: Montserrat, sans-serif;
 }
 
-h3, p, button, .productBtn, h5 {
-    font-weight: bold;
+h3, p, button, .productBtn, h5, th.infoHeading {
+    font-weight: bold !important;
     font-family: Montserrat, sans-serif;
 }
 
@@ -187,14 +187,41 @@ h3, p, button, .productBtn, h5 {
     margin: 0px 10px 0px 10px;
 }
 
-tr:nth-child(even) {
-    background-color: lightblue;
-}
-
-td {
-    vertical-align: top;
-}
-
 table {
+    table-layout: auto;
+}
+
+th {
+    vertical-align: top;
+    padding: 3px 5px 5px 25px;
+}
+
+tr:nth-child(odd) {
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.progress {
+    margin-bottom: 0px;
+}
+
+.progress-bar {
+    background-color: #f25a5f;
+    border-color: rgba(204,204,204,1);
+}
+
+.infoCard {
     width: 100%;
+    border-radius: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 4px;
+    border-radius: 10px;
+    margin-left: 3px;
+    background-color: #f2f2f2;
+    -webkit-box-shadow: 1px 1px 1px 1px rgba(204,204,204,1);
+    -moz-box-shadow: 1px 1px 1px 1px rgba(204,204,204,1);
+    box-shadow: 1px 1px 1px 1px rgba(204,204,204,1);
 }
