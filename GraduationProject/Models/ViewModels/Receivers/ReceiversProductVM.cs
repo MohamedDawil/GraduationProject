@@ -12,6 +12,9 @@ namespace GraduationProject.Models.ViewModels
         public string ProductImage { get; set; }
         public DateTime ProductPickUpDate1 { get; set; }
         public DateTime ProductPickUpDate2 { get; set; }
+        public DateTime ProductExpiryDate { get; set; }
+        public double ProductLongitude { get; set; }
+        public double ProductLatitude { get; set; }
         public int ProductFreshness { get; set; }
         public string ProductDescription { get; set; }
         public int ProductId { get; set; }
