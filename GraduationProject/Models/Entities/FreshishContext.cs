@@ -16,6 +16,7 @@ namespace GraduationProject.Models.Entities
         }
 
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Chat> Chat { get; set; }
         public virtual DbSet<Product> Product { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -50,6 +51,46 @@ namespace GraduationProject.Models.Entities
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<Chat>(entity =>
+            {
+                entity.ToTable("chat", "fresh");
+
+                entity.Property(e => e.GiverId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Message).IsRequired();
+
+                entity.Property(e => e.ReceiverId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.SentById).HasMaxLength(450);
+
+                entity.HasOne(d => d.Giver)
+                    .WithMany(p => p.ChatGiver)
+                    .HasForeignKey(d => d.GiverId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__chat__GiverId__49C3F6B7");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Chat)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__chat__ProductId__5CD6CB2B");
+
+                entity.HasOne(d => d.Receiver)
+                    .WithMany(p => p.ChatReceiver)
+                    .HasForeignKey(d => d.ReceiverId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__chat__ReceiverId__4AB81AF0");
+
+                entity.HasOne(d => d.SentBy)
+                    .WithMany(p => p.ChatSentBy)
+                    .HasForeignKey(d => d.SentById)
+                    .HasConstraintName("FK__chat__SentById__5BE2A6F2");
             });
 
             modelBuilder.Entity<Product>(entity =>

@@ -12,6 +12,9 @@ namespace GraduationProject.Models.ViewModels
     public class GiversAddProductVM
     {
         public IGeometry Location { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string ZipCode { get; set; }
 
         public string GiverId { get; set; }
         //[Required(ErrorMessage ="Vänligen lägg till en bild på din vara")]

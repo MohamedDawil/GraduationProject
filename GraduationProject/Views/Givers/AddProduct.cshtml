@@ -27,15 +27,15 @@
     <span asp-validation-for="Freshness"></span>
     <br />
     <label asp-for="ExpiryDate"></label>
-    <input asp-for="ExpiryDate" type="date" placeholder="Utgångsdatum" data-role="none" />
+    <input asp-for="ExpiryDate" type="date"  value="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Utgångsdatum" data-role="none" />
     <span asp-validation-for="ExpiryDate"></span>
     <br />
     <label asp-for="PickUpDate1"></label>
-    <input asp-for="PickUpDate1" type="date" placeholder="Hämta tidigast" />
+    <input asp-for="PickUpDate1" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" value="@DateTime.Today.ToString("yyyy-MM-dd")"  placeholder="Hämta tidigast" />
     <span asp-validation-for="PickUpDate1"></span>
     <br />
     <label asp-for="PickUpDate2"></label>
-    <input asp-for="PickUpDate2" type="date" placeholder="Hämta senast" />
+    <input asp-for="PickUpDate2" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" value="@DateTime.Today.ToString("yyyy-MM-dd")"  placeholder="Hämta senast" />
     <span asp-validation-for="PickUpDate2"></span>
     <br />
     <input type="submit" value="Lägg till vara" />

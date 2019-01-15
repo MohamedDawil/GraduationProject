@@ -33,6 +33,7 @@ namespace GraduationProject.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProduct(GiversAddProductVM giversAddProductVM)
         {
+            //http://api.ica.se/api/upclookup?upc=7310390001383
             if (!ModelState.IsValid)
                 return View(giversAddProductVM);
 
@@ -47,6 +48,9 @@ namespace GraduationProject.Controllers
 
             var giver = await membersService.GetUser(HttpContext.User);
             giversAddProductVM.GiverId = giver.Id;
+            giversAddProductVM.Street = giver.Street;
+            giversAddProductVM.City = giver.City;
+            giversAddProductVM.ZipCode = giver.ZipCode;
 
             var location = await giversService.GetCoordinates(giver);
             giversAddProductVM.Location = location;
@@ -57,30 +61,60 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Products()
+        public async Task<IActionResult> Products()
         {
+            var giverId = membersService.GetUserId(HttpContext.User);
             var viewModel = new GiversProductsVM
             {
-                Claimed = new GiversClaimedVM[] { new GiversClaimedVM() },
-                Unclaimed = new GiversClaimedVM[] { new GiversClaimedVM() }
+                Claimed = await giversService.GetClaimed(giverId),
+                Unclaimed = await giversService.GetUnclaimed(giverId)
             };
 
             return View(viewModel);
         }
 
         [HttpGet]
-        public IActionResult ChangeProduct(int productId)
+        public async Task<IActionResult> ChangeProduct(int id)
         {
-            return View();
+            var viewModel = await giversService.GetProduct(id);
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult ChangeProduct(GiversChangeProductVM giversChangeProductVM)
+        public async Task<IActionResult> ChangeProduct(GiversChangeProductVM giversChangeProductVM)
         {
             if (!ModelState.IsValid)
                 return View(giversChangeProductVM);
 
-            return RedirectToAction(nameof(ChangeProduct));
+            if (giversChangeProductVM.Picture != null)
+            {
+                var uniqueFileName = Helper.GetUniqueFileName(giversChangeProductVM.Picture.FileName);
+                var images = Path.Combine(hostingEnvironment.WebRootPath, "Images");
+                var filePath = Path.Combine(images, uniqueFileName);
+                giversChangeProductVM.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+                giversChangeProductVM.PictureFileName = uniqueFileName;
+            }
+
+            var giver = await membersService.GetUser(HttpContext.User);
+            giversChangeProductVM.GiverId = giver.Id;
+            giversChangeProductVM.Street = giver.Street;
+            giversChangeProductVM.City = giver.City;
+            giversChangeProductVM.ZipCode = giver.ZipCode;
+
+            var location = await giversService.GetCoordinates(giver);
+            giversChangeProductVM.Location = location;
+
+            await giversService.ChangeProductAsync(giversChangeProductVM);
+
+            return RedirectToAction(nameof(Products));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var giverId = membersService.GetUserId(HttpContext.User);
+            await giversService.DeleteProduct(id, giverId);
+            return RedirectToAction(nameof(Products));
         }
     }
 }

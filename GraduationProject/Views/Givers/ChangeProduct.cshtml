@@ -3,9 +3,18 @@
     ViewData["Title"] = "ChangeProduct";
 }
 
-<form asp-controller="Givers" asp-action="ChangeProduct" method="post">
-    <input asp-for="Image" type="file" accept="image/*;capture=camera" value="Lägg till bild">
-    <input asp-for="Scan" type="file" accept="image/*;capture=camera" value="Skanna streckkod">
+<form asp-controller="Givers" asp-action="ChangeProduct" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="@Model.ProductId" />
+    <img src="/Images/@Model.PictureFileName" id="output" style="width: 200px; height: auto;" />
+    <br />
+    <label class="custom-file-upload">
+        <input asp-for="Picture" type="file" accept="image/*;capture=camera" value="Ändra bild" onchange="loadFile(event)">
+        <i class="fa fa-cloud-upload"></i> Ändra bild
+    </label>
+    <label class="custom-file-upload">
+        <input asp-for="Scan" type="file" accept="image/*;capture=camera" value="Skanna streckkod">
+        <i class="fa fa-cloud-upload"></i> Skanna streckkod
+    </label>
     <br />
 
     <input asp-for="ProductName" type="text" placeholder="Varunamn" />

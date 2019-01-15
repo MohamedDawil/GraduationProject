@@ -2,32 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraduationProject.Hubs;
+using GraduationProject.Models;
+using GraduationProject.Models.Services;
 using GraduationProject.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace GraduationProject.Controllers
 {
     public class MessagesController : Controller
     {
-        [HttpGet]
-        public IActionResult Inbox()
+        private MessagesService messagesService;
+        private MembersService membersService;
+        private readonly IHubContext<ChatHub> hubContext;
+
+        public MessagesController(IHubContext<ChatHub> hubContext, MessagesService messagesService, MembersService membersService)
         {
-            var viewModel = new MessagesInboxVM[] { new MessagesInboxVM() };
-            return View(viewModel);
+            this.hubContext = hubContext;
+            this.messagesService = messagesService;
+            this.membersService = membersService;
         }
 
         [HttpGet]
-        public IActionResult Chat(int ProductId)
+        public async Task<IActionResult> Inbox()
         {
-            var viewModel = new MessagesChatVM
-            {
-                ProductName = "Morötter",
-                Bubbles = new MessagesChatBubbleVM[]
-                {
-                    new MessagesChatBubbleVM {IsSent = false, MemberMessage = "Ge mig mina morötter!"},
-                    new MessagesChatBubbleVM {IsSent = true, MemberMessage = "I helvete heller!!"}
-                }
-            };
+            var userId = membersService.GetUserId(HttpContext.User);
+            var viewModels = await messagesService.GetInbox(userId);
+            return View(viewModels);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> StartChat(string receiverId, int productId)
+        {
+            var giverId = membersService.GetUserId(HttpContext.User);
+            await messagesService.StartChat(productId, receiverId, giverId);
+            return RedirectToAction("Chat", new { productId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Chat(int productId)
+        {
+            var userId = membersService.GetUserId(HttpContext.User);
+            var viewModel = await messagesService.GetChat(productId, userId);
             return View(viewModel);
         }
 
@@ -38,6 +55,10 @@ namespace GraduationProject.Controllers
                 return View(messagesChatVM);
 
             return RedirectToAction(nameof(Chat));
+        }
+        public async Task SendMessage(string user, string message)
+        {
+            await hubContext.Clients.All.SendAsync("ReceiveMessage", user, message);
         }
     }
 }

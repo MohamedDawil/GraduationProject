@@ -6,6 +6,11 @@ namespace GraduationProject.Models.Entities
 {
     public partial class Product
     {
+        public Product()
+        {
+            Chat = new HashSet<Chat>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int Freshness { get; set; }
@@ -26,5 +31,6 @@ namespace GraduationProject.Models.Entities
 
         public virtual AspNetUsers Giver { get; set; }
         public virtual AspNetUsers Receiver { get; set; }
+        public virtual ICollection<Chat> Chat { get; set; }
     }
 }

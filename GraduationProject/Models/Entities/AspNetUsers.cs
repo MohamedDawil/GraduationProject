@@ -7,6 +7,9 @@ namespace GraduationProject.Models.Entities
     {
         public AspNetUsers()
         {
+            ChatGiver = new HashSet<Chat>();
+            ChatReceiver = new HashSet<Chat>();
+            ChatSentBy = new HashSet<Chat>();
             ProductGiver = new HashSet<Product>();
             ProductReceiver = new HashSet<Product>();
         }
@@ -33,6 +36,9 @@ namespace GraduationProject.Models.Entities
         public string City { get; set; }
         public string Picture { get; set; }
 
+        public virtual ICollection<Chat> ChatGiver { get; set; }
+        public virtual ICollection<Chat> ChatReceiver { get; set; }
+        public virtual ICollection<Chat> ChatSentBy { get; set; }
         public virtual ICollection<Product> ProductGiver { get; set; }
         public virtual ICollection<Product> ProductReceiver { get; set; }
     }

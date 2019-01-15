@@ -37,10 +37,11 @@
         <button onclick="mapsSelector(@Model[i].ProductLatitude, @Model[i].ProductLongitude)" class="ui-shadow ui-btn ui-corner-all">Se på karta</button>
     </div>
     <div class="ui-grid-a">
-        <div class="ui-block-a"><button id="info_@i" onclick="showInfo(@i);" class="ui-shadow ui-btn ui-corner-all">Se info</button></div>
+        <div class="ui-block-a"><button id="info_@i" onclick="showInfo(@i);" class="button">Se info</button></div>
 
         <div class="ui-block-b"><a asp-controller="Receivers" asp-action="UnclaimProductCart" asp-route-id="@Model[i].ProductId" class="ui-shadow ui-btn ui-corner-all">Avboka vara</a></div>
 
+        <a asp-controller="Messages" asp-action="StartChat" asp-route-id="@Model[i].ProductId">Meddela säljare</a>
     </div>
 
 }

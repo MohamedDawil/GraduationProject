@@ -4,30 +4,49 @@
     ViewData["Title"] = "Cart";
 }
 
-<label asp-for="Claimed"></label>
-@{ foreach (var product in Model.Claimed)
-    {
-        @product.ProductImage
-        <br />
-        @product.ReceiverName
-        <br />
+<div>
+    <label asp-for="Claimed"></label>
+    @{ foreach (var product in Model.Claimed)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/Images/@product.ProductImage" style="width: 250px;" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        @product.ReceiverName
+                        @product.ProductPickUpDate1
+                        @product.ProductPickUpDate2
+                    </p>
+                    <p class="card-body">
+                        <a asp-controller="Givers" asp-action="ChangeProduct" asp-route-id="@product.ProductId" class="btn btn-primary">Ändra</a>
+                        <a asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" class="btn btn-primary">Radera</a>
+                    </p>
+                    <p>
+                        <a asp-controller="Messages" asp-action="StartChat" asp-route-receiverid="@product.ReceiverId" asp-route-productid="@product.ProductId" class="btn btn-primary">Meddela köpare</a>
+                    </p>
+                </div>
+            </div>
+        }
 
-        <a asp-controller="Givers" asp-action="ChangeProduct" asp-route-id="@product.ProductId" class="button">Ändra</a>
-        <a asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" class="button">Radera</a>
     }
+</div>
+<div>
+    <label asp-for="Unclaimed"></label>
+    @{ foreach (var product in Model.Unclaimed)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/Images/@product.ProductImage" style="width:250px;" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        @product.ProductPickUpDate1
+                        @product.ProductPickUpDate2
+                    </p>
+                    <p class="card-body">
+                        <a asp-controller="Givers" asp-action="ChangeProduct" asp-route-id="@product.ProductId" class="btn btn-primary">Ändra</a>
+                        <a asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" class="btn btn-primary">Radera</a>
+                    </p>
+                </div>
+            </div>
+        }
 
-}
-
-<label asp-for="Unclaimed"></label>
-@{ foreach (var product in Model.Unclaimed)
-    {
-        @product.ProductImage
-        <br />
-        @product.ReceiverName
-        <br />
-
-        <a asp-controller="Givers" asp-action="ChangeProduct" asp-route-id="@product.ProductId" class="button">Ändra</a>
-        <a asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" class="button">Radera</a>
     }
-
-}
+</div>

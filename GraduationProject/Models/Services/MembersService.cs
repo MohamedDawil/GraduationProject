@@ -100,7 +100,8 @@ namespace GraduationProject.Models
             var http = new HttpClient();
             var street = new String(membersProfileVM.Street.Where(Char.IsLetter).ToArray());
             var streetNumber = Regex.Match(membersProfileVM.Street, @"\d+").Value;
-            var url = string.Format($"https://papapi.se/json/?v={street}|{streetNumber}|{membersProfileVM.ZipCode}|{membersProfileVM.City}&token=b5d95cb8932150b6bb65e4de000fe4567aac2d30");
+            var url = string.Format($"https://papapi.se/json/?v={street}|{streetNumber}|" +
+                $"{membersProfileVM.ZipCode}|{membersProfileVM.City}&token=b5d95cb8932150b6bb65e4de000fe4567aac2d30");
             var response = await http.GetAsync(url);
             var result = await response.Content.ReadAsStringAsync();
             var json = JsonConvert.DeserializeObject<JsonAddress>(result); // Convertor from string"result" to json
@@ -110,7 +111,6 @@ namespace GraduationProject.Models
                 json.result.status.code == "100",
                 json.result.status.description_sv
             );
-            
         }
     }
 }

@@ -3,25 +3,58 @@
     ViewData["Title"] = "Chat";
 }
 
-@foreach (var bubble in Model.Bubbles)
-{
-    @if (bubble.IsSent)
-    {
-        <h5>Skickat:</h5>
-    }
-    else
-    {
-        <h5>Mottaget:</h5>
-    }
-    @bubble.MemberImage
-    <br />
-    @bubble.MemberMessage
-    <br />
-    @bubble.PublishDate
+@Model.ProductName
+<div class="container">
+    <div class="row">
+        <div class="col-6">&nbsp;</div>
+        <div class="col-6">
+            <ul id="messagesList">
+                @foreach (var bubble in Model.Bubbles)
+                {
+                    <li>@bubble.MemberImage @bubble.MemberName @bubble.MemberMessage @bubble.PublishDate</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">&nbsp;</div>
+        <div class="col-6">
+            <input type="hidden" asp-for="SentById" />
+            <input type="hidden" asp-for="GiverId" />
+            <input type="hidden" asp-for="ReceiverId" />
+            <input type="hidden" asp-for="ProductId" />
+            <br />
+            Message...<input type="text" asp-for="SendMessage" />
+            <input type="button" id="sendButton" value="Send Message" />
+        </div>
+    </div>
 
+</div>
+@section Scripts {
+    <script src="~/lib/@@aspnet/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/chat.js"></script>
 }
 
-<form asp-controller="Messages" asp-action="Chat" method="post">
-<textarea asp-for="SendMessage"></textarea><br />
-    <input type="submit" value="Skicka" />
-</form>
+
+@*@foreach (var bubble in Model.Bubbles)
+    {
+        @if (bubble.IsSent)
+        {
+            <h5>Skickat:</h5>
+        }
+        else
+        {
+            <h5>Mottaget:</h5>
+        }
+        @bubble.MemberImage
+        <br />
+        @bubble.MemberMessage
+        <br />
+        @bubble.PublishDate
+
+    }
+
+    <form asp-controller="Messages" asp-action="Chat" method="post">
+    <textarea asp-for="SendMessage"></textarea><br />
+        <input type="submit" value="Skicka" />
+    </form>*@
