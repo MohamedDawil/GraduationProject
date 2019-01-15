@@ -38,11 +38,14 @@
 
     <div id="footer">
         <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
-            <div class="row" id="bottomBack">
-                <div class="col-xs-12 text-center">
-                    <a href="#">Tillbaka</a>
+            @if (ViewBag.BackButton ?? false)
+            {
+                <div class="row" id="bottomBack">
+                    <div class="col-xs-4 text-center">
+                        <a href="javascript:history.back()"><i class="glyphicon glyphicon-arrow-left"></i> Tillbaka</a>
+                    </div>
                 </div>
-            </div>
+            }
             <div class="row" id="bottomNav">
                 <div class="col-xs-4 text-center"><a asp-controller="Receivers" asp-action="Map"><i class="glyphicon glyphicon-map-marker"></i><br>Karta</a></div>
                 <div class="col-xs-4 text-center"><a asp-controller="Receivers" asp-action="Cart"><i class="glyphicon glyphicon-shopping-cart"></i><span class="countBubl" id="badge-cart">0</span><br>Matkorg</a></div>
@@ -50,7 +53,6 @@
             </div>
         </div>
     </div>
-
 
 
     @*<div data-role="page">
