@@ -48,6 +48,7 @@ namespace GraduationProject.Models
 
         }
 
+
         public async Task<Point> GetCoordinates(MyIdentityUser giver)
         {
             var http = new HttpClient();

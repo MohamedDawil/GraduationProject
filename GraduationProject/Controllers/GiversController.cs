@@ -15,18 +15,22 @@ namespace GraduationProject.Controllers
     {
         private GiversService giversService;
         private MembersService membersService;
+        private BadgeService badgeService;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public GiversController(GiversService giversService, MembersService membersService, IHostingEnvironment environment)
+        public GiversController(GiversService giversService, MembersService membersService, BadgeService badgeService, IHostingEnvironment environment)
         {
             this.giversService = giversService;
             this.membersService = membersService;
+            this.badgeService = badgeService;
             this.hostingEnvironment = environment;
         }
 
         [HttpGet]
-        public IActionResult AddProduct()
+        public async Task<IActionResult> AddProduct()
         {
+            await SetBadges();
+
             return View(new GiversAddProductVM());
         }
 
@@ -70,6 +74,8 @@ namespace GraduationProject.Controllers
                 Unclaimed = await giversService.GetUnclaimed(giverId)
             };
 
+            await SetBadges();
+
             return View(viewModel);
         }
 
@@ -77,6 +83,9 @@ namespace GraduationProject.Controllers
         public async Task<IActionResult> ChangeProduct(int id)
         {
             var viewModel = await giversService.GetProduct(id);
+
+            await SetBadges();
+
             return View(viewModel);
         }
 
@@ -115,6 +124,14 @@ namespace GraduationProject.Controllers
             var giverId = membersService.GetUserId(HttpContext.User);
             await giversService.DeleteProduct(id, giverId);
             return RedirectToAction(nameof(Products));
+        }
+
+        private async Task SetBadges()
+        {
+            var userId = membersService.GetUserId(HttpContext.User);
+            ViewBag.BadgeProducts = await badgeService.ProductCount(userId);
+            ViewBag.BadgeCart = await badgeService.CartCount(userId);
+            ViewBag.BadgeInbox = await badgeService.InboxCount(userId);
         }
     }
 }

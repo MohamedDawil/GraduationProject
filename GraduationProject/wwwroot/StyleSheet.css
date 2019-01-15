@@ -137,9 +137,13 @@ input[type="file"] {
 }
 
 .countBubl {
-    font-size: 12px;
-    background: #ed1d24;
-    color: #fff;
-    padding: 3px;
-    border-radius: 5px;
+    height: 17px;
+    width: 17px;
+    background-color: #ed1d24;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top;
+    font-size: small;
+    position: relative;
+    top: -2px
 }

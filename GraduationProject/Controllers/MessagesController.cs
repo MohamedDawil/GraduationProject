@@ -15,13 +15,15 @@ namespace GraduationProject.Controllers
     {
         private MessagesService messagesService;
         private MembersService membersService;
+        private BadgeService badgeService;
         private readonly IHubContext<ChatHub> hubContext;
 
-        public MessagesController(IHubContext<ChatHub> hubContext, MessagesService messagesService, MembersService membersService)
+        public MessagesController(IHubContext<ChatHub> hubContext, MessagesService messagesService, MembersService membersService, BadgeService badgeService)
         {
             this.hubContext = hubContext;
             this.messagesService = messagesService;
             this.membersService = membersService;
+            this.badgeService = badgeService;
         }
 
         [HttpGet]
@@ -29,6 +31,9 @@ namespace GraduationProject.Controllers
         {
             var userId = membersService.GetUserId(HttpContext.User);
             var viewModels = await messagesService.GetInbox(userId);
+
+            await SetBadges();
+
             return View(viewModels);
         }
 
@@ -37,6 +42,8 @@ namespace GraduationProject.Controllers
         {
             var giverId = membersService.GetUserId(HttpContext.User);
             await messagesService.StartChat(productId, receiverId, giverId);
+            await SetBadges();
+
             return RedirectToAction("Chat", new { productId });
         }
 
@@ -47,6 +54,8 @@ namespace GraduationProject.Controllers
             var viewModel = await messagesService.GetChat(productId, userId);
             if (viewModel == null)
                 return RedirectToAction(nameof(Inbox));
+
+            await SetBadges();
             return View(viewModel);
         }
 
@@ -58,9 +67,16 @@ namespace GraduationProject.Controllers
 
             return RedirectToAction(nameof(Chat));
         }
-        public async Task SendMessage(string user, string message)
+        //public async Task SendMessage(string user, string message)
+        //{
+        //    await hubContext.Clients.All.SendAsync("ReceiveMessage", user, message);
+        //}
+        private async Task SetBadges()
         {
-            await hubContext.Clients.All.SendAsync("ReceiveMessage", user, message);
+            var userId = membersService.GetUserId(HttpContext.User);
+            ViewBag.BadgeProducts = await badgeService.ProductCount(userId);
+            ViewBag.BadgeCart = await badgeService.CartCount(userId);
+            ViewBag.BadgeInbox = await badgeService.InboxCount(userId);
         }
     }
 }

@@ -13,19 +13,22 @@ namespace GraduationProject.Controllers
 {
     public class MembersController : Controller
     {
-        private MembersService service;
+        private MembersService membersService;
+        private BadgeService badgeService;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public MembersController(MembersService service, IHostingEnvironment hostingEnvironment)
+        public MembersController(MembersService membersService, IHostingEnvironment hostingEnvironment, BadgeService badgeService)
         {
-            this.service = service;
+            this.membersService = membersService;
+            this.badgeService = badgeService;
             this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
         [Route("")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await SetBadges();
             return View();
         }
 
@@ -36,7 +39,7 @@ namespace GraduationProject.Controllers
             if (!ModelState.IsValid)
                 return View(membersIndexVM);
 
-            var isLoggedIn = await service.SignInAsync(membersIndexVM);
+            var isLoggedIn = await membersService.SignInAsync(membersIndexVM);
 
             if (!isLoggedIn)
                 return View(membersIndexVM);
@@ -46,16 +49,19 @@ namespace GraduationProject.Controllers
 
 
         [HttpGet]
-        public IActionResult Register()
+
+        public async Task<IActionResult> Register()
         {
             ViewBag.BackButton = true;
+            await SetBadges();
             return View();
         }
 
         [HttpGet]
-        public IActionResult RegisterPrivate()
+        public async Task<IActionResult> RegisterPrivate()
         {
             ViewBag.BackButton = true;
+            await SetBadges();
             return View();
         }
 
@@ -68,7 +74,7 @@ namespace GraduationProject.Controllers
                 return View(membersRegisterPrivateVM);
             }
 
-            var isAdded = await service.CreateAsync(membersRegisterPrivateVM);
+            var isAdded = await membersService.CreateAsync(membersRegisterPrivateVM);
 
             if (!isAdded)
             {
@@ -80,8 +86,9 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult RegisterOrganization()
+        public async Task<IActionResult> RegisterOrganization()
         {
+            await SetBadges();
             return View();
         }
 
@@ -97,7 +104,9 @@ namespace GraduationProject.Controllers
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
-            var viewModel = await service.GetProfile(HttpContext.User);
+            var viewModel = await membersService.GetProfile(HttpContext.User);
+
+            await SetBadges();
 
             return View(viewModel);
         }
@@ -108,7 +117,7 @@ namespace GraduationProject.Controllers
             if (!ModelState.IsValid)
                 return View(membersProfileVM);
 
-            var statusCode = await service.CheckAddress(membersProfileVM);
+            var statusCode = await membersService.CheckAddress(membersProfileVM);
 
             if (!statusCode.Item1)
             {
@@ -125,8 +134,16 @@ namespace GraduationProject.Controllers
                 membersProfileVM.Picture = uniqueFileName;
             }
 
-            await service.ChangeProfile(membersProfileVM, HttpContext.User);
+            await membersService.ChangeProfile(membersProfileVM, HttpContext.User);
             return RedirectToAction(nameof(Profile));
+        }
+
+        private async Task SetBadges()
+        {
+            var userId = membersService.GetUserId(HttpContext.User);
+            ViewBag.BadgeProducts = await badgeService.ProductCount(userId);
+            ViewBag.BadgeCart = await badgeService.CartCount(userId);
+            ViewBag.BadgeInbox = await badgeService.InboxCount(userId);
         }
 
     }

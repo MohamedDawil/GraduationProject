@@ -60,7 +60,8 @@ function claimProduct(id) {
         success: function (response) {
             console.log("_ProductBox.claimProduct (success): " + response);
             document.getElementById("product_" + id).innerHTML = "Avboka vara";
-            document.getElementById("product_" + id).onclick = function () { unClaimProduct(id); }
+            document.getElementById("product_" + id).onclick = function () { unClaimProduct(id); };
+            $('#badge-cart').html(parseInt($('#badge-cart').html(), 10) + 1);
         },
         error: function (response) {
             console.log("_ProductBox.claimProduct (error): " + response);
@@ -79,7 +80,8 @@ function unClaimProduct(id) {
         success: function (response) {
             console.log("_ProductBox.unClaimProduct (success)" + response);
             document.getElementById("product_" + id).innerHTML = "Boka vara";
-            document.getElementById("product_" + id).onclick = function () { claimProduct(id); }
+            document.getElementById("product_" + id).onclick = function () { claimProduct(id); };
+            $('#badge-cart').html(parseInt($('#badge-cart').html(), 10) - 1);
         },
         error: function (response) {
             console.log("_ProductBox.unClaimProduct (error)" + response);
