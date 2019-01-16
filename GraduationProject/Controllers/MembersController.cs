@@ -145,6 +145,5 @@ namespace GraduationProject.Controllers
             ViewBag.BadgeCart = await badgeService.CartCount(userId);
             ViewBag.BadgeInbox = await badgeService.InboxCount(userId);
         }
-
     }
 }

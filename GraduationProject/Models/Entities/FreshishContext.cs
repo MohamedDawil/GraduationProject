@@ -75,29 +75,29 @@ namespace GraduationProject.Models.Entities
                     .WithMany(p => p.ChatGiver)
                     .HasForeignKey(d => d.GiverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__chat__GiverId__49C3F6B7");
+                    .HasConstraintName("FK__chat__GiverId__68487DD7");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Chat)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__chat__ProductId__5CD6CB2B");
+                    .HasConstraintName("FK__chat__ProductId__6B24EA82");
 
                 entity.HasOne(d => d.ReadBy)
                     .WithMany(p => p.ChatReadBy)
                     .HasForeignKey(d => d.ReadById)
-                    .HasConstraintName("FK__chat__ReadById__6E01572D");
+                    .HasConstraintName("FK__chat__ReadById__6C190EBB");
 
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.ChatReceiver)
                     .HasForeignKey(d => d.ReceiverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__chat__ReceiverId__4AB81AF0");
+                    .HasConstraintName("FK__chat__ReceiverId__693CA210");
 
                 entity.HasOne(d => d.SentBy)
                     .WithMany(p => p.ChatSentBy)
                     .HasForeignKey(d => d.SentById)
-                    .HasConstraintName("FK__chat__SentById__5BE2A6F2");
+                    .HasConstraintName("FK__chat__SentById__6A30C649");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -130,12 +130,12 @@ namespace GraduationProject.Models.Entities
                     .WithMany(p => p.ProductGiver)
                     .HasForeignKey(d => d.GiverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__product__GiverId__36B12243");
+                    .HasConstraintName("FK__product__GiverId__6477ECF3");
 
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.ProductReceiver)
                     .HasForeignKey(d => d.ReceiverId)
-                    .HasConstraintName("FK__product__Receive__37A5467C");
+                    .HasConstraintName("FK__product__Receive__656C112C");
             });
         }
     }
