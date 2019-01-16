@@ -84,14 +84,16 @@ namespace GraduationProject.Models.Services
             var bubbles = await context.Chat.Where(c => c.ProductId == productId && (c.GiverId == userId || c.ReceiverId == userId)).Select(c => new MessagesChatBubbleVM
             {
                 IsSent = c.SentById.Equals(userId),
+                IsServer = c.IsServer,
                 MemberImage = c.SentBy.Picture,
                 MemberMessage = c.Message,
                 MemberName = c.SentBy.FirstName,
                 PublishDate = c.PublishDate
             }).ToArrayAsync();
+
             if (!bubbles.Any())
                 return null;
-
+            //Fixa avboka först
             var product = await context.Product.SingleOrDefaultAsync(p => p.Id == productId);
             return new MessagesChatVM
             {

@@ -65,7 +65,7 @@ namespace GraduationProject.Controllers
             var receiverId = membersService.GetUserId(HttpContext.User);
             var isClaimed = await receiversService.ClaimProduct(id, receiverId);
 
-            return Json(isClaimed);
+            return RedirectToAction(nameof(Map));
         }
 
         public async Task<IActionResult> UnclaimProduct(int id)
@@ -73,7 +73,7 @@ namespace GraduationProject.Controllers
             var receiver = await membersService.GetUser(HttpContext.User);
             var isUnClaimed = await receiversService.UnclaimProduct(id, receiver.Id);
 
-            return Json(isUnClaimed);
+            return RedirectToAction(nameof(Cart));
         }
 
         [HttpGet]

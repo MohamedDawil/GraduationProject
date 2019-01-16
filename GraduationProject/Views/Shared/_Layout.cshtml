@@ -16,7 +16,7 @@
         <div class="bg-dark fixed-top">
             <div class="row" id="topNav">
                 <div class="col text-center"><a asp-controller="Givers" asp-action="AddProduct"><i class="fas fa-plus"></i><br>Lägg till vara</a></div>
-                <div class="col text-center"><a asp-controller="Givers" asp-action="Products"><i class="fas fa-list-alt"></i><span class="countBubl" id="badge-products">@ViewBag.BadgeProducts</span><br>Mina varor</a></div>
+                <div class="col text-center"><a asp-controller="Givers" asp-action="Products"><i class="fas fa-list-alt"></i><span class="countBubl" id="badge-products" @if(ViewBag.BadgeProducts == 0) { @("style=visibility:hidden;");}>@ViewBag.BadgeProducts</span><br>Mina varor</a></div>
                 <div class="col text-center"><a asp-controller="Members" asp-action="Profile"><i class="fas fa-user"></i><br>Profil</a></div>
             </div>
         </div>
@@ -40,9 +40,8 @@
             }
             <div class="row" id="bottomNav">
                 <div class="col text-center"><a asp-controller="Receivers" asp-action="Map"><i class="fas fa-map-marker-alt"></i><br>Karta</a></div>
-                <div class="col text-center"><a asp-controller="Receivers" asp-action="Search"><i class="fas fa-search"></i><br>Sök</a></div>
-                <div class="col text-center"><a asp-controller="Receivers" asp-action="Cart"><i class="fas fa-shopping-cart"></i><span class="countBubl" id="badge-cart">@ViewBag.BadgeCart</span><br>Matkorg</a></div>
-                <div class="col text-center"><a asp-controller="Messages" asp-action="Inbox"><i class="fas fa-comment"></i><span class="countBubl" id="badge-cart">@ViewBag.BadgeInbox</span><br>Inkorg</a></div>
+                <div class="col text-center"><a asp-controller="Receivers" asp-action="Cart"><i class="fas fa-shopping-cart"></i><span class="countBubl" id="badge-cart" @if(ViewBag.BadgeCart == 0) { @("style=visibility:hidden;");}>@ViewBag.BadgeCart</span><br>Matkorg</a></div>
+                <div class="col text-center"><a asp-controller="Messages" asp-action="Inbox"><i class="fas fa-comment"></i><span class="countBubl" id="badge-cart" @if(ViewBag.BadgeInbox == 0) { @("style=visibility:hidden;");}>@ViewBag.BadgeInbox</span><br>Inkorg</a></div>
             </div>
         </div>
     </div>

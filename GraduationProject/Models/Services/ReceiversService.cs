@@ -22,7 +22,7 @@ namespace GraduationProject.Models
 
         public async Task<ReceiversMapPositionVM[]> GetPositions()
         {
-            return await context.Product.Select(p => new ReceiversMapPositionVM
+            return await context.Product.Where(q => q.IsDeleted != 1 && q.Claimed == false).Select(p => new ReceiversMapPositionVM
             {
                 //FIXME: Shift due to strange behaviour
                 Latitude = ((Point)p.Location).Y,
@@ -35,7 +35,7 @@ namespace GraduationProject.Models
         {
             var point = new Point(new Coordinate(lat, lng));
             point.SRID = 4326;
-            return await context.Product.Select(p => new ReceiversMapProductVM
+            return await context.Product.Where(p=>p.Claimed == false && p.IsDeleted != 1).Select(p => new ReceiversMapProductVM
             {
                 ProductId = p.Id,
                 ProductImage = p.Picture,
@@ -85,6 +85,8 @@ namespace GraduationProject.Models
                 ProductLatitude = ((Point)p.Location).X,
                 ProductLongitude = ((Point)p.Location).Y,
                 ProductClaimed = p.Claimed,
+                HasChat = p.Chat.Count != 0,
+                GiverId = p.GiverId,
                 GiverName = p.Giver.FirstName,
                 GiverCity = p.City,
                 GiverStreet = p.Street,
@@ -92,7 +94,7 @@ namespace GraduationProject.Models
                 ProductDistance = Convert.ToInt32(Helper.Distance(point, (Point)p.Location)),
             }).OrderBy(p => p.ProductDistance).ToArrayAsync();
         }
-
+       
         public async Task<bool> UnclaimProduct(int productId, string receiverId)
         {
             var product = await context.Product.SingleOrDefaultAsync(p => p.Id == productId);

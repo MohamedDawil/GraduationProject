@@ -135,6 +135,7 @@ namespace GraduationProject.Controllers
             }
 
             await membersService.ChangeProfile(membersProfileVM, HttpContext.User);
+
             return RedirectToAction(nameof(Profile));
         }
 

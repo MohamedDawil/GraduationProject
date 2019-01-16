@@ -14,5 +14,6 @@ namespace GraduationProject.Models.ViewModels
         public string ReceiverId { get; set; }
         public DateTime ProductPickUpDate1 { get; set; }
         public DateTime ProductPickUpDate2 { get; set; }
+        public bool HasChat { get; set; }
     }
 }

@@ -37,7 +37,6 @@ namespace GraduationProject.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProduct(GiversAddProductVM giversAddProductVM)
         {
-            //http://api.ica.se/api/upclookup?upc=7310390001383
             if (!ModelState.IsValid)
                 return View(giversAddProductVM);
 
@@ -63,6 +62,8 @@ namespace GraduationProject.Controllers
 
             return RedirectToAction(nameof(AddProduct));
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> Products()
