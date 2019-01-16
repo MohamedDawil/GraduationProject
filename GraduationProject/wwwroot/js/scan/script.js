@@ -409,7 +409,7 @@ var loopReadVideo = function () {
                 type: "GET",
                 success: function (response) {
                     if (response.GTIN !== null) {
-                        pTopLog.innerText = "Success: " + txtArr[i];
+                        pTopLog.innerText = "Hittade vara: " + txtArr[i];
                         $divTopLog.append(pTopLog);
                         $(pTopLog).slideDown();
                         console.log("success");
@@ -423,14 +423,25 @@ var loopReadVideo = function () {
                             '<input type="text" name="name" value="' + response.Artikelbenamning + '" />' +
                             '<input type="text" name="picture" value="' + response.Bilder[2].Lank + '" />' +
                             '<input type="text" name="description" value="' + response.Ingrediensforteckning + '" />' +
+                            '<input type="text" name="notFound" value="false" />' +
                             '</form>');
                         $('body').append(form);
                         form.submit();
 
                     } else {
-                        pTopLog.innerText = "Not found in database! Try to take a picture instead.";
+                        pTopLog.innerText = "Hittade ej!";
                         $divTopLog.append(pTopLog);
                         $(pTopLog).slideDown();
+
+                        var form2 = $('<form action="/Food/Ajax" method="post">' +
+                            '<input type="text" name="name" value="" />' +
+                            '<input type="text" name="picture" value="" />' +
+                            '<input type="text" name="description" value="" />' +
+                            '<input type="text" name="notFound" value="true" />' +
+                            '</form>');
+                        $('body').append(form2);
+                        form2.submit();
+
                         console.log("error: gtin not found");
                     }
                 },

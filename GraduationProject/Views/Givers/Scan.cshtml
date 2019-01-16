@@ -1,6 +1,5 @@
 ﻿@*@model Foodbay.Models.FoodAjaxVM*@
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,6 +136,10 @@
         <div class="div-forProceedBtn">
 
             <form>
+                @if (Model.NotFound)
+                {
+                    <p>Varan hittades ej i databasen. Var god ta en bild i stället.</p>
+                }
                 <input type="text" value="@Model.Name" />
                 <input type="text" value="@Model.Description" />
                 <img src="@Model.Picture" />
@@ -145,7 +148,7 @@
             <button id="btn-processSupportAndSettings">Proceed</button>
         </div>
     </div>
-    @*<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src='/js/scan/what-input.min.js'></script>
     <script src='/js/scan/foundation.min.js'></script>
     <script>
