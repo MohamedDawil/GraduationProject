@@ -16,6 +16,7 @@
 	[Street] NVARCHAR (MAX) NOT NULL,
 	[City] NVARCHAR (MAX) NOT NULL,
 	[ZipCode] NVARCHAR (MAX) NOT NULL,
+    [IsDeleted] INT NOT NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([GiverId]) REFERENCES [dbo].[AspNetUsers] ([Id]),
     FOREIGN KEY ([ReceiverId]) REFERENCES [dbo].[AspNetUsers] ([Id])

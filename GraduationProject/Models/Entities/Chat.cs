@@ -14,9 +14,11 @@ namespace GraduationProject.Models.Entities
         public bool IsServer { get; set; }
         public bool IsDeleted { get; set; }
         public string SentById { get; set; }
+        public string ReadById { get; set; }
 
         public virtual AspNetUsers Giver { get; set; }
         public virtual Product Product { get; set; }
+        public virtual AspNetUsers ReadBy { get; set; }
         public virtual AspNetUsers Receiver { get; set; }
         public virtual AspNetUsers SentBy { get; set; }
     }

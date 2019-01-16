@@ -8,9 +8,11 @@
     [IsServer]    BIT            NOT NULL,
 	IsDeleted bit NOT NULL,
 	SentById nvarchar(450) NULL,
+    [ReadById] NVARCHAR(450) NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([GiverId]) REFERENCES [dbo].[AspNetUsers] ([Id]),
     FOREIGN KEY ([ReceiverId]) REFERENCES [dbo].[AspNetUsers] ([Id]),
 	FOREIGN KEY ([SentById]) REFERENCES [dbo].[AspNetUsers] ([Id]),
+	FOREIGN KEY ([ReadById]) REFERENCES [dbo].[AspNetUsers] ([Id]),
     FOREIGN KEY ([ProductId]) REFERENCES [fresh].[product] ([Id]),
 );

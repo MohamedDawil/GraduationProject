@@ -28,6 +28,7 @@ namespace GraduationProject.Models.Entities
         public string Street { get; set; }
         public string City { get; set; }
         public string ZipCode { get; set; }
+        public int IsDeleted { get; set; }
 
         public virtual AspNetUsers Giver { get; set; }
         public virtual AspNetUsers Receiver { get; set; }

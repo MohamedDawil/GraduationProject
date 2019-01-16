@@ -28,7 +28,7 @@ namespace GraduationProject.Models
         }
         public async Task<int> InboxCount(string userId)
         {
-            var chats = await context.Chat.Where(p => p.ReceiverId == userId || p.GiverId == userId).ToArrayAsync();
+            var chats = await context.Chat.Where(p => (p.ReceiverId == userId || p.GiverId == userId) && p.SentById != userId && p.ReadById == null).ToArrayAsync();
             return chats.Count();
         }
     }

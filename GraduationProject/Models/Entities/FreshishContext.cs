@@ -63,6 +63,8 @@ namespace GraduationProject.Models.Entities
 
                 entity.Property(e => e.Message).IsRequired();
 
+                entity.Property(e => e.ReadById).HasMaxLength(450);
+
                 entity.Property(e => e.ReceiverId)
                     .IsRequired()
                     .HasMaxLength(450);
@@ -80,6 +82,11 @@ namespace GraduationProject.Models.Entities
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__chat__ProductId__5CD6CB2B");
+
+                entity.HasOne(d => d.ReadBy)
+                    .WithMany(p => p.ChatReadBy)
+                    .HasForeignKey(d => d.ReadById)
+                    .HasConstraintName("FK__chat__ReadById__6E01572D");
 
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.ChatReceiver)

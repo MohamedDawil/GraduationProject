@@ -25,3 +25,11 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     });
     event.preventDefault();
 });
+
+$(function () {
+
+    connection.invoke("ReadMessage", ).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});
