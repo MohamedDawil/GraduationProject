@@ -29,6 +29,7 @@ namespace GraduationProject.Controllers
         public async Task<IActionResult> Index()
         {
             await SetBadges();
+
             return View();
         }
 
@@ -102,6 +103,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Profile)]
         public async Task<IActionResult> Profile()
         {
             var viewModel = await membersService.GetProfile(HttpContext.User);

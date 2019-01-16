@@ -27,6 +27,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Inbox)]
         public async Task<IActionResult> Inbox()
         {
             var userId = membersService.GetUserId(HttpContext.User);
@@ -58,6 +59,7 @@ namespace GraduationProject.Controllers
 
 
         [HttpGet]
+        [HighlightedMenu(Menu.AddProduct)]
         public async Task<IActionResult> Chat(int productId)
         {
             var userId = membersService.GetUserId(HttpContext.User);

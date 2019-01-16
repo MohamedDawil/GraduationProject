@@ -22,6 +22,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Map)]
         public async Task<IActionResult> Map()
         {
             var viewModel = new ReceiversMapVM
@@ -34,11 +35,12 @@ namespace GraduationProject.Controllers
             };
 
             await SetBadges();
-            
+
             return View(viewModel);
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Search)]
         public async Task<IActionResult> Search()
         {
             var viewModels = new ReceiversSearchVM
@@ -86,9 +88,11 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Cart)]
         public async Task<IActionResult> Cart()
         {
             await SetBadges();
+
             return View();
         }
 

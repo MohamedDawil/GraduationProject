@@ -27,8 +27,10 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.AddProduct)]
         public async Task<IActionResult> AddProduct()
         {
+
             await SetBadges();
 
             return View(new GiversAddProductVM());
@@ -66,6 +68,7 @@ namespace GraduationProject.Controllers
 
 
         [HttpGet]
+        [HighlightedMenu(Menu.Products)]
         public async Task<IActionResult> Products()
         {
             var giverId = membersService.GetUserId(HttpContext.User);
@@ -76,7 +79,6 @@ namespace GraduationProject.Controllers
             };
 
             await SetBadges();
-
             return View(viewModel);
         }
 
@@ -86,6 +88,7 @@ namespace GraduationProject.Controllers
             var viewModel = await giversService.GetProduct(id);
 
             await SetBadges();
+
             ViewBag.BackButton = true;
             return View(viewModel);
         }
@@ -123,6 +126,7 @@ namespace GraduationProject.Controllers
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var giverId = membersService.GetUserId(HttpContext.User);
+
             await giversService.DeleteProduct(id, giverId);
             return RedirectToAction(nameof(Products));
         }
@@ -134,5 +138,6 @@ namespace GraduationProject.Controllers
             ViewBag.BadgeCart = await badgeService.CartCount(userId);
             ViewBag.BadgeInbox = await badgeService.InboxCount(userId);
         }
+        
     }
 }

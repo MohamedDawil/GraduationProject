@@ -86,3 +86,9 @@ function unClaimProduct(id) {
         }
     });
 }
+
+
+//$('#bottomNav a, #topNav a').click(function () {
+//    $('a').removeClass('active');
+//    $(this).addClass('active');
+//});
