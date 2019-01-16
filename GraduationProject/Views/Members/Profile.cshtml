@@ -35,7 +35,7 @@
                 <td><input asp-for="Email" type="text" placeholder="E-mail" /></td>
                 <td><span asp-validation-for="LastName"></span></td>
             </tr>
-            @if (Model.ErrorMessage != null)
+            @if (Model.ErrorMessage != "")
             {
                 <tr>
                     <td colspan="3">
