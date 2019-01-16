@@ -57,22 +57,26 @@ document.getElementById("sendButton").addEventListener("click", function (event)
 });
 
 $(function () {
+<<<<<<< HEAD
+
+    connection.invoke("ReadMessage", ).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});
+=======
     scrollDown();
 
     $('#sendButton').attr('disabled', true);
     $('#SendMessage').keyup(function () {
-        if ($(this).val().length !== 0)
+        if ($(this).val().length != 0)
             $('#sendButton').attr('disabled', false);
         else
             $('#sendButton').attr('disabled', true);
-    });
-
-//connection.invoke("ReadMessage").catch(function (err) {
-//        return console.error(err.toString());
-//    });
-//    event.preventDefault();
+    })
 });
 
 function scrollDown() {
     $('#messagesList').scrollTop($('#messagesList')[0].scrollHeight);
 };
+>>>>>>> f2c114eabba7ec1cdbb80f92bc3a32c77e0531da

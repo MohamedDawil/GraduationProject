@@ -27,7 +27,9 @@ namespace GraduationProject.Hubs
                 SendMessage = sendMessage
             });
             var member = await membersService.GetUser(sentById);
-            await Clients.All.SendAsync("ReceiveMessage", member.Picture, member.FirstName, DateTime.Now, sendMessage);
+            var user = Context.GetHttpContext().User;
+            var userId = membersService.GetUserId(user);
+            await Clients.All.SendAsync("ReceiveMessage", member.Picture, member.FirstName, DateTime.Now, sendMessage, sentById == userId);
         }
     }
 }
