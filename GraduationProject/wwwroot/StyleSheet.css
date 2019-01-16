@@ -10,15 +10,15 @@ body {
 }
 
 /* Wrapper for page content to push down footer */
-#wrap {
-    min-height: 100%;
+/*#wrap {*/
+    /*min-height: 100%;
     height: auto !important;
-    height: 100%;
+    height: 100%;*/
     /* Negative indent footer by its height */
-    margin: 0 auto -60px;
+    /*margin: 0 auto -60px;*/
     /* Pad bottom by footer height */
-    padding: 0 0 60px;
-}
+    /*padding: 0 0 60px;*/
+/*}*/
 
 /* Set the fixed height of the footer here */
 #footer {
@@ -64,17 +64,18 @@ body {
 #bottomNav {
     padding: 10px;
     font-weight: 500;
+    -webkit-box-shadow: 0px -1px 7px 0px rgba(179,179,179,1);
+    -moz-box-shadow: 0px -1px 7px 0px rgba(179,179,179,1);
+    box-shadow: 0px -1px 7px 0px rgba(179,179,179,1);
 }
 
-#bottomNav a {
-    font-size: 13px;
-    color: #ddd;
-    text-decoration: none;
-}
+    #bottomNav a {
+        font-size: 13px;
+        color: #686868;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
 
-#bottomNav a:hover {
-    color: #fff;
-}
 
 #bottomBack {
     padding: 10px;
@@ -86,30 +87,28 @@ body {
         text-decoration: none;
     }
 
-        #bottomBack a:hover {
-            color: #fff;
-        }
-
-
-
 #topNav {
     padding: 10px;
     font-weight: 500;
+    -webkit-box-shadow: 0px 1px 7px 0px rgba(179,179,179,1);
+    -moz-box-shadow: 0px 1px 7px 0px rgba(179,179,179,1);
+    box-shadow: 0px 1px 7px 0px rgba(179,179,179,1);
 }
 
     #topNav a {
-        font-size: 13px;
-        color: #ddd;
+        font-size: 14px;
+        color: #686868;
         text-decoration: none;
+        text-transform: uppercase;
     }
 
-        #topNav a:hover {
-            color: #fff;
-        }
+    i {
+        font-size: 18px;
+    }
 
-
-.active {
-    color: #fff !important;
+.active > a {
+    color: #E0002D !important;
+    font-weight: 600;
 }
 
 input[type="file"] {
@@ -148,21 +147,19 @@ input[type="file"] {
 .countBubl {
     height: 17px;
     width: 17px;
-    background-color: #ed1d24;
-    border: 1px solid red;
+    background-color: #257FB6;
     border-radius: 50%;
     display: inline-block;
     vertical-align: top;
     font-size: small;
     position: relative;
-    top: -2px
+    top: -2px;
+    color: #F8F9FA;
+    margin-left: 3px;
 }
 
 .container {
-    max-width: 1170px;
-    margin: auto;
-    padding-right: 0px;
-    padding-left: 0px;
+overflow: hidden;
 }
 
 img {

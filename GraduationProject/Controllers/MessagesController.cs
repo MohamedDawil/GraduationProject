@@ -27,6 +27,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Inbox)]
         public async Task<IActionResult> Inbox()
         {
             var userId = membersService.GetUserId(HttpContext.User);
@@ -38,7 +39,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> StartChat(string receiverId, int productId)
+        public async Task<IActionResult> StartChatGiver(string receiverId, int productId)
         {
             var giverId = membersService.GetUserId(HttpContext.User);
             await messagesService.StartChat(productId, receiverId, giverId);
@@ -46,8 +47,19 @@ namespace GraduationProject.Controllers
 
             return RedirectToAction("Chat", new { productId });
         }
+        [HttpGet]
+        public async Task<IActionResult> StartChatReceiver(string giverId, int productId)
+        {
+            var receiverId = membersService.GetUserId(HttpContext.User);
+            await messagesService.StartChat(productId, receiverId, giverId);
+            await SetBadges();
+
+            return RedirectToAction("Chat", new { productId });
+        }
+
 
         [HttpGet]
+        [HighlightedMenu(Menu.AddProduct)]
         public async Task<IActionResult> Chat(int productId)
         {
             var userId = membersService.GetUserId(HttpContext.User);
@@ -72,10 +84,6 @@ namespace GraduationProject.Controllers
 
             return RedirectToAction(nameof(Chat));
         }
-        //public async Task SendMessage(string user, string message)
-        //{
-        //    await hubContext.Clients.All.SendAsync("ReceiveMessage", user, message);
-        //}
         private async Task SetBadges()
         {
             var userId = membersService.GetUserId(HttpContext.User);

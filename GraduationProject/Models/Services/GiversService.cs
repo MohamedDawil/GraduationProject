@@ -57,7 +57,7 @@ namespace GraduationProject.Models
             var response = await http.GetAsync(url);
             var result = await response.Content.ReadAsStringAsync();
             var json = JsonConvert.DeserializeObject<JsonCoordinates>(result); // Convertor from string"result" to json
-            var point = new Point(new Coordinate((double)json.results[0].geometry.location.lat, 
+            var point = new Point(new Coordinate((double)json.results[0].geometry.location.lat,
                 (double)json.results[0].geometry.location.lng));
             point.SRID = 4326;
             return point;
@@ -82,7 +82,7 @@ namespace GraduationProject.Models
         public async Task<GiversClaimedVM[]> GetClaimed(string giverId)
         {
             return await context.Product
-                .Where(p => p.Claimed == true && p.GiverId == giverId)
+                .Where(p => p.Claimed == true && p.GiverId == giverId && p.IsDeleted != 1)
                 .Select(p => new GiversClaimedVM
                 {
                     ProductId = p.Id,
@@ -91,14 +91,15 @@ namespace GraduationProject.Models
                     ReceiverName = $"{p.Receiver.FirstName} {p.Receiver.LastName}",
                     ReceiverId = p.ReceiverId,
                     ProductPickUpDate1 = p.PickUpDate1,
-                    ProductPickUpDate2 = p.PickUpDate2
+                    ProductPickUpDate2 = p.PickUpDate2,
+                    HasChat = p.Chat != null
                 }).ToArrayAsync();
         }
 
         public async Task<GiversClaimedVM[]> GetUnclaimed(string giverId)
         {
             return await context.Product
-                .Where(p => p.Claimed == false && p.GiverId == giverId)
+                .Where(p => p.Claimed == false && p.GiverId == giverId && p.IsDeleted != 1)
                 .Select(p => new GiversClaimedVM
                 {
                     ProductId = p.Id,
@@ -114,7 +115,7 @@ namespace GraduationProject.Models
             var product = await context.Product.SingleOrDefaultAsync(p => p.Id == productId && p.GiverId == giverId);
             if (product != null)
             {
-                context.Product.Remove(product);
+                product.IsDeleted = 1;
                 await context.SaveChangesAsync();
             }
         }
@@ -137,5 +138,6 @@ namespace GraduationProject.Models
 
             await context.SaveChangesAsync();
         }
+
     }
 }

@@ -48,7 +48,10 @@
             else
             {
                 <div class="incoming_msg">
-                    <div class="incoming_msg_img"> <img src="~/Profiles/@bubble.MemberImage"> </div>
+                    @if (!bubble.IsServer)
+                    {
+                        <div class="incoming_msg_img"><img src="~/Profiles/@bubble.MemberImage"></div>
+                    }
                     <div class="received_msg">
                         <div class="received_withd_msg">
                             <p>

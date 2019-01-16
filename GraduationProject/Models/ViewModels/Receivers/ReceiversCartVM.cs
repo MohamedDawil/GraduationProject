@@ -9,7 +9,8 @@ namespace GraduationProject.Models.ViewModels
     public class ReceiversCartVM
     {
         public int ProductId { get; set; }
-        public int GiverId { get; set; }
+        public string GiverId { get; set; }
+        public bool HasChat { get; set; }
         public string ProductName { get; set; }
         public string ProductImage { get; set; }
         [Display(Name ="Beskrivning")]

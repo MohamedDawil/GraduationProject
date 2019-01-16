@@ -18,12 +18,12 @@ namespace GraduationProject.Models
 
         public async Task<int> ProductCount(string giverId)
         {
-            var products = await context.Product.Where(p => p.GiverId == giverId).ToArrayAsync();
+            var products = await context.Product.Where(p => p.GiverId == giverId && p.IsDeleted != 1).ToArrayAsync();
             return products.Count();
         }
         public async Task<int> CartCount(string receiverId)
         {
-            var products = await context.Product.Where(p => p.ReceiverId == receiverId).ToArrayAsync();
+            var products = await context.Product.Where(p => p.ReceiverId == receiverId && p.IsDeleted != 1).ToArrayAsync();
             return products.Count();
         }
         public async Task<int> InboxCount(string userId)

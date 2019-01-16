@@ -22,6 +22,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Map)]
         public async Task<IActionResult> Map()
         {
             var viewModel = new ReceiversMapVM
@@ -34,11 +35,12 @@ namespace GraduationProject.Controllers
             };
 
             await SetBadges();
-            
+
             return View(viewModel);
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Search)]
         public async Task<IActionResult> Search()
         {
             var viewModels = new ReceiversSearchVM
@@ -65,7 +67,7 @@ namespace GraduationProject.Controllers
             var receiverId = membersService.GetUserId(HttpContext.User);
             var isClaimed = await receiversService.ClaimProduct(id, receiverId);
 
-            return Json(isClaimed);
+            return RedirectToAction(nameof(Map));
         }
 
         public async Task<IActionResult> UnclaimProduct(int id)
@@ -73,7 +75,7 @@ namespace GraduationProject.Controllers
             var receiver = await membersService.GetUser(HttpContext.User);
             var isUnClaimed = await receiversService.UnclaimProduct(id, receiver.Id);
 
-            return Json(isUnClaimed);
+            return RedirectToAction(nameof(Cart));
         }
 
         [HttpGet]
@@ -86,9 +88,11 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Cart)]
         public async Task<IActionResult> Cart()
         {
             await SetBadges();
+
             return View();
         }
 

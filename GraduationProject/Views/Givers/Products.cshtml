@@ -21,7 +21,14 @@
                         <a asp-controller="Givers" asp-action="DeleteProduct" asp-route-id="@product.ProductId" class="btn btn-primary">Radera</a>
                     </p>
                     <p>
-                        <a asp-controller="Messages" asp-action="StartChat" asp-route-receiverid="@product.ReceiverId" asp-route-productid="@product.ProductId" class="btn btn-primary">Meddela köpare</a>
+                        @if (product.HasChat)
+                        {
+                            <a asp-controller="Messages" asp-action="Chat" asp-route-productid="@product.ProductId" class="btn btn-primary">Gå till chatt</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Messages" asp-action="StartChatGiver" asp-route-receiverid="@product.ReceiverId" asp-route-productid="@product.ProductId" class="btn btn-primary">Meddela köpare</a>
+                        }
                     </p>
                 </div>
             </div>
