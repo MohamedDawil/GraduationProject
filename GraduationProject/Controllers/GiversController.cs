@@ -56,6 +56,7 @@ namespace GraduationProject.Controllers
             giversAddProductVM.Street = giver.Street;
             giversAddProductVM.City = giver.City;
             giversAddProductVM.ZipCode = giver.ZipCode;
+            
 
             var location = await giversService.GetCoordinates(giver);
             giversAddProductVM.Location = location;
@@ -83,6 +84,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Products)]
         public async Task<IActionResult> ChangeProduct(int id)
         {
             var viewModel = await giversService.GetProduct(id);

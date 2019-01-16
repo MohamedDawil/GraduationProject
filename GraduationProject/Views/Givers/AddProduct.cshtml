@@ -11,32 +11,80 @@
         <i class="fa fa-cloud-upload"></i> Lägg till bild
     </label>
     <label class="custom-file-upload">
-        <input asp-for="Scan" type="file" accept="image/*;capture=camera" value="Skanna streckkod" >
+        <input asp-for="Scan" type="file" accept="image/*;capture=camera" value="Skanna streckkod">
         <i class="fa fa-cloud-upload"></i> Skanna streckkod
     </label>
     <br />
 
-    <input asp-for="ProductName" type="text" placeholder="Varunamn" />
-    <span asp-validation-for="ProductName"></span>
-    <br />
-    <input asp-for="Description" type="text" placeholder="Beskrivning" />
-    <span asp-validation-for="Description"></span>
-    <br />
-    <label asp-for="Freshness">Fräschhet</label>
-    <input asp-for="Freshness" type="range" min="1" max="10" placeholder="Fräschhet" />
-    <span asp-validation-for="Freshness"></span>
-    <br />
-    <label asp-for="ExpiryDate"></label>
-    <input asp-for="ExpiryDate" type="date"  value="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Utgångsdatum" data-role="none" />
-    <span asp-validation-for="ExpiryDate"></span>
-    <br />
-    <label asp-for="PickUpDate1"></label>
-    <input asp-for="PickUpDate1" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" value="@DateTime.Today.ToString("yyyy-MM-dd")"  placeholder="Hämta tidigast" />
-    <span asp-validation-for="PickUpDate1"></span>
-    <br />
-    <label asp-for="PickUpDate2"></label>
-    <input asp-for="PickUpDate2" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" value="@DateTime.Today.ToString("yyyy-MM-dd")"  placeholder="Hämta senast" />
-    <span asp-validation-for="PickUpDate2"></span>
-    <br />
-    <input type="submit" value="Lägg till vara" />
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row"><label asp-for="ProductName"></label></th>
+                <td>
+                    <input asp-for="ProductName" type="text" placeholder="Varunamn" />
+                </td>
+                <td>
+                    <span asp-validation-for="ProductName"></span>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label asp-for="Description"></label></th>
+                <td>
+                    <input asp-for="Description" type="text" placeholder="ex: antal, mängd" />
+                </td>
+                <td>
+                    <span asp-validation-for="Description"></span>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label asp-for="Freshness"></label></th>
+                <td class="progress-bar">
+                    <input asp-for="Freshness" type="range" min="1" max="10" placeholder="Fräschhet" />
+                </td>
+                <td>
+                    <span asp-validation-for="Freshness"></span>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label asp-for="ExpiryDate"></label></th>
+                <td>
+                    <input asp-for="ExpiryDate" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Utgångsdatum" data-role="none" />
+                </td>
+                <td>
+                    <span asp-validation-for="ExpiryDate"></span>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label asp-for="PickUpDate1"></label></th>
+                <td>
+                    <input asp-for="PickUpDate1" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" value="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Hämta tidigast" />
+                </td>
+                <td>
+                    <span asp-validation-for="PickUpDate1"></span>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label asp-for="PickUpDate2"></label></th>
+                <td>
+                    <input asp-for="PickUpDate2" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" value="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Hämta senast" />
+                </td>
+                <td>
+                    <span asp-validation-for="PickUpDate2"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="3">
+
+                    <input class="btn btn-light productBtn" type="submit" value="Lägg till vara" />
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
 </form>
+
+
+
