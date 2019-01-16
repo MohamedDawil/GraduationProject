@@ -42,11 +42,11 @@ function showInfo(id) {
     var x = document.getElementById("seInfoDiv_" + id);
     if (x.style.display === "none") {
         x.style.display = "block";
-        document.getElementById("info_" + id).innerHTML = "Dölj info";
+        document.getElementById("info_" + id).innerHTML = "Dölj";
     }
     else {
         x.style.display = "none";
-        document.getElementById("info_" + id).innerHTML = "Se info";
+        document.getElementById("info_" + id).innerHTML = "Info";
     }
 }
 
@@ -58,10 +58,9 @@ function claimProduct(id) {
         },
         type: "POST",
         success: function (response) {
-            console.log("_ProductBox.claimProduct (success): " + response);
-            document.getElementById("product_" + id).innerHTML = "Avboka vara";
-            document.getElementById("product_" + id).onclick = function () { unClaimProduct(id); };
             $('#badge-cart').html(parseInt($('#badge-cart').html(), 10) + 1);
+            document.getElementById("product_" + id).innerHTML = "Avboka";
+            document.getElementById("product_" + id).onclick = function () { unClaimProduct(id); }
         },
         error: function (response) {
             console.log("_ProductBox.claimProduct (error): " + response);
@@ -78,10 +77,9 @@ function unClaimProduct(id) {
         },
         type: "POST",
         success: function (response) {
-            console.log("_ProductBox.unClaimProduct (success)" + response);
-            document.getElementById("product_" + id).innerHTML = "Boka vara";
-            document.getElementById("product_" + id).onclick = function () { claimProduct(id); };
             $('#badge-cart').html(parseInt($('#badge-cart').html(), 10) - 1);
+            document.getElementById("product_" + id).innerHTML = "Boka";
+            document.getElementById("product_" + id).onclick = function () { claimProduct(id); }
         },
         error: function (response) {
             console.log("_ProductBox.unClaimProduct (error)" + response);

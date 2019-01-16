@@ -3,33 +3,33 @@
 <head>
     <title>Halvfräscht</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />*@
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/StyleSheet.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div id="wrap">
-        <div id="header">
-            <div class="col-xs-12 navbar-inverse navbar-fixed-top" style="background: #84699D; border-bottom: 1px solid black">
-                <div class="row" id="topNav">
-                    <div class="col-xs-4 text-center" style="background: #63487E; border-radius: 3px;"><a asp-controller="Givers" asp-action="AddProduct" class="active"><i class="glyphicon glyphicon-plus"></i><br>Lägg till vara</a></div>
-                    <div class="col-xs-4 text-center"><a asp-controller="Givers" asp-action="Products"><i class="glyphicon glyphicon-list-alt"></i><span class="countBubl" id="badge-products">@ViewBag.BadgeProducts</span><br>Mina varor</a></div>
-                    <div class="col-xs-4 text-center"><a asp-controller="Members" asp-action="Profile"><i class="glyphicon glyphicon-user"></i><br>Profil</a></div>
-                </div>
+
+
+
+    <div id="header">
+        <div class="bg-dark fixed-top">
+            <div class="row" id="topNav">
+                <div class="col text-center"><a asp-controller="Givers" asp-action="AddProduct"><i class="fas fa-plus"></i><br>Lägg till vara</a></div>
+                <div class="col text-center"><a asp-controller="Givers" asp-action="Products"><i class="fas fa-list-alt"></i><span class="countBubl" id="badge-products">@ViewBag.BadgeProducts</span><br>Mina varor</a></div>
+                <div class="col text-center"><a asp-controller="Members" asp-action="Profile"><i class="fas fa-user"></i><br>Profil</a></div>
             </div>
         </div>
-
+    </div>
+    <div id="wrap">
         <!-- Begin page content -->
         <div class="container">
-            <p class="lead">
-                @RenderBody()
-            </p>
+            @RenderBody()
         </div>
     </div>
 
     <div id="footer">
-        <div class="col-xs-12 navbar-inverse navbar-fixed-bottom" style="background: #84699D;border-top: 1px solid black;">
+        <div class="bg-dark fixed-bottom">
             @if (ViewBag.BackButton ?? false)
             {
                 <div class="row" id="bottomBack" style="background: #AB93C3">
@@ -39,13 +39,14 @@
                 </div>
             }
             <div class="row" id="bottomNav">
-                <div class="col-xs-4 text-center"><a asp-controller="Receivers" asp-action="Map"><i class="glyphicon glyphicon-map-marker"></i><br>Karta</a></div>
-                <div class="col-xs-4 text-center"><a asp-controller="Receivers" asp-action="Cart"><i class="glyphicon glyphicon-shopping-cart"></i><span class="countBubl" id="badge-cart">@ViewBag.BadgeCart</span><br>Matkorg</a></div>
-                <div class="col-xs-4 text-center"><a asp-controller="Messages" asp-action="Inbox"><i class="glyphicon glyphicon-comment"></i><span class="countBubl" id="badge-inbox">@ViewBag.BadgeInbox</span><br>Inkorg</a></div>
+                <div class="col text-center"><a asp-controller="Receivers" asp-action="Map"><i class="fas fa-map-marker-alt"></i><br>Karta</a></div>
+                <div class="col text-center"><a asp-controller="Receivers" asp-action="Search"><i class="fas fa-search"></i><br>Sök</a></div>
+                <div class="col text-center"><a asp-controller="Receivers" asp-action="Cart"><i class="fas fa-shopping-cart"></i><span class="countBubl" id="badge-cart">@ViewBag.BadgeCart</span><br>Matkorg</a></div>
+                <div class="col text-center"><a asp-controller="Messages" asp-action="Inbox"><i class="fas fa-comment"></i><span class="countBubl" id="badge-cart">@ViewBag.BadgeInbox</span><br>Inkorg</a></div>
             </div>
         </div>
     </div>
-    </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>

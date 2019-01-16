@@ -16,29 +16,55 @@
     <input type="submit" value="Sök" />
 </form>
 
+@for (int i = 0; i < Model.Products.Length; i++)
+{
+    <div class="productCard">
+        <img src="~/products/@Model.Products[i].ProductImage" alt="..." />
+        <div class="caption productCaption">
+            <div class="title">
+                <h3>@Model.Products[i].ProductName</h3>
+                <span>@Model.Products[i].ProductDistance m</span>
+            </div>
+            <p>Hämtas före @Model.Products[i].ProductPickUpDate2</p>
+        </div>
+        <div class="productButtons">
+            <button onclick="mapsSelector(@Model.Products[i].ProductLatitude, @Model.Products[i].ProductLongitude)" class="btn btn-light productBtn">Karta</button>
+            <button id="info_@i" onclick="showInfo(@i);" class="btn btn-light productBtn">Info</button>
+            <button id="product_@Model.Products[i].ProductId" onclick="claimProduct(@Model.Products[i].ProductId);" class="btn btn-light productBtn">Boka</button>
+        </div>
+    </div>
 
-
-@{
-    if (Model.Products != null)
-    {
-
-        foreach (var product in Model.Products)
-        {
-            @product.ProductName
-
-            @product.ProductDistance
-            <br />
-            @product.ProductImage
-            <br />
-            @product.ProductPickUpDate1
-            @product.ProductPickUpDate2
-            <br />
-            <form asp-controller="Receivers" asp-action="ClaimProduct" asp-route-id="@product.ProductId" method="post">
-                @*Lägg till en ajaxgrej*@
-                <input type="button" value="Se info" />
-                <input type="submit" value="Boka vara" />
-            </form>
-        }
-    }
-
+    <div class="infoCard" id="seInfoDiv_@i" style="display: none;">
+        <table class="procuctsTable">
+            <tr>
+                <th class="infoHeading">Fräschhet</th>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@Model.Products[i].ProductFreshness" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Products[i].ProductFreshness+"0%");"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="infoHeading">Utgångsdatum</th>
+                <td>@Model.Products[i].ProductExpiryDate</td>
+            </tr>
+            <tr>
+                <th class="infoHeading">Beskrivning</th>
+                <td>@Model.Products[i].ProductDescription</td>
+            </tr>
+            <tr>
+                <th class="infoHeading">Inlagd av</th>
+                <td>
+                    @Model.Products[i].GiverName<br />
+                    @Model.Products[i].GiverStreet<br />
+                    @Model.Products[i].GiverZip<br />
+                    @Model.Products[i].GiverCity
+                </td>
+            </tr>
+        </table>
+    </div>
 }
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+

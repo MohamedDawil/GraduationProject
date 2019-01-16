@@ -4,44 +4,59 @@
     Layout = null;
 }
 
-@for (int i = 0; i < Model.Length; i++)
-{
-    <div class="ui-grid-a">
-        <div class="ui-block-a">@Model[i].ProductName</div>
-        <div class="ui-block-b">@Model[i].ProductDistance m</div>
-    </div>
-    <div class="ui-grid-solo">
-        <div class="ui-block-a"><img src="~/products/@Model[i].ProductImage" style="width: 100%; height: 150px;" /></div>
-        <div class="ui-block-b">Hämtas @Model[i].ProductPickUpDate1 - @Model[i].ProductPickUpDate2</div>
-    </div>
-    <div class="ui-grid-solo" id="seInfoDiv_@i" style="display: none;">
-        <div class="ui-grid-solo">Fräschhet: @Model[i].ProductFreshness</div>
-        <div class="ui-grid-solo">Utgångsdatum: @Model[i].ProductExpiryDate</div>
-        <div class="ui-grid-solo">
-            Beskrivning: @Model[i].ProductDescription
-        </div>
-        <div class="ui-grid-solo">
-            Inlagd av: @Model[i].GiverName
-        </div>
-        <div class="ui-grid-solo">
-            Gatudress: @Model[i].GiverStreet
-        </div>
-        <div class="ui-grid-solo">
-            Postnummer: @Model[i].GiverZipCode
-        </div>
-        <div class="ui-grid-solo">
-            Stad: @Model[i].GiverCity
-        </div>
-    </div>
-    <div class="ui-grid-solo">
-        <button onclick="mapsSelector(@Model[i].ProductLatitude, @Model[i].ProductLongitude)" class="ui-shadow ui-btn ui-corner-all">Se på karta</button>
-    </div>
-    <div class="ui-grid-a">
-        <div class="ui-block-a"><button id="info_@i" onclick="showInfo(@i);" class="button">Se info</button></div>
 
-        <div class="ui-block-b"><a asp-controller="Receivers" asp-action="UnclaimProductCart" asp-route-id="@Model[i].ProductId" class="ui-shadow ui-btn ui-corner-all">Avboka vara</a></div>
 
-        <a asp-controller="Messages" asp-action="StartChat" asp-route-id="@Model[i].ProductId">Meddela säljare</a>
-    </div>
-
-}
+<div class="row mx-0">
+    @for (int i = 0; i < Model.Length; i++)
+    {
+        <div class="px-1 col-sm-6 col-md-4 col-xl-2">
+            <div class="productCard">
+                <img src="~/products/@Model[i].ProductImage" alt="..." />
+                <div class="caption productCaption">
+                    <div class="title">
+                        <h3>@Model[i].ProductName</h3>
+                        <span>@Model[i].ProductDistance m</span>
+                    </div>
+                    <p>Hämtas före @Model[i].ProductPickUpDate2</p>
+                </div>
+                <div class="productButtons">
+                    <button onclick="mapsSelector(@Model[i].ProductLatitude, @Model[i].ProductLongitude)" class="btn btn-light productBtn">Karta</button>
+                    <button id="info_@i" onclick="showInfo(@i);" class="btn btn-light productBtn">Info</button>
+                    <button id="product_@Model[i].ProductId" onclick="claimProduct(@Model[i].ProductId);" class="btn btn-light btn-sm productBtn">Boka</button>
+                    <button class="btn btn-light btn-sm productBtn">Meddelande</button>
+                </div>
+            </div>
+            <div class="infoCard" id="seInfoDiv_@i" style="display: none;">
+                <table class="table procuctsTable">
+                    <tr>
+                        <th class="infoHeading">Fräschhet</th>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="@Model[i].ProductFreshness" aria-valuemin="0" aria-valuemax="100" style="width: @(Model[i].ProductFreshness+"0%");"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="infoHeading">Utgångsdatum</th>
+                        <td>@Model[i].ProductExpiryDate</td>
+                    </tr>
+                    <tr>
+                        <th class="infoHeading">Beskrivning</th>
+                        <td>@Model[i].ProductDescription</td>
+                    </tr>
+                    <tr>
+                        <th class="infoHeading">Inlagd av</th>
+                        <td>
+                            @Model[i].GiverName<br />
+                            @Model[i].GiverStreet<br />
+                            @Model[i].GiverZipCode<br />
+                            @Model[i].GiverCity
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
