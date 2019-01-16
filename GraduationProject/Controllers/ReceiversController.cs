@@ -22,6 +22,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Map)]
         public async Task<IActionResult> Map()
         {
             var viewModel = new ReceiversMapVM
@@ -35,18 +36,11 @@ namespace GraduationProject.Controllers
 
             await SetBadges();
 
-            ViewBag.ActiveAddProduct = false;
-            ViewBag.ActiveProducts = false;
-            ViewBag.ActiveProfile = false;
-            ViewBag.ActiveMap = true;
-            ViewBag.ActiveSearch = false;
-            ViewBag.ActiveCart = false;
-            ViewBag.ActiveInbox = false;
-
             return View(viewModel);
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Search)]
         public async Task<IActionResult> Search()
         {
             var viewModels = new ReceiversSearchVM
@@ -55,14 +49,6 @@ namespace GraduationProject.Controllers
             };
 
             await SetBadges();
-
-            ViewBag.ActiveAddProduct = false;
-            ViewBag.ActiveProducts = false;
-            ViewBag.ActiveProfile = false;
-            ViewBag.ActiveMap = false;
-            ViewBag.ActiveSearch = true;
-            ViewBag.ActiveCart = false;
-            ViewBag.ActiveInbox = false;
 
             return View(viewModels);
         }
@@ -102,17 +88,10 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Cart)]
         public async Task<IActionResult> Cart()
         {
             await SetBadges();
-
-            ViewBag.ActiveAddProduct = false;
-            ViewBag.ActiveProducts = false;
-            ViewBag.ActiveProfile = false;
-            ViewBag.ActiveMap = false;
-            ViewBag.ActiveSearch = false;
-            ViewBag.ActiveCart = true;
-            ViewBag.ActiveInbox = false;
 
             return View();
         }

@@ -27,20 +27,13 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Inbox)]
         public async Task<IActionResult> Inbox()
         {
             var userId = membersService.GetUserId(HttpContext.User);
             var viewModels = await messagesService.GetInbox(userId);
 
             await SetBadges();
-
-            ViewBag.ActiveAddProduct = false;
-            ViewBag.ActiveProducts = false;
-            ViewBag.ActiveProfile = false;
-            ViewBag.ActiveMap = false;
-            ViewBag.ActiveSearch = false;
-            ViewBag.ActiveCart = false;
-            ViewBag.ActiveInbox = true;
 
             return View(viewModels);
         }
@@ -56,6 +49,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.AddProduct)]
         public async Task<IActionResult> Chat(int productId)
         {
             var userId = membersService.GetUserId(HttpContext.User);
@@ -64,14 +58,6 @@ namespace GraduationProject.Controllers
                 return RedirectToAction(nameof(Inbox));
 
             await SetBadges();
-
-            ViewBag.ActiveAddProduct = false;
-            ViewBag.ActiveProducts = false;
-            ViewBag.ActiveProfile = false;
-            ViewBag.ActiveMap = false;
-            ViewBag.ActiveSearch = false;
-            ViewBag.ActiveCart = false;
-            ViewBag.ActiveInbox = true;
 
             ViewBag.BackButton = true;
             return View(viewModel);

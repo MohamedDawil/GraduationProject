@@ -103,19 +103,12 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Profile)]
         public async Task<IActionResult> Profile()
         {
             var viewModel = await membersService.GetProfile(HttpContext.User);
 
             await SetBadges();
-
-            ViewBag.ActiveAddProduct = false;
-            ViewBag.ActiveProducts = false;
-            ViewBag.ActiveProfile = true;
-            ViewBag.ActiveMap = false;
-            ViewBag.ActiveSearch = false;
-            ViewBag.ActiveCart = false;
-            ViewBag.ActiveInbox = false;
 
             return View(viewModel);
         }
