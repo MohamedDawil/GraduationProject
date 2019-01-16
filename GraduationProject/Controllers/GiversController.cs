@@ -29,7 +29,16 @@ namespace GraduationProject.Controllers
         [HttpGet]
         public async Task<IActionResult> AddProduct()
         {
+
             await SetBadges();
+
+            ViewBag.ActiveAddProduct = true;
+            ViewBag.ActiveProducts = false;
+            ViewBag.ActiveProfile = false;
+            ViewBag.ActiveMap = false;
+            ViewBag.ActiveSearch = false;
+            ViewBag.ActiveCart = false;
+            ViewBag.ActiveInbox = false;
 
             return View(new GiversAddProductVM());
         }
@@ -61,6 +70,7 @@ namespace GraduationProject.Controllers
 
             await giversService.CreateProductAsync(giversAddProductVM);
 
+            
             return RedirectToAction(nameof(AddProduct));
         }
 
@@ -73,8 +83,17 @@ namespace GraduationProject.Controllers
                 Claimed = await giversService.GetClaimed(giverId),
                 Unclaimed = await giversService.GetUnclaimed(giverId)
             };
+            ViewBag.Active = false;
 
             await SetBadges();
+
+            ViewBag.ActiveAddProduct = false;
+            ViewBag.ActiveProducts = true;
+            ViewBag.ActiveProfile = false;
+            ViewBag.ActiveMap = false;
+            ViewBag.ActiveSearch = false;
+            ViewBag.ActiveCart = false;
+            ViewBag.ActiveInbox = false;
 
             return View(viewModel);
         }
@@ -83,8 +102,18 @@ namespace GraduationProject.Controllers
         public async Task<IActionResult> ChangeProduct(int id)
         {
             var viewModel = await giversService.GetProduct(id);
+            //ViewBag.Active = true;
 
             await SetBadges();
+
+            ViewBag.ActiveAddProduct = false;
+            ViewBag.ActiveProducts = true;
+            ViewBag.ActiveProfile = false;
+            ViewBag.ActiveMap = false;
+            ViewBag.ActiveSearch = false;
+            ViewBag.ActiveCart = false;
+            ViewBag.ActiveInbox = false;
+
             ViewBag.BackButton = true;
             return View(viewModel);
         }
@@ -122,6 +151,7 @@ namespace GraduationProject.Controllers
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var giverId = membersService.GetUserId(HttpContext.User);
+
             await giversService.DeleteProduct(id, giverId);
             return RedirectToAction(nameof(Products));
         }
@@ -133,5 +163,6 @@ namespace GraduationProject.Controllers
             ViewBag.BadgeCart = await badgeService.CartCount(userId);
             ViewBag.BadgeInbox = await badgeService.InboxCount(userId);
         }
+        
     }
 }

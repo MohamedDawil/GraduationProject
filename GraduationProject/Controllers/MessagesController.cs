@@ -34,6 +34,14 @@ namespace GraduationProject.Controllers
 
             await SetBadges();
 
+            ViewBag.ActiveAddProduct = false;
+            ViewBag.ActiveProducts = false;
+            ViewBag.ActiveProfile = false;
+            ViewBag.ActiveMap = false;
+            ViewBag.ActiveSearch = false;
+            ViewBag.ActiveCart = false;
+            ViewBag.ActiveInbox = true;
+
             return View(viewModels);
         }
 
@@ -56,6 +64,14 @@ namespace GraduationProject.Controllers
                 return RedirectToAction(nameof(Inbox));
 
             await SetBadges();
+
+            ViewBag.ActiveAddProduct = false;
+            ViewBag.ActiveProducts = false;
+            ViewBag.ActiveProfile = false;
+            ViewBag.ActiveMap = false;
+            ViewBag.ActiveSearch = false;
+            ViewBag.ActiveCart = false;
+            ViewBag.ActiveInbox = true;
 
             ViewBag.BackButton = true;
             return View(viewModel);

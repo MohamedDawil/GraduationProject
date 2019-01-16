@@ -109,7 +109,7 @@ body {
 
 
 .active {
-    color: #fff !important;
+    background-color: red !important;
 }
 
 input[type="file"] {

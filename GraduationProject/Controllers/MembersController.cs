@@ -29,6 +29,7 @@ namespace GraduationProject.Controllers
         public async Task<IActionResult> Index()
         {
             await SetBadges();
+
             return View();
         }
 
@@ -107,6 +108,14 @@ namespace GraduationProject.Controllers
             var viewModel = await membersService.GetProfile(HttpContext.User);
 
             await SetBadges();
+
+            ViewBag.ActiveAddProduct = false;
+            ViewBag.ActiveProducts = false;
+            ViewBag.ActiveProfile = true;
+            ViewBag.ActiveMap = false;
+            ViewBag.ActiveSearch = false;
+            ViewBag.ActiveCart = false;
+            ViewBag.ActiveInbox = false;
 
             return View(viewModel);
         }

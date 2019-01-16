@@ -34,7 +34,15 @@ namespace GraduationProject.Controllers
             };
 
             await SetBadges();
-            
+
+            ViewBag.ActiveAddProduct = false;
+            ViewBag.ActiveProducts = false;
+            ViewBag.ActiveProfile = false;
+            ViewBag.ActiveMap = true;
+            ViewBag.ActiveSearch = false;
+            ViewBag.ActiveCart = false;
+            ViewBag.ActiveInbox = false;
+
             return View(viewModel);
         }
 
@@ -47,6 +55,14 @@ namespace GraduationProject.Controllers
             };
 
             await SetBadges();
+
+            ViewBag.ActiveAddProduct = false;
+            ViewBag.ActiveProducts = false;
+            ViewBag.ActiveProfile = false;
+            ViewBag.ActiveMap = false;
+            ViewBag.ActiveSearch = true;
+            ViewBag.ActiveCart = false;
+            ViewBag.ActiveInbox = false;
 
             return View(viewModels);
         }
@@ -89,6 +105,15 @@ namespace GraduationProject.Controllers
         public async Task<IActionResult> Cart()
         {
             await SetBadges();
+
+            ViewBag.ActiveAddProduct = false;
+            ViewBag.ActiveProducts = false;
+            ViewBag.ActiveProfile = false;
+            ViewBag.ActiveMap = false;
+            ViewBag.ActiveSearch = false;
+            ViewBag.ActiveCart = true;
+            ViewBag.ActiveInbox = false;
+
             return View();
         }
 
