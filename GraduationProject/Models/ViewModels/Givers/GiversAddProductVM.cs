@@ -41,9 +41,14 @@ namespace GraduationProject.Models.ViewModels
         [Display(Name = "Hämtningsdatum 1")]
         public DateTime PickUpDate1 { get; set; }
 
+        //public DateTime PickUpTime1 { get; set; }
+
         //[Required(ErrorMessage = "Sluttid måste anges")]
         [Display(Name = "Hämtningsdatum 2")]
         public DateTime PickUpDate2 { get; set; }
+
+        //public DateTime PickUpTime2 { get; set; }
+
         public string Scan { get; set; }
     }
 }
