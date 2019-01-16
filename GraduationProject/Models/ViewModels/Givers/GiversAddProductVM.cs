@@ -23,21 +23,26 @@ namespace GraduationProject.Models.ViewModels
         public string PictureFileName { get; set; }
 
         [Required(ErrorMessage ="Vänligen ange varans namn")]
+        [Display(Name = "Produkt namn")]
         public string ProductName { get; set; }
 
         [Required(ErrorMessage ="Vänligen ange varans skick")]
         [Display(Name ="Fräschhet")]
         public int Freshness { get; set; }
 
+        [Display(Name = "Utgångsdatum")]
         public DateTime ExpiryDate { get; set; }
         
         [Required(ErrorMessage ="Vänligen ange en enkel beskrivning av din vara")]
+        [Display(Name = "Produkt beskrivning")]
         public string Description { get; set; }
 
         //[Required(ErrorMessage = "Starttid måste anges")]
+        [Display(Name = "Hämtningsdatum 1")]
         public DateTime PickUpDate1 { get; set; }
 
         //[Required(ErrorMessage = "Sluttid måste anges")]
+        [Display(Name = "Hämtningsdatum 2")]
         public DateTime PickUpDate2 { get; set; }
         public string Scan { get; set; }
     }

@@ -130,12 +130,12 @@ namespace GraduationProject.Models.Entities
                     .WithMany(p => p.ProductGiver)
                     .HasForeignKey(d => d.GiverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__product__GiverId__36B12243");
+                    .HasConstraintName("FK__product__GiverId__6477ECF3");
 
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.ProductReceiver)
                     .HasForeignKey(d => d.ReceiverId)
-                    .HasConstraintName("FK__product__Receive__37A5467C");
+                    .HasConstraintName("FK__product__Receive__656C112C");
             });
         }
     }

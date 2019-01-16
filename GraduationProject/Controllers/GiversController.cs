@@ -83,6 +83,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [HighlightedMenu(Menu.Products)]
         public async Task<IActionResult> ChangeProduct(int id)
         {
             var viewModel = await giversService.GetProduct(id);
