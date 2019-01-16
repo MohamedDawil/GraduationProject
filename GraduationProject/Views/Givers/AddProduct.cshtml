@@ -11,7 +11,7 @@
         <i class="fa fa-cloud-upload"></i> Lägg till bild
     </label>
     <label class="custom-file-upload">
-        <input asp-for="Scan" type="file" accept="image/*;capture=camera" value="Skanna streckkod" >
+        <input asp-for="Scan" type="file" accept="image/*;capture=camera" value="Skanna streckkod">
         <i class="fa fa-cloud-upload"></i> Skanna streckkod
     </label>
     <br />
@@ -22,20 +22,22 @@
     <input asp-for="Description" type="text" placeholder="Beskrivning" />
     <span asp-validation-for="Description"></span>
     <br />
-    <label asp-for="Freshness">Fräschhet</label>
+    <label asp-for="Freshness"></label>
     <input asp-for="Freshness" type="range" min="1" max="10" placeholder="Fräschhet" />
     <span asp-validation-for="Freshness"></span>
     <br />
     <label asp-for="ExpiryDate"></label>
-    <input asp-for="ExpiryDate" type="date"  value="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Utgångsdatum" data-role="none" />
+    <input asp-for="ExpiryDate" type="date" value="@DateTime.Today.ToString("0:yyyy-MM-dd")" placeholder="Utgångsdatum" data-role="none" />
     <span asp-validation-for="ExpiryDate"></span>
     <br />
     <label asp-for="PickUpDate1"></label>
-    <input asp-for="PickUpDate1" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" value="@DateTime.Today.ToString("yyyy-MM-dd")"  placeholder="Hämta tidigast" />
+    <input asp-for="PickUpDate1" type="date" min="@DateTime.Today.ToString("0:yyyy-MM-dd")" value="@DateTime.Today.ToString("0:yyyy-MM-dd")" placeholder="Hämta tidigast" />
+    @*<input asp-for="PickUpTime1" type="date" min="@DateTime.Now.ToString("hh-mm")" value="@DateTime.Now.ToString("hh-mm")" placeholder="Hämta tidigast" />*@
     <span asp-validation-for="PickUpDate1"></span>
     <br />
     <label asp-for="PickUpDate2"></label>
-    <input asp-for="PickUpDate2" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" value="@DateTime.Today.ToString("yyyy-MM-dd")"  placeholder="Hämta senast" />
+    <input asp-for="PickUpDate2" type="date" min="@DateTime.Today.ToString("0:yyyy-MM-dd")" value="@DateTime.Today.ToString("0:yyyy-MM-dd")" placeholder="Hämta senast" />
+  @*  <input asp-for="PickUpTime2" type="date" min="@DateTime.Now.ToString("hh-mm")" value="@DateTime.Now.ToString("hh-mm")" placeholder="Hämta tidigast" />*@
     <span asp-validation-for="PickUpDate2"></span>
     <br />
     <input type="submit" value="Lägg till vara" />

@@ -14,8 +14,8 @@
                 <img src="~/products/@Model[i].ProductImage" alt="..." />
                 <div class="caption productCaption">
                     <div class="title">
-                        <h3>@Model[i].ProductName</h3>
-                        <span>@Model[i].ProductDistance m</span>
+                        <h3>@Model[i].ProductName </h3>
+                        <span>avstånd: @Model[i].ProductDistance meter</span>
                     </div>
                     <p>Hämtas före @Model[i].ProductPickUpDate2</p>
                 </div>
@@ -32,7 +32,7 @@
                         <th class="infoHeading">Fräschhet</th>
                         <td>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="@Model[i].ProductFreshness" aria-valuemin="0" aria-valuemax="100" style="width: @(Model[i].ProductFreshness+"0%");"></div>
+                                <div class="progress-bar" role="progressbar" aria-valuenow="@Model[i].ProductFreshness" aria-valuemin="0" aria-valuemax="10" style="width: @(Model[i].ProductFreshness+"0%");">@(Model[i].ProductFreshness+"0%")</div> 
                             </div>
                         </td>
                     </tr>

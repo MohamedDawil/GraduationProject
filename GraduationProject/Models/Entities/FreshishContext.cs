@@ -75,29 +75,29 @@ namespace GraduationProject.Models.Entities
                     .WithMany(p => p.ChatGiver)
                     .HasForeignKey(d => d.GiverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__chat__GiverId__49C3F6B7");
+                    .HasConstraintName("FK__chat__GiverId__32E0915F");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Chat)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__chat__ProductId__5CD6CB2B");
+                    .HasConstraintName("FK__chat__ProductId__35BCFE0A");
 
                 entity.HasOne(d => d.ReadBy)
                     .WithMany(p => p.ChatReadBy)
                     .HasForeignKey(d => d.ReadById)
-                    .HasConstraintName("FK__chat__ReadById__6E01572D");
+                    .HasConstraintName("FK__chat__ReadById__3E52440B");
 
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.ChatReceiver)
                     .HasForeignKey(d => d.ReceiverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__chat__ReceiverId__4AB81AF0");
+                    .HasConstraintName("FK__chat__ReceiverId__33D4B598");
 
                 entity.HasOne(d => d.SentBy)
                     .WithMany(p => p.ChatSentBy)
                     .HasForeignKey(d => d.SentById)
-                    .HasConstraintName("FK__chat__SentById__5BE2A6F2");
+                    .HasConstraintName("FK__chat__SentById__34C8D9D1");
             });
 
             modelBuilder.Entity<Product>(entity =>

@@ -37,8 +37,13 @@ namespace GraduationProject.Models.ViewModels
         //[Required(ErrorMessage = "Starttid måste anges")]
         public DateTime PickUpDate1 { get; set; }
 
+        //public DateTime PickUpTime1 { get; set; }
+
         //[Required(ErrorMessage = "Sluttid måste anges")]
         public DateTime PickUpDate2 { get; set; }
+
+        //public DateTime PickUpTime2 { get; set; }
+
         public string Scan { get; set; }
     }
 }

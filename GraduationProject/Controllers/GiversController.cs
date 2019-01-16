@@ -55,6 +55,7 @@ namespace GraduationProject.Controllers
             giversAddProductVM.Street = giver.Street;
             giversAddProductVM.City = giver.City;
             giversAddProductVM.ZipCode = giver.ZipCode;
+            
 
             var location = await giversService.GetCoordinates(giver);
             giversAddProductVM.Location = location;
