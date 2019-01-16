@@ -14,9 +14,9 @@
 
 
     <div id="header">
-        <div class="bg-dark fixed-top">
+        <div class="bg-light fixed-top">
             <div class="row" id="topNav">
-                <div id="menuItem@(nameof(Menu.AddProduct))" class="col text-center"><a asp-controller="Givers" asp-action="AddProduct"><i class="fas fa-plus"></i><br>Lägg till vara</a></div>
+                <div id="menuItem@(nameof(Menu.AddProduct))" class="col text-center"><a asp-controller="Givers" asp-action="AddProduct"><i class="fas fa-plus"></i><br>Ny vara</a></div>
                 <div id="menuItem@(nameof(Menu.Products))" class="col text-center"><a asp-controller="Givers" asp-action="Products"><i class="fas fa-list-alt"></i><span class="countBubl" id="badge-products">@ViewBag.BadgeProducts</span><br>Mina varor</a></div>
                 <div class="col text-center" id="menuItem@(nameof(Menu.Profile))"><a asp-controller="Members" asp-action="Profile"><i class="fas fa-user"></i><br>Profil</a></div>
             </div>
@@ -30,7 +30,7 @@
     </div>
 
     <div id="footer">
-        <div class="bg-dark fixed-bottom">
+        <div class="bg-light fixed-bottom">
             @if (ViewBag.BackButton ?? false)
             {
                 <div class="row" id="bottomBack" style="background: #AB93C3">

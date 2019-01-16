@@ -64,17 +64,21 @@ body {
 #bottomNav {
     padding: 10px;
     font-weight: 500;
+    -webkit-box-shadow: 0px -1px 7px 0px rgba(179,179,179,1);
+    -moz-box-shadow: 0px -1px 7px 0px rgba(179,179,179,1);
+    box-shadow: 0px -1px 7px 0px rgba(179,179,179,1);
 }
 
-#bottomNav a {
-    font-size: 13px;
-    color: #ddd;
-    text-decoration: none;
-}
+    #bottomNav a {
+        font-size: 13px;
+        color: #686868;
+        text-decoration: none;
+        font-size: 105%;
+    }
 
-#bottomNav a:hover {
+/*#bottomNav a:hover {
     color: #fff;
-}
+}*/
 
 #bottomBack {
     padding: 10px;
@@ -95,21 +99,26 @@ body {
 #topNav {
     padding: 10px;
     font-weight: 500;
+    -webkit-box-shadow: 0px 1px 7px 0px rgba(179,179,179,1);
+    -moz-box-shadow: 0px 1px 7px 0px rgba(179,179,179,1);
+    box-shadow: 0px 1px 7px 0px rgba(179,179,179,1);
 }
 
     #topNav a {
         font-size: 13px;
-        color: #ddd;
+        color: #686868;
         text-decoration: none;
+        font-size: 105%;
     }
 
-        #topNav a:hover {
+        /*#topNav a:hover {
             color: #fff;
-        }
+        }*/
 
 
-.active {
-    background-color: red !important;
+.active > a {
+    color: #ff2d57 !important;
+    font-weight: 600;
 }
 
 input[type="file"] {
