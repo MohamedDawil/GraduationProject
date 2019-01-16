@@ -425,12 +425,21 @@ img {
 }
 
 h3, p, button, .productBtn, h5, th.infoHeading {
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     font-family: Montserrat, sans-serif;
 }
 
 .productBtn {
     margin: 0px 10px 0px 10px;
+    background-color: #FF3D64;
+    border-radius: 25px;
+    font-size: medium;
+    color: white;
+    border: none;
+    text-transform: uppercase;
+    -webkit-box-shadow: 0px 1px 15px 0px rgba(112,112,112,1);
+    -moz-box-shadow: 0px 1px 15px 0px rgba(112,112,112,1);
+    box-shadow: 0px 1px 15px 0px rgba(112,112,112,1);
 }
 
 table {
