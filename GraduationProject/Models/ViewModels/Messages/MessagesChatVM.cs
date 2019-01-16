@@ -10,6 +10,9 @@ namespace GraduationProject.Models.ViewModels
     {
         public string ProductName { get; set; }
         public int ProductId { get; set; }
+        public string ReceiverId { get; set; }
+        public string GiverId { get; set; }
+        public string SentById { get; set; }
         [Required]
         public string SendMessage { get; set; }
         public MessagesChatBubbleVM[] Bubbles { get; set; }

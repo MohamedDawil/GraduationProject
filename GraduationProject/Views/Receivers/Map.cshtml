@@ -4,21 +4,150 @@
     ViewData["Title"] = "Map";
 }
 
-@foreach (var position in Model.Positions)
-{
-    @position.Longitude
-    @position.Latitude
-    @position.ProductsAmount
-}
-@foreach (var product in Model.Products)
-{
-    @product.ProductName
-    @product.ProductLongitude
-    @product.ProductLatitude
-    @product.ProductImage
-    @product.ProductPickUpDate1
-    @product.ProductPickUpDate2
-    
-    <a class="button" href="#">Se info</a>
-    <a class="button" asp-controller="Receivers" asp-action="ClaimProduct">Boka vara</a>
+<div id="map-content">
+    <div id="google-map"></div>
+    <div id="products"></div>
+</div>
+@section Scripts {
+    <script>
+    // Note: This example requires that you consent to location sharing when
+    // prompted by your browser. If you see the error "The Geolocation service
+    // failed.", it means you probably did not give permission for the browser to
+    // locate you.
+    var map, receiverWindow;
+    function initMap() {
+
+        console.log("initMap");
+        var map = new google.maps.Map(document.getElementById('google-map'), {
+            zoom: 10,
+            center: new google.maps.LatLng(-33.92, 151.25),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var locations = [];
+
+        @for (int j = 0; j < Model.Positions.Length; j++)
+        {
+            @:locations.push(['@Model.Positions[j].ProductName', @Model.Positions[j].Longitude, @Model.Positions[j].Latitude, @j]);
+        }
+
+        receiverWindow = new google.maps.InfoWindow;
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map,
+                icon: {
+                    url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                }
+            });
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            console.log("navigator.geolocation");
+
+            var location_timeout = setTimeout("geolocFail()", 10000);
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+                console.log("navigator.geolocation.getCurrentPosition");
+
+                clearTimeout(location_timeout);
+
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                console.log(pos);
+
+                $.ajax({
+                    url: "/Receivers/GetProducts",
+                    data: pos,
+                    type: "GET",
+                    cache: false,
+                    success: function (response) {
+                        $("#products").html(response);
+                        $("#badge-chat").html(parseInt($('#badge-chat').html(), 10) + 1);
+                    },
+                    error: function (response) {
+                        console.log("error" + response.responseText);
+                        alert(response.responseText);
+                    }
+                });
+
+                receiverWindow.setPosition(pos);
+                receiverWindow.setContent('Min position.');
+                receiverWindow.open(map);
+                map.setCenter(pos);
+
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(pos.lat, pos.lng),
+                    map: map,
+                    icon: {
+                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                    }
+                });
+
+            }, function () {
+                console.log("!navigator.geolocation.getCurrentPosition");
+
+                var pos = {
+                    lat: 59.3477632,
+                    lng: 18.042060799999998
+                };
+
+                $.ajax({
+                    url: "/Receivers/GetProducts",
+                    data: pos,
+                    type: "GET",
+                    dataType: 'HTML',
+                    processData: false,
+                    success: function (response) {
+                        console.log(response);
+                        $("#products").html(response);
+                    },
+                    error: function (response) {
+                        console.log("error" + response.responseText);
+                        alert(response.responseText);
+                    }
+                });
+
+                clearTimeout(location_timeout);
+
+                handleLocationError(true, receiverWindow, map.getCenter());
+                }, { timeout: 30000, enableHighAccuracy: true });
+        } else {
+            console.log("!navigator.geolocation");
+            // Browser doesn't support Geolocation
+            handleLocationError(false, receiverWindow, map.getCenter());
+        }
+    }
+
+    function geolocFail() {
+        console.log("geolocFail()");
+    }
+
+    function handleLocationError(browserHasGeolocation, receiverWindow, pos) {
+        receiverWindow.setPosition(pos);
+        receiverWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        receiverWindow.open(map);
+    }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtkrfI4kUln6UUZTJTvZvv3FC5wP624D4&callback=initMap">
+    </script>
 }

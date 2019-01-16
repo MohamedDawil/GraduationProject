@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,30 +10,44 @@ namespace GraduationProject.Controllers
 {
     public class ReceiversController : Controller
     {
+        private ReceiversService receiversService;
+        private MembersService membersService;
+        private BadgeService badgeService;
+
+        public ReceiversController(ReceiversService receiversService, MembersService membersService, BadgeService badgeService)
+        {
+            this.receiversService = receiversService;
+            this.membersService = membersService;
+            this.badgeService = badgeService;
+        }
+
         [HttpGet]
-        public IActionResult Map()
+        public async Task<IActionResult> Map()
         {
             var viewModel = new ReceiversMapVM
             {
-                Positions = new ReceiversMapPositionVM[]
-                {
-                    new ReceiversMapPositionVM()
-                },
+                Positions = await receiversService.GetPositions(),
                 Products = new ReceiversMapProductVM[]
                 {
                     new ReceiversMapProductVM()
                 }
             };
+
+            await SetBadges();
+            
             return View(viewModel);
         }
 
         [HttpGet]
-        public IActionResult Search()
+        public async Task<IActionResult> Search()
         {
             var viewModels = new ReceiversSearchVM
             {
                 Products = new ReceiversProductVM[] { new ReceiversProductVM() }
             };
+
+            await SetBadges();
+
             return View(viewModels);
         }
 
@@ -44,21 +59,66 @@ namespace GraduationProject.Controllers
 
             return RedirectToAction(nameof(Search));
         }
-        
-        public IActionResult ClaimProduct(int productId)
+
+        public async Task<IActionResult> ClaimProduct(int id)
         {
-            return RedirectToAction(nameof(Search));
+            var receiverId = membersService.GetUserId(HttpContext.User);
+            var isClaimed = await receiversService.ClaimProduct(id, receiverId);
+
+            return Json(isClaimed);
+        }
+
+        public async Task<IActionResult> UnclaimProduct(int id)
+        {
+            var receiver = await membersService.GetUser(HttpContext.User);
+            var isUnClaimed = await receiversService.UnclaimProduct(id, receiver.Id);
+
+            return Json(isUnClaimed);
         }
 
         [HttpGet]
-        public IActionResult Cart()
+        public async Task<IActionResult> UnclaimProductCart(int id)
         {
-            var viewModels = new ReceiversCartVM[]
-            {
-                new ReceiversCartVM()
-            };
-           
-            return View(viewModels);
+            var receiver = await membersService.GetUser(HttpContext.User);
+            var isUnClaimed = await receiversService.UnclaimProduct(id, receiver.Id);
+
+            return RedirectToAction(nameof(Cart));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Cart()
+        {
+            await SetBadges();
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCart(double lat, double lng)
+        {
+            var receiverId = membersService.GetUserId(HttpContext.User);
+            var viewModels = await receiversService.GetCart(receiverId, lat, lng);
+            
+            await SetBadges();
+
+            return PartialView("_CartBox", viewModels);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProducts(double lat, double lng)
+        {
+            var viewModels = await receiversService.GetDistances(lat, lng);
+
+            await SetBadges();
+
+            return PartialView("_ProductBox", viewModels);
+        }
+
+        private async Task SetBadges()
+        {
+            var userId = membersService.GetUserId(HttpContext.User);
+            ViewBag.BadgeProducts = await badgeService.ProductCount(userId);
+            ViewBag.BadgeCart = await badgeService.CartCount(userId);
+            ViewBag.BadgeInbox = await badgeService.InboxCount(userId);
         }
     }
 }

@@ -19,8 +19,14 @@ namespace GraduationProject.Models.ViewModels
         [Display(Name = "Hämttid")]
         public DateTime ProductPickUpDate1 { get; set; }
         public DateTime ProductPickUpDate2 { get; set; }
-        public decimal ProductGpsLatitude { get; set; }
-        public decimal ProductGpsLongitude { get; set; }
-
+        public double ProductLatitude { get; set; }
+        public double ProductLongitude { get; set; }
+        public int ProductFreshness { get; set; }
+        public bool ProductClaimed { get; set; }
+        public string GiverName { get; set; }
+        public string GiverCity { get; set; }
+        public string GiverStreet { get; set; }
+        public string GiverZipCode { get; set; }
+        public int ProductDistance { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace GraduationProject.Models.ViewModels
         public string ProductName { get; set; }
         public string MemberName { get; set; }
         public DateTime PublishDate { get; set; }
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
     }
 }

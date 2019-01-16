@@ -12,8 +12,11 @@
     [PublishDate] DATETIME2 (7)  NOT NULL,
     [GiverId]     NVARCHAR (450) NOT NULL,
     [ReceiverId]  NVARCHAR (450) NULL,
-    [Latitude]    NVARCHAR (MAX) NOT NULL,
-    [Longitude]   NVARCHAR (MAX) NOT NULL,
+    [Location]    geography NOT NULL,
+	[Street] NVARCHAR (MAX) NOT NULL,
+	[City] NVARCHAR (MAX) NOT NULL,
+	[ZipCode] NVARCHAR (MAX) NOT NULL,
+    [IsDeleted] INT NOT NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([GiverId]) REFERENCES [dbo].[AspNetUsers] ([Id]),
     FOREIGN KEY ([ReceiverId]) REFERENCES [dbo].[AspNetUsers] ([Id])

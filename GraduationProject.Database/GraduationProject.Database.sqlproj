@@ -73,5 +73,6 @@
     <Build Include="dbo\Tables\AspNetRoleClaims.sql" />
     <Build Include="fresh\Tables\product.sql" />
     <Build Include="Security\fresh.sql" />
+    <Build Include="fresh\Tables\chat.sql" />
   </ItemGroup>
 </Project>
