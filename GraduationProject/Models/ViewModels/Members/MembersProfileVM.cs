@@ -30,13 +30,13 @@ namespace GraduationProject.Models.ViewModels
         [Display(Name = "E-mail: ")]
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
-        [Display(Name = "Lösenord: ")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-        [Required]
-        [Display(Name = "Bekräfta lösenord: ")]
-        [DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }
+        //[Required]
+        //[Display(Name = "Lösenord: ")]
+        //[DataType(DataType.Password)]
+        //public string Password { get; set; }
+        //[Required]
+        //[Display(Name = "Bekräfta lösenord: ")]
+        //[DataType(DataType.Password)]
+        //public string ConfirmPassword { get; set; }
     }
 }
