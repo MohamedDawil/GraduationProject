@@ -5,7 +5,7 @@
 }
 
 <div class="row mx-0">
-    <label asp-for="Claimed"></label>
+    <label asp-for="Claimed" style="font-size:20px;"></label>
     @{ foreach (var product in Model.Claimed)
         {
 
@@ -42,7 +42,7 @@
     }
 </div>
 <div class="row mx-0">
-    <label asp-for="Unclaimed"></label>
+    <label class="title" asp-for="Unclaimed" style="font-size:20px;"></label>
     @{ foreach (var product in Model.Unclaimed)
         {
             <div class="px-1 col-sm-6 col-md-4 col-xl-2">
