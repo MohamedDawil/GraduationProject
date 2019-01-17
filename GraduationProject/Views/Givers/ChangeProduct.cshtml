@@ -3,37 +3,86 @@
     ViewData["Title"] = "ChangeProduct";
 }
 
-<form asp-controller="Givers" asp-action="ChangeProduct" method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="@Model.ProductId" />
-    <img src="/products/@Model.PictureFileName" id="output" style="width: 200px; height: auto;" />
-    <br />
-    <label class="custom-file-upload">
-        <input asp-for="Picture" type="file" accept="image/*;capture=camera" value="Ändra bild" onchange="loadFile(event)">
-        <i class="fa fa-cloud-upload"></i> Ändra bild
-    </label>
-    <label class="custom-file-upload">
-        <input asp-for="Scan" type="file" accept="image/*;capture=camera" value="Skanna streckkod">
-        <i class="fa fa-cloud-upload"></i> Skanna streckkod
-    </label>
-    <br />
+<div class="row index">
+    <div class="col px-3">
 
-    <input asp-for="ProductName" type="text" placeholder="Varunamn" />
-    <span asp-validation-for="ProductName"></span>
-    <br />
-    <input asp-for="Description" type="text" placeholder="Beskrivning" />
-    <span asp-validation-for="Description"></span>
-    <br />
-    <input asp-for="Freshness" type="range" min="1" max="10" placeholder="Fräschhet" />
-    <span asp-validation-for="Freshness"></span>
-    <br />
-    <input asp-for="ExpiryDate" type="date" placeholder="Utgångsdatum" />
-    <span asp-validation-for="ExpiryDate"></span>
-    <br />
-    <input asp-for="PickUpDate1" type="date" placeholder="Hämta tidigast" />
-    <span asp-validation-for="PickUpDate1"></span>
-    <br />
-    <input asp-for="PickUpDate2" type="date" placeholder="Hämta senast" />
-    <span asp-validation-for="PickUpDate2"></span>
-    <br />
-    <input type="submit" value="Ändra vara" />
-</form>
+
+        <form asp-controller="Givers" asp-action="ChangeProduct" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="@Model.ProductId" />
+            <div class="form-group row">
+                <div class="col">
+                    <img src="/products/@Model.PictureFileName" id="output" style="width: 200px; height: auto;" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+
+                    <label class="custom-file-upload btn productBtn">
+                        <input asp-for="Picture" type="file" accept="image/*;capture=camera" value="Ändra bild" onchange="loadFile(event)">
+                        Ändra bild
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col">
+
+                    <label class="custom-file-upload btn productBtn">
+                        <input asp-for="Scan" type="file" accept="image/*;capture=camera" value="Skanna streckkod">
+                        Skanna streckkod
+                    </label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label></label>
+                    <input asp-for="ProductName" type="text" placeholder="Varunamn" />
+                    <span asp-validation-for="ProductName"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" type="text" placeholder="Beskrivning" />
+                    <span asp-validation-for="Description"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="Freshness"></label>
+                    <input asp-for="Freshness" type="range" min="1" max="10" placeholder="Fräschhet" />
+                    <span asp-validation-for="Freshness"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="ExpiryDate"></label>
+                    <input asp-for="ExpiryDate" type="date" placeholder="Utgångsdatum" />
+                    <span asp-validation-for="ExpiryDate"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="PickUpDate1"></label>
+                    <input asp-for="PickUpDate1" type="date" placeholder="Hämta tidigast" />
+                    <span asp-validation-for="PickUpDate1"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="PickUpDate2"></label>
+                    <input asp-for="PickUpDate2" type="date" placeholder="Hämta senast" />
+                    <span asp-validation-for="PickUpDate2"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="submit" value="Ändra vara" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

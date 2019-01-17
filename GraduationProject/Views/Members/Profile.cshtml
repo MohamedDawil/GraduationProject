@@ -2,80 +2,83 @@
 @{
     ViewData["Title"] = "Profile";
 }
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 
-<img src="/profiles/@Model.Picture" id="output" style="width: 250px; height: auto;" />
 
-<form asp-controller="Members" asp-action="Profile" method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="Picture" />
-    <label class="custom-file-upload">
-        <input asp-for="FilePath" type="file" accept="image/*;capture=camera" value="Lägg till bild" onchange="loadFile(event)">
-        <i class="fa fa-cloud-upload"></i> Lägg till bild
-    </label>
-    <br />
-    <table class="table">
-        <tbody>
-            <tr>
-                <th scope="row"><label asp-for="FirstName"></label></th>
-                <td>
-                    <input asp-for="FirstName" type="text" placeholder="Förnamn" />
-                </td>
-                <td>
-                    <span asp-validation-for="FirstName"></span>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><label asp-for="LastName"></label></th>
-                <td><input asp-for="LastName" type="text" placeholder="Efternamn" /></td>
-                <td><span asp-validation-for="LastName"></span></td>
-            </tr>
-            <tr>
-                <th scope="row"><label asp-for="Email"></label></th>
-                <td><input asp-for="Email" type="text" placeholder="E-mail" /></td>
-                <td><span asp-validation-for="LastName"></span></td>
-            </tr>
-            @if (Model.ErrorMessage != "")
-            {
-                <tr>
-                    <td colspan="3">
+<div class="row">
+    <div class="col">
+        <img src="/profiles/@Model.Picture" id="output" style="width: 250px; height: auto;" />
 
-                        <label>@Model.ErrorMessage</label>
+        <form asp-controller="Members" asp-action="Profile" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Picture" />
+            <label class="custom-file-upload">
+                <input asp-for="FilePath" type="file" accept="image/*;capture=camera" value="Lägg till bild" onchange="loadFile(event)">
+                <i class="fa fa-cloud-upload"></i> Lägg till bild
+            </label>
+            <br />
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row"><label asp-for="FirstName"></label></th>
+                        <td>
+                            <input asp-for="FirstName" type="text" placeholder="Förnamn" />
+                        </td>
+                        <td>
+                            <span asp-validation-for="FirstName"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label asp-for="LastName"></label></th>
+                        <td><input asp-for="LastName" type="text" placeholder="Efternamn" /></td>
+                        <td><span asp-validation-for="LastName"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label asp-for="Email"></label></th>
+                        <td><input asp-for="Email" type="text" placeholder="E-mail" /></td>
+                        <td><span asp-validation-for="LastName"></span></td>
+                    </tr>
+                    @*@if (Model.ErrorMessage != "")
+                        {
+                            <tr>
+                                <td colspan="3">
 
-                    </td>
-                </tr>
-            }
-            <tr>
-                <th scope="row"><label asp-for="Street"></label></th>
-                <td><input asp-for="Street" type="text" placeholder="Gatuadress" /></td>
-                <td><span asp-validation-for="Street"></span></td>
-            </tr>
-            <tr>
-                <th scope="row"><label asp-for="ZipCode"></label></th>
-                <td><input asp-for="ZipCode" type="text" placeholder="Postnr" onkeyup="this.value=this.value.replace(/^(\d{3})(?=\d)/,'$1 ')" /></td>
-                <td><span asp-validation-for="ZipCode"></span></td>
-            </tr>
-            <tr>
-                <th scope="row"><label asp-for="City"></label></th>
-                <td><input asp-for="City" type="text" placeholder="Postort" /></td>
-                <td><span asp-validation-for="City"></span></td>
-            </tr>
-            @*<tr>
-                    <th scope="row"><label asp-for="Password"></label></th>
-                    <td><input asp-for="Password" type="password" placeholder="Lösenord" /></td>
-                    <td><span asp-validation-for="Password"></span></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label asp-for="ConfirmPassword"></label></th>
-                    <td><input asp-for="ConfirmPassword" type="password" placeholder="Bekräfta lösenord" /></td>
-                    <td><span asp-validation-for="ConfirmPassword"></span></td>
-                </tr>*@
-            <tr>
-                <td colspan="3">
-                        <input class="btn btn-light productBtn" type="submit" value="Spara" />
-                </td>
-            </tr>
+                                    <label>@Model.ErrorMessage</label>
 
-        </tbody>
-    </table>
-</form>
+                                </td>
+                            </tr>
+                        }*@
+                    <tr>
+                        <th scope="row"><label asp-for="Street"></label></th>
+                        <td><input asp-for="Street" type="text" placeholder="Gatuadress" /></td>
+                        <td><span asp-validation-for="Street"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label asp-for="ZipCode"></label></th>
+                        <td><input asp-for="ZipCode" type="text" placeholder="Postnr" onkeyup="this.value=this.value.replace(/^(\d{3})(?=\d)/,'$1 ')" /></td>
+                        <td><span asp-validation-for="ZipCode"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label asp-for="City"></label></th>
+                        <td><input asp-for="City" type="text" placeholder="Postort" /></td>
+                        <td><span asp-validation-for="City"></span></td>
+                    </tr>
+                    @*<tr>
+                            <th scope="row"><label asp-for="Password"></label></th>
+                            <td><input asp-for="Password" type="password" placeholder="Lösenord" /></td>
+                            <td><span asp-validation-for="Password"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label asp-for="ConfirmPassword"></label></th>
+                            <td><input asp-for="ConfirmPassword" type="password" placeholder="Bekräfta lösenord" /></td>
+                            <td><span asp-validation-for="ConfirmPassword"></span></td>
+                        </tr>*@
+                    <tr>
+                        <td colspan="3">
+                            <input class="btn btn-light productBtn" type="submit" value="Spara" />
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

@@ -23,7 +23,7 @@ namespace GraduationProject.Models.ViewModels
         public string PictureFileName { get; set; }
 
         [Required(ErrorMessage ="Vänligen ange varans namn")]
-        [Display(Name = "Produkt namn")]
+        [Display(Name = "Produktnamn")]
         public string ProductName { get; set; }
 
         [Required(ErrorMessage ="Vänligen ange varans skick")]
@@ -34,17 +34,17 @@ namespace GraduationProject.Models.ViewModels
         public DateTime ExpiryDate { get; set; }
         
         [Required(ErrorMessage ="Vänligen ange en enkel beskrivning av din vara")]
-        [Display(Name = "Produkt beskrivning")]
+        [Display(Name = "Beskrivning")]
         public string Description { get; set; }
 
         //[Required(ErrorMessage = "Starttid måste anges")]
-        [Display(Name = "Hämtningsdatum 1")]
+        [Display(Name = "Hämtas från")]
         public DateTime PickUpDate1 { get; set; }
 
         //public DateTime PickUpTime1 { get; set; }
 
         //[Required(ErrorMessage = "Sluttid måste anges")]
-        [Display(Name = "Hämtningsdatum 2")]
+        [Display(Name = "Hämtas till")]
         public DateTime PickUpDate2 { get; set; }
 
         //public DateTime PickUpTime2 { get; set; }

@@ -14,20 +14,20 @@ namespace GraduationProject.Models.ViewModels
         
         public string ErrorMessage { get; set; }
         [Required]
-        [Display(Name = "Förnamn: ")]
+        [Display(Name = "Förnamn")]
         public string FirstName { get; set; }
         [Required]
-        [Display(Name = "Efternamn: ")]
+        [Display(Name = "Efternamn")]
         public string LastName { get; set; }
-        [Display(Name = "Gatuadress: ")]
+        [Display(Name = "Gatuadress")]
         public string Street { get; set; }
-        [Display(Name = "Postnr: ")]
+        [Display(Name = "Postnummer")]
         [RegularExpression(@"\d{3}[ ]?\d{2}")]
         public string ZipCode { get; set; }
-        [Display(Name = "Postort: ")]
+        [Display(Name = "Postort")]
         public string City { get; set; }
         [Required]
-        [Display(Name = "E-mail: ")]
+        [Display(Name = "E-mail")]
         [EmailAddress]
         public string Email { get; set; }
         //[Required]
