@@ -160,7 +160,7 @@ input[type="file"] {
 }
 
 .container {
-overflow: hidden;
+overflow: hidden !important;
 margin-top: 20px;
 }
 

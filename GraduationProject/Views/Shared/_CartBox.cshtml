@@ -20,20 +20,19 @@
                     <p>Hämtas före @Model[i].ProductPickUpDate2</p>
                 </div>
                 <div class="productButtons">
-                    <button onclick="mapsSelector(@Model[i].ProductLatitude, @Model[i].ProductLongitude)" class="btn btn-light productBtn">Karta</button>
+                    
                     <button id="info_@i" onclick="showInfo(@i);" class="btn btn-light productBtn">Info</button>
-                    @if (!Model[i].HasChat)
-                    {
+                    
                         <a asp-controller="Receivers" asp-action="UnclaimProduct" asp-route-id="@Model[i].ProductId" class="btn btn-light btn-sm productBtn">Avboka</a>
-                    }
+                    
 
                     @if (Model[i].HasChat)
                     {
-                        <a asp-controller="Messages" asp-action="Chat" asp-route-productid="@Model[i].ProductId" class="btn btn-primary">Gå till chatt</a>
+                        <a asp-controller="Messages" asp-action="Chat" asp-route-productid="@Model[i].ProductId" class="btn btn-light productBtn">Chatt</a>
                     }
                     else
                     {
-                        <a asp-controller="Messages" asp-action="StartChatReceiver" asp-route-giverid="@Model[i].GiverId" asp-route-productid="@Model[i].ProductId" class="btn btn-primary">Meddela givare</a>
+                        <a asp-controller="Messages" asp-action="StartChatReceiver" asp-route-giverid="@Model[i].GiverId" asp-route-productid="@Model[i].ProductId" class="btn btn-light productBtn">Chatta</a>
                     }
                 </div>
             </div>
@@ -62,6 +61,11 @@
                             @Model[i].GiverStreet<br />
                             @Model[i].GiverZipCode<br />
                             @Model[i].GiverCity
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button onclick="mapsSelector(@Model[i].ProductLatitude, @Model[i].ProductLongitude)" class="btn-block productBtn">Karta</button>
                         </td>
                     </tr>
                 </table>
