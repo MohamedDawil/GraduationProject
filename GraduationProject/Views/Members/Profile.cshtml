@@ -6,7 +6,8 @@
 
 <div class="row">
     <div class="col">
-        <img src="/profiles/@Model.Picture" id="output" style="width: 250px; height: auto;" />
+        <center><img src="/profiles/@Model.Picture" id="output" style="width: 250px; height: auto;" /></center>
+        <p>&nbsp;</p>
 
         <form asp-controller="Members" asp-action="Profile" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Picture" />
