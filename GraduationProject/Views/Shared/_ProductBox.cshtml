@@ -18,8 +18,8 @@
                     <p>Hämtas före @Model[i].ProductPickUpDate2.ToString("yyyy-MM-dd")</p>
                 </div>
                 <div class="productButtons">
-                    <button id="info_@i" onclick="showInfo(@i);" class="btn btn-light productBtn">Info</button>
-                    <a asp-controller="Receivers" asp-action="ClaimProduct" asp-route-id="@Model[i].ProductId" class="btn btn-light btn-sm productBtn">Boka</a>
+                    <button id="info_@i" onclick="showInfo(@i);" class="btn productBtn" style="color:white;">Info</button>
+                    <a asp-controller="Receivers" asp-action="ClaimProduct" asp-route-id="@Model[i].ProductId" class="btn productBtn">Boka</a>
                 </div>
             </div>
             <div class="infoCard" id="seInfoDiv_@i" style="display: none;">

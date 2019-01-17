@@ -20,19 +20,16 @@
                     <p>Hämtas före @Model[i].ProductPickUpDate2.ToString("yyyy-MM-dd")</p>
                 </div>
                 <div class="productButtons">
-                    
-                    <button id="info_@i" onclick="showInfo(@i);" class="btn btn-light productBtn">Info</button>
-                    
-                        <a asp-controller="Receivers" asp-action="UnclaimProduct" asp-route-id="@Model[i].ProductId" class="btn btn-light btn-sm productBtn">Avboka</a>
-                    
+                    <button id="info_@i" onclick="showInfo(@i);" class="btn productBtn" style="color:white;">Info</button>
+                    <a asp-controller="Receivers" asp-action="UnclaimProduct" asp-route-id="@Model[i].ProductId" class="btn productBtn">Avboka</a>
 
                     @if (Model[i].HasChat)
                     {
-                        <a asp-controller="Messages" asp-action="Chat" asp-route-productid="@Model[i].ProductId" class="btn btn-light productBtn">Chatt</a>
+                        <a asp-controller="Messages" asp-action="Chat" asp-route-productid="@Model[i].ProductId" class="btn productBtn">Chatt</a>
                     }
                     else
                     {
-                        <a asp-controller="Messages" asp-action="StartChatReceiver" asp-route-giverid="@Model[i].GiverId" asp-route-productid="@Model[i].ProductId" class="btn btn-light productBtn">Chatta</a>
+                        <a asp-controller="Messages" asp-action="StartChatReceiver" asp-route-giverid="@Model[i].GiverId" asp-route-productid="@Model[i].ProductId" class="btn productBtn">Chatta</a>
                     }
                 </div>
             </div>
@@ -42,7 +39,7 @@
                         <th class="infoHeading">Fräschhet</th>
                         <td>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="@Model[i].ProductFreshness" aria-valuemin="0" aria-valuemax="10" style="width: @(Model[i].ProductFreshness+"0%");">@(Model[i].ProductFreshness+"0%")</div> 
+                                <div class="progress-bar" role="progressbar" aria-valuenow="@Model[i].ProductFreshness" aria-valuemin="0" aria-valuemax="10" style="width: @(Model[i].ProductFreshness+"0%");">@(Model[i].ProductFreshness + "0%")</div>
                             </div>
                         </td>
                     </tr>
