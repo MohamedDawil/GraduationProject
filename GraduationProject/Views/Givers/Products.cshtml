@@ -17,7 +17,7 @@
                             <h3>@product.ReceiverName </h3>
                         </div>
                         <p>
-                            @product.ProductPickUpDate1 -@product.ProductPickUpDate2
+                            @product.ProductPickUpDate1.ToShortDateString()
                                             </p>
                     </div>
                     <div class="productButtons">
@@ -50,10 +50,10 @@
                     <img src="~/products/@product.ProductImage" alt="..." />
                     <div class="caption productCaption">
                         <div class="title">
-                            <h3>@product.ReceiverName </h3>
+                            <h3>@product.ProductName </h3>
                         </div>
                         <p>
-                            @product.ProductPickUpDate1 -@product.ProductPickUpDate2
+                            @product.ProductPickUpDate1.ToShortDateString()
                         </p>
                     </div>
                     <div class="productButtons">

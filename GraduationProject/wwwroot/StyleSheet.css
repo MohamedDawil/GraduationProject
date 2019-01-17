@@ -283,7 +283,7 @@ img {
 }
 
 .inbox_chat {
-    height: 550px;
+    height: 380px;
     overflow-y: scroll;
     width:auto;
     padding:0px;
@@ -359,8 +359,8 @@ img {
     border: medium none;
     color: #4c4c4c;
     font-size: 15px;
-    min-height: 48px;
-    width: 100%;
+    min-height: 30px;
+    width: 80%;
 }
 
 .type_msg {
