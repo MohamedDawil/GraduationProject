@@ -17,7 +17,7 @@
                         <h3>@Model[i].ProductName </h3>
                         <span>avstånd: @Model[i].ProductDistance meter</span>
                     </div>
-                    <p>Hämtas före @Model[i].ProductPickUpDate2</p>
+                    <p>Hämtas före @Model[i].ProductPickUpDate2.ToString("yyyy-MM-dd")</p>
                 </div>
                 <div class="productButtons">
                     
@@ -48,7 +48,7 @@
                     </tr>
                     <tr>
                         <th class="infoHeading">Utgångsdatum</th>
-                        <td>@Model[i].ProductExpiryDate</td>
+                        <td>@Model[i].ProductExpiryDate.ToString("yyyy-MM-dd")</td>
                     </tr>
                     <tr>
                         <th class="infoHeading">Beskrivning</th>

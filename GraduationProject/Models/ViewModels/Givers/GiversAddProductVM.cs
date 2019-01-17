@@ -23,7 +23,7 @@ namespace GraduationProject.Models.ViewModels
         public string PictureFileName { get; set; }
 
         [Required(ErrorMessage ="Vänligen ange varans namn")]
-        [Display(Name = "Produktnamn")]
+        [Display(Name = "Varunamn")]
         public string ProductName { get; set; }
 
         [Required(ErrorMessage ="Vänligen ange varans skick")]

@@ -13,9 +13,9 @@
                 <div class="caption productCaption">
                     <div class="title">
                         <h3>@Model[i].ProductName</h3>
-                        <span>avstånd: @Model[i].ProductDistance meter</span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;avstånd: @Model[i].ProductDistance m</span>
                     </div>
-                    <p>Hämtas före @Model[i].ProductPickUpDate2</p>
+                    <p>Hämtas före @Model[i].ProductPickUpDate2.ToString("yyyy-MM-dd")</p>
                 </div>
                 <div class="productButtons">
                     <button id="info_@i" onclick="showInfo(@i);" class="btn btn-light productBtn">Info</button>
@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <th class="infoHeading">Utgångsdatum</th>
-                        <td>@Model[i].ProductExpiryDate</td>
+                        <td>@Model[i].ProductExpiryDate.ToString("yyyy-MM-dd")</td>
                     </tr>
                     <tr>
                         <th class="infoHeading">Beskrivning</th>
