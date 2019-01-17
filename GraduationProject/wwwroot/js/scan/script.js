@@ -415,13 +415,13 @@ var loopReadVideo = function () {
                         console.log("success");
                         console.log(response);
                         console.log(response.Artikelbenamning);
-                        console.log(response.Bilder[2].Lank);
+                        console.log(response.Bilder[0].Lank);
                         console.log(response.Ingrediensforteckning);
 
-                        var url = '/Food/Ajax/';
+                        var url = '/Givers/Scan/';
                         var form = $('<form action="' + url + '" method="post">' +
                             '<input type="text" name="name" value="' + response.Artikelbenamning + '" />' +
-                            '<input type="text" name="picture" value="' + response.Bilder[2].Lank + '" />' +
+                            '<input type="text" name="picture" value="' + response.Bilder[0].Lank + '" />' +
                             '<input type="text" name="description" value="' + response.Ingrediensforteckning + '" />' +
                             '<input type="text" name="notFound" value="false" />' +
                             '</form>');
@@ -433,7 +433,7 @@ var loopReadVideo = function () {
                         $divTopLog.append(pTopLog);
                         $(pTopLog).slideDown();
 
-                        var form2 = $('<form action="/Food/Ajax" method="post">' +
+                        var form2 = $('<form action="/Givers/Scan/" method="post">' +
                             '<input type="text" name="name" value="" />' +
                             '<input type="text" name="picture" value="" />' +
                             '<input type="text" name="description" value="" />' +

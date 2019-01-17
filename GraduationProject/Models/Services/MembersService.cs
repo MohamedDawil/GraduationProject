@@ -113,10 +113,11 @@ namespace GraduationProject.Models
             var result = await response.Content.ReadAsStringAsync();
             var json = JsonConvert.DeserializeObject<JsonAddress>(result); // Convertor from string"result" to json
 
+            var description = json.result.status.description_sv;
             return new Tuple<bool, string>
             (
                 json.result.status.code == "100",
-                json.result.status.description_sv
+                description.First().ToString().ToUpper() + description.Substring(1)
             );
         }
     }
