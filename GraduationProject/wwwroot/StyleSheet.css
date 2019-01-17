@@ -90,6 +90,10 @@ body {
         text-decoration: none;
     }
 
+.fa-arrow-left {
+    padding: 0px 10px 0px 10px;
+}
+
 #topNav {
     padding: 10px;
     font-weight: 500;
