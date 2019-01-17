@@ -4,7 +4,7 @@
 }
 
 <form asp-controller="Givers" asp-action="AddProduct" method="post" enctype="multipart/form-data">
-    <img src="@Model.Picture" id="output" style="width: 200px; height: auto;" />
+    <img src="/products/@Model.Picture" id="output" style="width: 200px; height: auto;" />
     <br />
     <label class="custom-file-upload">
         <input asp-for="Picture" type="file" accept="image/*;capture=camera" value="Lägg till bild" onchange="loadFile(event)">

@@ -9,7 +9,7 @@ connection.on("ReceiveMessage", function (memberImage, memberName, publishDate, 
 
     if (isSent) {
         encodedMsg += "<div class='incoming_msg'>";
-        encodedMsg += "<div class='incoming_msg_img'><img src='/Profiles/" + memberImage + "'></div>";
+        encodedMsg += "<div class='incoming_msg_img'><img src='/profiles/" + memberImage + "'></div>";
         encodedMsg += "<div class='received_msg'>";
         encodedMsg += "<div class='received_withd_msg'>";
         encodedMsg += "<p>";

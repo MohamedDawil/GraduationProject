@@ -133,6 +133,28 @@ namespace GraduationProject.Controllers
             return RedirectToAction(nameof(Products));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Scan()
+        {
+            await SetBadges();
+            return View(new GiversScanVM());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Scan(string name, string picture, string description, bool notFound)
+        {
+            var viewModel = new GiversScanVM
+            {
+                Name = name,
+                Picture = picture,
+                Description = description,
+                NotFound = notFound
+            };
+            await SetBadges();
+
+            return View(viewModel);
+        }
+
         private async Task SetBadges()
         {
             var userId = membersService.GetUserId(HttpContext.User);
