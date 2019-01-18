@@ -15,6 +15,8 @@ namespace GraduationProject.Models.ViewModels
         public string Street { get; set; }
         public string City { get; set; }
         public string ZipCode { get; set; }
+        public bool NotFound { get; set; }
+        public string Link { get; set; }
 
         public string GiverId { get; set; }
         //[Required(ErrorMessage ="Vänligen lägg till en bild på din vara")]

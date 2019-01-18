@@ -13,7 +13,7 @@
                 <div class="caption productCaption">
                     <div class="title">
                         <h3>@Model[i].ProductName</h3>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;avstånd: @Model[i].ProductDistance m</span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;@Model[i].ProductDistance m</span>
                     </div>
                     <p>Hämtas före @Model[i].ProductPickUpDate2.ToString("yyyy-MM-dd")</p>
                 </div>
@@ -21,7 +21,7 @@
                     <button id="info_@i" onclick="showInfo(@i);" class="btn productBtn" style="color:white;">Info</button>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a asp-controller="Receivers" asp-action="ClaimProduct" asp-route-id="@Model[i].ProductId" class="btn productBtn">Boka</a>
+                        <a asp-controller="Receivers" asp-action="ClaimProduct" asp-route-id="@Model[i].ProductId" class="btn productBtn" >Boka</a>
                     }
                 </div>
             </div>

@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GraduationProject.Helpers;
 using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace GraduationProject.Controllers
 {
@@ -17,13 +24,15 @@ namespace GraduationProject.Controllers
         private GiversService giversService;
         private MembersService membersService;
         private BadgeService badgeService;
+        private FileService fileService;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public GiversController(GiversService giversService, MembersService membersService, BadgeService badgeService, IHostingEnvironment environment)
+        public GiversController(GiversService giversService, MembersService membersService, BadgeService badgeService, FileService fileService, IHostingEnvironment environment)
         {
             this.giversService = giversService;
             this.membersService = membersService;
             this.badgeService = badgeService;
+            this.fileService = fileService;
             this.hostingEnvironment = environment;
         }
 
@@ -53,12 +62,23 @@ namespace GraduationProject.Controllers
                 giversAddProductVM.PictureFileName = uniqueFileName;
             }
 
+            if (giversAddProductVM.Link != null)
+            {
+                var uniqueFileName = Helper.GetUniqueFileName(giversAddProductVM.Link);
+                //fileName = fileService.GetFileName(viewModel.ImageUrl);
+                var fileName = fileService.GetFileName(giversAddProductVM.Link);
+
+                await fileService.SaveFileFromUrlAsync(giversAddProductVM.Link, fileName);
+
+                giversAddProductVM.PictureFileName = fileName;
+            }
+
             var giver = await membersService.GetUser(HttpContext.User);
             giversAddProductVM.GiverId = giver.Id;
             giversAddProductVM.Street = giver.Street;
             giversAddProductVM.City = giver.City;
             giversAddProductVM.ZipCode = giver.ZipCode;
-            
+
 
             var location = await giversService.GetCoordinates(giver);
             giversAddProductVM.Location = location;
@@ -146,16 +166,16 @@ namespace GraduationProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Scan(string name, string picture, string description, bool notFound)
         {
-            var viewModel = new GiversScanVM
+            var viewModel = new GiversAddProductVM
             {
-                Name = name,
-                Picture = picture,
+                ProductName = name,
+                Link = picture,
                 Description = description,
                 NotFound = notFound
             };
             await SetBadges();
 
-            return View(viewModel);
+            return View(nameof(AddProduct), viewModel);
         }
 
         private async Task SetBadges()
@@ -165,6 +185,6 @@ namespace GraduationProject.Controllers
             ViewBag.BadgeCart = await badgeService.CartCount(userId);
             ViewBag.BadgeInbox = await badgeService.InboxCount(userId);
         }
-        
+
     }
 }

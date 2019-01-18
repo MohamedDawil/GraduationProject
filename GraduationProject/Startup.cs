@@ -36,6 +36,7 @@ namespace GraduationProject
             services.AddTransient<ReceiversService>();
             services.AddTransient<MessagesService>();
             services.AddTransient<BadgeService>();
+            services.AddTransient<FileService>();
 
             var connString = this.configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<MyIdentityContext>(o =>
