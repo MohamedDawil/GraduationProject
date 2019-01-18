@@ -6,6 +6,7 @@ using GraduationProject.Hubs;
 using GraduationProject.Models;
 using GraduationProject.Models.Services;
 using GraduationProject.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -27,6 +28,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [HighlightedMenu(Menu.Inbox)]
         public async Task<IActionResult> Inbox()
         {

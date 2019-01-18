@@ -53,10 +53,10 @@ namespace GraduationProject
                 .AddEntityFrameworkStores<MyIdentityContext>()
                 .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(
-                o => o.LoginPath = "/Members/Login");
+                o => o.LoginPath = "/");
             services.AddAuthentication(
                    CookieAuthenticationDefaults.AuthenticationScheme)
-               .AddCookie(o => o.LoginPath = "/Members/Login");
+               .AddCookie(o => o.LoginPath = "/");
             services.AddMvc();
             services.AddSignalR();
         }

@@ -19,7 +19,10 @@
                 </div>
                 <div class="productButtons">
                     <button id="info_@i" onclick="showInfo(@i);" class="btn productBtn" style="color:white;">Info</button>
-                    <a asp-controller="Receivers" asp-action="ClaimProduct" asp-route-id="@Model[i].ProductId" class="btn productBtn">Boka</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="Receivers" asp-action="ClaimProduct" asp-route-id="@Model[i].ProductId" class="btn productBtn">Boka</a>
+                    }
                 </div>
             </div>
             <div class="infoCard" id="seInfoDiv_@i" style="display: none;">

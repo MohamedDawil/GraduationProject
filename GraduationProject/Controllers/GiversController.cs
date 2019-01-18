@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GraduationProject.Helpers;
 using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [HighlightedMenu(Menu.AddProduct)]
         public async Task<IActionResult> AddProduct()
         {
@@ -69,6 +71,7 @@ namespace GraduationProject.Controllers
 
 
         [HttpGet]
+        [Authorize]
         [HighlightedMenu(Menu.Products)]
         public async Task<IActionResult> Products()
         {

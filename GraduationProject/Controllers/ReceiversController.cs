@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GraduationProject.Controllers
@@ -88,6 +89,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [HighlightedMenu(Menu.Cart)]
         public async Task<IActionResult> Cart()
         {

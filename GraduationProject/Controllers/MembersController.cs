@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GraduationProject.Helpers;
 using GraduationProject.Models;
 using GraduationProject.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
@@ -109,6 +110,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [HighlightedMenu(Menu.Profile)]
         public async Task<IActionResult> Profile()
         {
