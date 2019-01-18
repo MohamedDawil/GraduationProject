@@ -48,6 +48,12 @@ namespace GraduationProject.Controllers
             return RedirectToAction("Map", "Receivers");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await membersService.Logout();
+            return RedirectToAction(nameof(Index));
+        }
 
         [HttpGet]
 

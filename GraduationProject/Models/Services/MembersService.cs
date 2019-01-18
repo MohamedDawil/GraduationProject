@@ -47,6 +47,11 @@ namespace GraduationProject.Models
             return userId;
         }
 
+        public async Task Logout()
+        {
+            await signInManager.SignOutAsync();
+        }
+
         public async Task<bool> SignInAsync(MembersIndexVM membersIndexVM)
         {
             var result = await signInManager.PasswordSignInAsync(membersIndexVM.Email, membersIndexVM.Password, false, false);
